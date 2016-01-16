@@ -2,22 +2,16 @@ import pygame, sys, math, random
 
 import tmx
 
-# == (1) Create 'global' variables ==
-# These are variables that every part of your
-# code can 'see' and change
+
 global screen, screen_size, current_keys, last_keys
-global tilemap, playerPos, object, objects
+global tilemap, playerPos, object, objects, doors, keys
 
-# == (2) Define the functions for each task first ==
 
-# == GameInit ==
-# Put one time initialisation stuff here 
-# it is called just *once*
-# at the beginning of our program
 def GameInit():
     global screen, current_keys, screen_size, tilemap, player
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global object, objects
+    global doors, keys
     global moved
 
     moved = False
@@ -46,10 +40,10 @@ def GameInit():
     nextPlayerPos = playerPos.copy()
     nextPlayerCollideRect = playerCollideRect.copy()
 
-# == GameReset ==
-# Put 'new game' starting values here.
-# This is called many times while the program 
-# running whenever a new game is started
+    doors = {}
+    keys = {}
+
+
 def GameReset():
     global map_offset, tilemap
     map_offset = [20, 20]
@@ -68,11 +62,7 @@ def GameReset():
         create = t.properties["OnCreate"]
         exec(create)
 
-# == UpdateGameScreen ==
-# This function is called once every game loop
-# to update the main game screen data objects
-# Here is where we will put the keyboard responses, 
-# collision detection and other game logic.
+
 def UpdateGameScreen(elapsed_ms):
     global map_offset, tilemap
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
@@ -180,24 +170,16 @@ def processTilesCollision(collisionCells, nextPlayerCollideRect):
 
     return moved
 
+
 def collideWithOffset(r1, x, y, r2):
-    # return (   A->x < B->x + B->w
-    #         && A->y < B->y + B->h
-    #         && A->x + A->w > B->x
-    #         && A->y + A->h > B->y)
-
-
     return r1.x < r2.x + x + r2.w and r1.y < r2.y + y + r2.h and r1.x + r1.w > r2.x + x and r1.y + r1.h > r2.y + y
+
 
 def PreventMove():
     global moved
     moved = False
 
-# == DrawGameScreen ==
-# This function is called once every game loop
-# to draw the main game screen.
-# Here is where we will draw a background, 
-# sprites and on screen text.    
+
 def DrawGameScreen():
     global screen, tilemap, player, playerPos
     tilemap.draw(screen)
@@ -206,9 +188,7 @@ def DrawGameScreen():
 
     screen.blit(player, nextPlayerPos)
 
-# == GameLoop ==
-# Put things that have to occur repeatedly
-# here. It is called every frame
+
 def GameLoop():
     global current_keys, last_keys, tilemap, playerPos, object, objects
     elapsed_ms = pygame.time.Clock().tick(60)
@@ -228,46 +208,7 @@ def GameLoop():
     # flip the screen to show our drawing
     pygame.display.flip()
 
-    # pos = playerPos.move(tilemap.viewport.x, tilemap.viewport.y)
-    #
-    # groundLayer = tilemap.layers['ground']
-    #
-    # collisionCells = groundLayer.get_in_region(pos.left, pos.top, pos.right, pos.bottom)
-    #
-    # if len(collisionCells) > 0:
-    #     for cell in collisionCells:
-    #         tile = cell.tile
-    #         print(", " + str(tile.gid), end="")
-    #     print("")
-    #
-    #     colRects = collisionCells[0].tile.collisionRects
-    #     if len(colRects) > 0:
-    #         rect = colRects[0]
-    #         print("Got rect[" + str(rect.left) + ", " + str(rect.top) + "," + str(rect.width) + "," + str(rect.height) + "]")
-    #
-    # for cell in collisionCells:
-    #     tile = cell.tile
-    #     i = pos.collidelist(tile.collisionRects)
-    #     if i >= 0:
-    #         print("found collision " + str(i))
-    #
-    # # for tile in collisionTiles:
-    # #     if tile
-    #
-    # objectsLayer = tilemap.layers['objects']
-    #
-    #
-    # objects = objectsLayer.collide(pos, "OnCollision")
-    #
-    # # print("x=" + str(pos[0]) + ", y=" + str(pos[1]) + " o# " + str(len(objects)))
-    #
-    # for object in objects:
-    #     onCollision = object.properties["OnCollision"]
-    #     exec(onCollision)
 
-# == (3) Call the functions to run the game == 
-# We have only *defined* our functions above.
-# Here we actually call them to make them happen
 GameInit()
 GameReset()
 while True:
