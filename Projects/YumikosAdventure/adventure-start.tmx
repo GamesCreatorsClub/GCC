@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="22">
- <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16">
-  <image source="maps/tilea2.png" width="512" height="384"/>
-  <terraintypes>
-   <terrain name="New Terrain" tile="-1"/>
-  </terraintypes>
-  <tile id="204">
-   <objectgroup draworder="index">
-    <object id="0" x="0.625" y="0.375" width="15.375" height="5.25"/>
-    <object id="0" x="0" y="0" width="5.25" height="15.5"/>
-   </objectgroup>
-  </tile>
- </tileset>
+ <tileset firstgid="1" source="tilea2.tsx"/>
  <tileset firstgid="769" name="tilea1" tilewidth="16" tileheight="16">
   <image source="maps/tilea1.png" width="512" height="384"/>
  </tileset>
