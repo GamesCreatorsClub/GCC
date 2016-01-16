@@ -1,0 +1,18 @@
+
+
+- select tileset for the game
+- make collision data in tileset
+- implement collision in tmx.py (Daniel)
+- draw Yumiko's image (all poses)
+- implement changing pose depending on direction
+- implement moving by clicking
+- implement lives/mana/energy/luck/...
+- draw splash screen
+- implement splash screen
+- implement menu
+- draw inventory
+- define and implement inventory API
+- define and implement NPC API
+- define and implement character's speech bubbles API
+- implement introduction to the game (Daniel?) (prog. driven game)
+
