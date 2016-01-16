@@ -55,6 +55,19 @@ def GameReset():
     map_offset = [20, 20]
     tilemap.set_focus(20, 20)
 
+    objectsLayer = tilemap.layers['objects']
+    objects = objectsLayer.find("OnCreate")
+    for o in objects:
+        create = o.properties["OnCreate"]
+        exec(create)
+
+    groundLayer = tilemap.layers['ground']
+
+    tiles = groundLayer.find("OnCreate")
+    for t in tiles:
+        create = t.properties["OnCreate"]
+        exec(create)
+
 # == UpdateGameScreen ==
 # This function is called once every game loop
 # to update the main game screen data objects
@@ -130,34 +143,35 @@ def UpdateGameScreen(elapsed_ms):
 
 
 def processObjectCollision(objects, objectsLayer):
+    global collidedObject, moved
     objects = objectsLayer.collide(nextPlayerCollideRect, "OnCollision")
     oi = 0
     oiLen = len(objects)
     while moved and oi < oiLen:
-        object = objects[oi]
-        if "OnCollision" in object.properties:
-            exec(object.properties["OnCollision"])
+        collidedObject = objects[oi]
+        collision = collidedObject.properties["OnCollision"]
+        exec(collision)
         oi = oi + 1
 
     return moved
 
 
 def processTilesCollision(collisionCells, nextPlayerCollideRect):
-    moved = True
+    global collidedTile, collidedCell, moved
 
     if len(collisionCells) > 0:
         cc = 0
         ccLen = len(collisionCells)
         while moved and cc < ccLen:
-            cell = collisionCells[cc]
-            tile = cell.tile
-            collisionRects = tile.collisionRects;
+            collidedCell = collisionCells[cc]
+            collidedTile = collidedCell.tile
+            collisionRects = collidedTile.collisionRects;
             cr = 0
             crLen = len(collisionRects)
             while moved and cr < crLen:
-                if collideWithOffset(nextPlayerCollideRect, cell.px, cell.py, collisionRects[cr]):
-                    if "OnCollision" in tile.properties:
-                        exec(tile.properties["OnCollision"])
+                if collideWithOffset(nextPlayerCollideRect, collidedCell.px, collidedCell.py, collisionRects[cr]):
+                    if "OnCollision" in collidedTile.properties:
+                        exec(collidedTile.properties["OnCollision"])
                     else:
                         moved = False
                 cr = cr + 1
@@ -175,7 +189,8 @@ def collideWithOffset(r1, x, y, r2):
 
     return r1.x < r2.x + x + r2.w and r1.y < r2.y + y + r2.h and r1.x + r1.w > r2.x + x and r1.y + r1.h > r2.y + y
 
-def preventMovement():
+def PreventMove():
+    global moved
     moved = False
 
 # == DrawGameScreen ==

@@ -483,7 +483,10 @@ visible: Whether the object is shown (1) or hidden (0). Defaults to 1.
         for c in props.findall('property'):
             # store additional properties.
             name = c.attrib['name']
-            value = c.attrib['value']
+            if 'value' in c.attrib:
+                value = c.attrib['value']
+            else:
+                value = c.text
 
             # TODO hax
             if value.isdigit():
