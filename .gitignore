@@ -1,0 +1,13 @@
+bin
+**/.svn
+**/bin/**
+**/target/**
+**/libs/cachedir/**
+**/war/WEB-INF/classes/**
+**/.gwt/.gwt-log
+t
+**/.DS_Store
+**/.directory
+**/*.apk
+**/__pycache__/**
+**/.idea/**
