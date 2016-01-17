@@ -36,7 +36,7 @@ def GameInit():
     #                         player.get_width(), player.get_height())
 
     playerPos = pygame.Rect(200, 240, player.get_width(), player.get_height())
-    playerCollideRect = playerPos.move(8, 8)
+    playerCollideRect = playerPos.move(8, 16)
     playerCollideRect.width = playerCollideRect.width - 16
     playerCollideRect.height = playerCollideRect.height - 16
 
