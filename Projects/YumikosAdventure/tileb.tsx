@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="tileb" tilewidth="32" tileheight="32">
+<tileset name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
  <image source="maps/tileb.png" width="512" height="512"/>
  <terraintypes>
   <terrain name="mound" tile="-1"/>
@@ -9,6 +9,12 @@
    <object id="0" x="2.96077" y="1.94301" width="26.832" height="26.3694">
     <ellipse/>
    </object>
+  </objectgroup>
+ </tile>
+ <tile id="81">
+  <objectgroup draworder="index">
+   <object id="0" x="0.803588" y="13.0766" width="30.8286" height="10.5928"/>
+   <object id="0" x="13.0035" y="24.2538" width="5.84428" height="7.52451"/>
   </objectgroup>
  </tile>
  <tile id="219" terrain=",,,0"/>

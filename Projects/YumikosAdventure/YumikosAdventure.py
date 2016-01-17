@@ -11,9 +11,8 @@ def GameInit():
     global screen, current_keys, screen_size, tilemap, player
     global mouse_click_pos, mouse_is_down
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
-    global object, objects
-    global doors, keys
     global moved
+    global coins
 
     moved = False
 
@@ -27,8 +26,6 @@ def GameInit():
 
     tilemap = tmx.load('adventure-start.tmx', screen_size)
     objectsLayer = tilemap.layers['objects']
-    objects = objectsLayer.objects;
-    object = objectsLayer.objects[0]
 
     player = pygame.image.load("images/player.png")
     # playerPos = pygame.Rect(screen_size[0] / 2 - player.get_width() / 2,
@@ -45,9 +42,7 @@ def GameInit():
 
     mouse_click_pos = [-1, -1]
 
-    doors = {}
-    keys = {}
-
+    coins = 0
 
 def GameReset():
     global map_offset, tilemap
@@ -121,7 +116,7 @@ def UpdateGameScreen(elapsed_ms):
             moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
 
         if moved:
-            moved = processObjectCollision(objects, objectsLayer)
+            moved = processObjectCollision(objectsLayer)
 
         if moved:
             playerPos[0] = nextPlayerPos[0]
@@ -159,7 +154,7 @@ def UpdateGameScreen(elapsed_ms):
             moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
 
         if moved:
-            moved = processObjectCollision(objects, objectsLayer)
+            moved = processObjectCollision(objectsLayer)
 
         if moved:
             playerPos[1] = nextPlayerPos[1]
@@ -184,15 +179,30 @@ def processObjectClick(object):
     return moved
 
 
-def processObjectCollision(objects, objectsLayer):
+def processObjectCollision(objectsLayer):
     global collidedObject, moved
     objects = objectsLayer.collide(nextPlayerCollideRect, "OnCollision")
     oi = 0
     oiLen = len(objects)
     while moved and oi < oiLen:
         collidedObject = objects[oi]
-        collision = collidedObject.properties["OnCollision"]
-        exec(collision)
+        collided = True
+        if collidedObject.type == "rect" and len(collidedObject.tile.collisionRects) > 0:
+            collisionRects = collidedObject.tile.collisionRects;
+            cr = 0
+            crLen = len(collisionRects)
+            collided = False
+            while not collided and cr < crLen:
+                if collideWithOffset(nextPlayerCollideRect, collidedObject.px, collidedObject.py, collisionRects[cr]):
+                    collided = True
+                cr = cr + 1
+
+        if collided:
+            if "OnCollision" in collidedObject:
+                collision = collidedObject["OnCollision"]
+            elif "OnCollision" in collidedObject.properties:
+                collision = collidedObject.properties["OnCollision"]
+            exec(collision)
         oi = oi + 1
 
     return moved
@@ -231,6 +241,28 @@ def PreventMove():
     global moved
     moved = False
 
+def AddCoins(amount):
+    global coins
+
+    coins = coins + 1
+
+def RemoveCoins(amount):
+    global coins
+
+    coins = coins - 1
+    if coins < 0:
+        coins = 0
+
+def Pay(amount):
+    if coins >= amount:
+        RemoveCoins(amount)
+        return True
+    return False
+
+def RemoveCollidedObject():
+    global collidedObject
+    objectsLayer = tilemap.layers["objects"]
+    objectsLayer.objects.remove(collidedObject)
 
 def DrawGameScreen():
     global screen, tilemap, player, playerPos
@@ -240,11 +272,10 @@ def DrawGameScreen():
     #tilemap.draw(screen)
 
     for layer in tilemap.layers:
-        if layer.name == "objects":
-            screen.blit(player, nextPlayerPos)
-
         if layer.visible:
             layer.draw(screen)
+        if layer.name == "objects":
+            screen.blit(player, nextPlayerPos)
 
     # screen.blit(player, nextPlayerPos)
 
