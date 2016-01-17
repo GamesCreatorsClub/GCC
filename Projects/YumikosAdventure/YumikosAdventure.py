@@ -9,12 +9,15 @@ global tilemap, playerPos, object, objects, doors, keys
 
 def GameInit():
     global screen, current_keys, screen_size, tilemap, player
+    global mouse_click_pos, mouse_is_down
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global object, objects
     global doors, keys
     global moved
 
     moved = False
+
+    mouse_is_down = False
 
     screen_size = (640, 640)
     pygame.init()
@@ -39,6 +42,8 @@ def GameInit():
 
     nextPlayerPos = playerPos.copy()
     nextPlayerCollideRect = playerCollideRect.copy()
+
+    mouse_click_pos = [-1, -1]
 
     doors = {}
     keys = {}
@@ -66,7 +71,7 @@ def GameReset():
 def UpdateGameScreen(elapsed_ms):
     global map_offset, tilemap
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
-    global moved
+    global moved, mouse_is_down, mouse_click_pos
 
     objectsLayer = tilemap.layers['objects']
     groundLayer = tilemap.layers['ground']
@@ -78,6 +83,7 @@ def UpdateGameScreen(elapsed_ms):
     nextPlayerCollideRect[0] = playerCollideRect[0]
     nextPlayerCollideRect[1] = playerCollideRect[1]
 
+    expecting_mouse_movement = mouse_is_down
     moved = False;
     if current_keys[pygame.K_LEFT] and map_offset[0] > 0:
         nextPlayerPos[0] -= speed
@@ -87,6 +93,16 @@ def UpdateGameScreen(elapsed_ms):
         nextPlayerPos[0] += speed
         nextPlayerCollideRect[0] += speed
         moved = True
+
+    if not moved and expecting_mouse_movement:
+        if playerPos[0] - mouse_click_pos[0] - tilemap.viewport.x >= speed:
+            nextPlayerPos[0] -= speed
+            nextPlayerCollideRect[0] -= speed
+            moved = True
+        elif mouse_click_pos[0] + tilemap.viewport.x - playerPos[0] >= speed:
+            nextPlayerPos[0] += speed
+            nextPlayerCollideRect[0] += speed
+            moved = True
 
     if moved:
         collisionCells = groundLayer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
@@ -112,6 +128,16 @@ def UpdateGameScreen(elapsed_ms):
         nextPlayerPos[1] += speed
         nextPlayerCollideRect[1] += speed
         moved = True
+
+    if not moved and expecting_mouse_movement:
+        if playerPos[1] - mouse_click_pos[1] - tilemap.viewport.y >= speed:
+            nextPlayerPos[1] -= speed
+            nextPlayerCollideRect[1] -= speed
+            moved = True
+        elif mouse_click_pos[1] + tilemap.viewport.y - playerPos[1] >= speed:
+            nextPlayerPos[1] += speed
+            nextPlayerCollideRect[1] += speed
+            moved = True
 
     if moved:
         collisionCells = groundLayer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
@@ -190,12 +216,23 @@ def DrawGameScreen():
 
 
 def GameLoop():
-    global current_keys, last_keys, tilemap, playerPos, object, objects
+    global current_keys, last_keys, tilemap, playerPos, object, objects, mouse_click_pos, mouse_is_down
+
     elapsed_ms = pygame.time.Clock().tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_click_pos[0] = event.pos[0]
+            mouse_click_pos[1] = event.pos[1]
+            mouse_is_down = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            mouse_is_down = False
+        elif event.type == pygame.MOUSEMOTION:
+            if mouse_is_down:
+                mouse_click_pos[0] = event.pos[0]
+                mouse_click_pos[1] = event.pos[1]
 
     last_keys = current_keys
     current_keys = pygame.key.get_pressed()
