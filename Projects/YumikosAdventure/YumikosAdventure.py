@@ -54,15 +54,16 @@ def GameReset():
     map_offset = [20, 20]
     tilemap.set_focus(20, 20)
 
-    objectsLayer = tilemap.layers['objects']
-    objects = objectsLayer.find("OnCreate")
-    for o in objects:
-        create = o.properties["OnCreate"]
-        exec(create)
+    ProcessOnCreate(tilemap.layers['objects'])
 
-    groundLayer = tilemap.layers['ground']
+    ProcessOnCreate(tilemap.layers["ground1"])
+    ProcessOnCreate(tilemap.layers["ground2"])
 
-    tiles = groundLayer.find("OnCreate")
+    ProcessOnCreate(tilemap.layers["overlay"])
+
+
+def ProcessOnCreate(layer):
+    tiles = layer.find("OnCreate")
     for t in tiles:
         create = t.properties["OnCreate"]
         exec(create)
@@ -73,8 +74,9 @@ def UpdateGameScreen(elapsed_ms):
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, mouse_is_down, mouse_click_pos
 
-    objectsLayer = tilemap.layers['objects']
-    groundLayer = tilemap.layers['ground']
+    objectsLayer = tilemap.layers["objects"]
+    ground1Layer = tilemap.layers["ground1"]
+    ground2Layer = tilemap.layers["ground2"]
 
     speed = elapsed_ms / 2
 
@@ -83,8 +85,9 @@ def UpdateGameScreen(elapsed_ms):
     nextPlayerCollideRect[0] = playerCollideRect[0]
     nextPlayerCollideRect[1] = playerCollideRect[1]
 
-    expecting_mouse_movement = mouse_is_down
+    move_by_mouse = mouse_is_down
     moved = False;
+
     if current_keys[pygame.K_LEFT] and map_offset[0] > 0:
         nextPlayerPos[0] -= speed
         nextPlayerCollideRect[0] -= speed
@@ -94,7 +97,7 @@ def UpdateGameScreen(elapsed_ms):
         nextPlayerCollideRect[0] += speed
         moved = True
 
-    if not moved and expecting_mouse_movement:
+    if not moved and move_by_mouse:
         if playerPos[0] - mouse_click_pos[0] - tilemap.viewport.x >= speed:
             nextPlayerPos[0] -= speed
             nextPlayerCollideRect[0] -= speed
@@ -104,10 +107,18 @@ def UpdateGameScreen(elapsed_ms):
             nextPlayerCollideRect[0] += speed
             moved = True
 
-    if moved:
-        collisionCells = groundLayer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+        clickedCell = objectsLayer.get_at(mouse_click_pos[0] + tilemap.viewport.x, mouse_click_pos[1] + tilemap.viewport.y)
+        moved = processObjectClick(clickedCell)
+        if not moved:
+            move_by_mouse = False
 
+    if moved:
+        collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
         moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
+
+        if moved:
+            collisionCells = ground2Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+            moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
 
         if moved:
             moved = processObjectCollision(objects, objectsLayer)
@@ -129,7 +140,7 @@ def UpdateGameScreen(elapsed_ms):
         nextPlayerCollideRect[1] += speed
         moved = True
 
-    if not moved and expecting_mouse_movement:
+    if not moved and move_by_mouse:
         if playerPos[1] - mouse_click_pos[1] - tilemap.viewport.y >= speed:
             nextPlayerPos[1] -= speed
             nextPlayerCollideRect[1] -= speed
@@ -140,9 +151,12 @@ def UpdateGameScreen(elapsed_ms):
             moved = True
 
     if moved:
-        collisionCells = groundLayer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
-
+        collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
         moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
+
+        if moved:
+            collisionCells = ground2Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+            moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
 
         if moved:
             moved = processObjectCollision(objects, objectsLayer)
@@ -156,6 +170,18 @@ def UpdateGameScreen(elapsed_ms):
 
     tilemap.set_focus(playerPos[0], playerPos[1])
     tilemap.update(elapsed_ms)
+
+
+def processObjectClick(object):
+    global clickedObject, moved
+
+    clickedObject = object
+
+    if clickedObject != None and "OnClick" in clickedObject.properties:
+        onClick = clickedObject.properties["OnClick"]
+        exec(onClick)
+
+    return moved
 
 
 def processObjectCollision(objects, objectsLayer):
@@ -208,11 +234,19 @@ def PreventMove():
 
 def DrawGameScreen():
     global screen, tilemap, player, playerPos
-    tilemap.draw(screen)
 
     nextPlayerPos.move_ip(-tilemap.viewport.x, -tilemap.viewport.y)
 
-    screen.blit(player, nextPlayerPos)
+    #tilemap.draw(screen)
+
+    for layer in tilemap.layers:
+        if layer.name == "objects":
+            screen.blit(player, nextPlayerPos)
+
+        if layer.visible:
+            layer.draw(screen)
+
+    # screen.blit(player, nextPlayerPos)
 
 
 def GameLoop():
