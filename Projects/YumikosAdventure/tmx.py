@@ -505,6 +505,17 @@ visible: Whether the object is shown (1) or hidden (0). Defaults to 1.
             return False
         return True
 
+    def contains(self, x, y):
+        if x < self.px:
+            return False
+        if y < self.py:
+            return False
+        if x > self.px + self.width:
+            return False
+        if y > self.py + self.height:
+            return False
+        return True
+
 
 class ObjectLayer(object):
     '''A layer composed of basic primitive shapes.
