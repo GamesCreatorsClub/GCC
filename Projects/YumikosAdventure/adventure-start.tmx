@@ -47,7 +47,7 @@ PreventMove()</property>
  </objectgroup>
  <layer name="overlay" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+   eJzt1MENQEAQBdC9KIVS0AmdUAltWuEki4PDIu8lP5PM6e9hJwQAAHim3tMkZiptnpq3pph5z3Qzu5g+T014vSL843+89R1rr6u7e5xDzJil6bUybDf17M6mdlWWpgAAAAAAfMkCRfoYng==
   </data>
  </layer>
 </map>
