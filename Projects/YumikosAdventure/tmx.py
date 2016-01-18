@@ -598,6 +598,14 @@ class ObjectLayer(object):
                     r.append(object)
         return r
 
+    def find_by_name(self, name):
+        '''Find all cells with the given properties set.
+        '''
+        for object in self.objects:
+            if object.name == name:
+                return object
+        return None
+
     def match(self, **properties):
         '''Find all objects with the given properties set to the given values.
         '''

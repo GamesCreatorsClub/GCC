@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="27">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="36">
  <tileset firstgid="1" source="tilea2.tsx"/>
  <tileset firstgid="769" source="tileb.tsx"/>
  <tileset firstgid="1025" source="objects.tsx"/>
  <layer name="ground1" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="ground2" width="50" height="50">
@@ -23,7 +23,7 @@ spawned = True</property>
 spawned = False</property>
    </properties>
   </object>
-  <object id="21" name="An Object to be moved" gid="42" x="490" y="189" width="16" height="16">
+  <object id="21" name="An Object to be moved" gid="809" x="490" y="189" width="16" height="16">
    <properties>
     <property name="OnCollision">if engine.playerCollideRect.right &lt; collidedObject.px:
     collidedObject.px += 2
@@ -41,10 +41,9 @@ PreventMove()
   </object>
   <object id="22" name="Sign" gid="850" x="554" y="106" width="32" height="32">
    <properties>
-    <property name="OnClick">print(&quot;Sign says: 'Hey'&quot;)
+    <property name="OnClick">print(&quot;Sign says: 'Come here!'&quot;)
 PreventMove()</property>
-    <property name="OnCollision">print(&quot;Sign says: 'Hey Stop!'&quot;)
-PreventMove()</property>
+    <property name="OnCollision" value="NextMap()"/>
    </properties>
   </object>
   <object id="23" name="coin" gid="1025" x="350" y="124" width="16" height="16"/>
@@ -56,6 +55,7 @@ PreventMove()</property>
     <property name="OnCollision" value="print(&quot;exec(GiveObjects(collidedObject))&quot;)"/>
    </properties>
   </object>
+  <object id="34" name="start_position" gid="850" x="208" y="192" width="32" height="32"/>
  </objectgroup>
  <layer name="overlay" width="50" height="50">
   <data encoding="base64" compression="zlib">

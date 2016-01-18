@@ -1,20 +1,41 @@
 import pygame, sys, math, random
 
-import tmx, engine, game
+import engine
 
 
 global screen, screen_size, current_keys, last_keys
 global tilemap, playerPos, object, objects, doors, keys
 
+# Important stuff - don't remove
+
+collidedObject = None
+collidedTile = None
+collidedCell = None
+
+map_names = ["adventure-start.tmx", "first_quest.tmx"]
+map_index = 0
+
+def execute(code):
+    exec(code)
+
 
 def GameInit():
     screen_size = (640, 640)
-    engine.Init(screen_size)
+    engine.Init(screen_size, sys.modules[__name__])
 
 
 def GameReset():
+    global collidedCell, collidedTile, collidedObject
+    global currentMap
+    global coins
+
     engine.Reset()
-    game.Reset()
+    engine.LoadMap(map_names[map_index])
+
+    coins = 0
+    collidedCell = None
+    collidedTile = None
+    collidedObject = None
 
 
 def GameLoop():
@@ -29,6 +50,50 @@ def GameLoop():
     
     # flip the screen to show our drawing
     pygame.display.flip()
+
+
+
+
+# Game methods - add your stuff here
+
+def PreventMove():
+    engine.moved = False
+
+def NextMap():
+    global map_index, map_names
+
+    map_index = map_index + 1
+    if map_index == len(map_names):
+        map_index = 0
+
+    engine.LoadMap(map_names[map_index])
+
+def AddCoins(amount):
+    global coins
+
+    coins = coins + 1
+
+
+def RemoveCoins(amount):
+    global coins
+
+    coins = coins - 1
+    if coins < 0:
+        coins = 0
+
+
+def Pay(amount):
+    if coins >= amount:
+        RemoveCoins(amount)
+        return True
+    return False
+
+
+def RemoveCollidedObject():
+    global collidedObject
+
+    objectsLayer = engine.tilemap.layers["objects"]
+    objectsLayer.objects.remove(collidedObject)
 
 
 GameInit()

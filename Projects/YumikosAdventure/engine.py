@@ -1,11 +1,13 @@
-import pygame, tmx, sys, game
+import pygame, tmx, sys
 
-def Init(screen_size):
+def Init(screen_size, game_pointer):
     global screen, current_keys, player
     global mouse_click_pos, mouse_is_down
 
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
-    global moved
+    global moved, game
+
+    game = game_pointer
 
     pygame.init()
     screen = pygame.display.set_mode(screen_size)
@@ -16,7 +18,20 @@ def Init(screen_size):
     moved = False
 
     player = pygame.image.load("images/player.png")
-    playerPos = pygame.Rect(200, 240, player.get_width(), player.get_height())
+    # playerPos = pygame.Rect(200, 240, player.get_width(), player.get_height())
+    # playerCollideRect = playerPos.move(8, 16)
+    # playerCollideRect.width = playerCollideRect.width - 16
+    # playerCollideRect.height = playerCollideRect.height - 16
+    #
+    # nextPlayerPos = playerPos.copy()
+    # nextPlayerCollideRect = playerCollideRect.copy()
+
+    mouse_click_pos = [-1, -1]
+
+def setupPlayer(playerPosition):
+    global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
+
+    playerPos = pygame.Rect(playerPosition[0], playerPosition[1], player.get_width(), player.get_height())
     playerCollideRect = playerPos.move(8, 16)
     playerCollideRect.width = playerCollideRect.width - 16
     playerCollideRect.height = playerCollideRect.height - 16
@@ -24,21 +39,28 @@ def Init(screen_size):
     nextPlayerPos = playerPos.copy()
     nextPlayerCollideRect = playerCollideRect.copy()
 
-    mouse_click_pos = [-1, -1]
 
 def Reset():
-    global map_offset, tilemap
+    LoadMap("adventure-start.tmx")
 
-    tilemap = tmx.load('adventure-start.tmx', screen.get_size())
+def LoadMap(mapName):
+    global tilemap, playerPos
 
-    map_offset = [20, 20]
-    tilemap.set_focus(20, 20)
+    tilemap = tmx.load(mapName, screen.get_size())
 
-    processOnCreate(tilemap.layers['objects'])
+    objectLayer = tilemap.layers["objects"]
+    startObject = objectLayer.find_by_name("start_position")
+    if not startObject == None:
+        objectLayer.objects.remove(startObject)
+        setupPlayer((startObject.px, startObject.py))
+    else:
+        setupPlayer((tilemap.px_width / 2, tilemap.px_height / 2))
 
+    tilemap.set_focus(playerPos.x, playerPos.y)
+
+    processOnCreate(tilemap.layers["objects"])
     processOnCreate(tilemap.layers["ground1"])
     processOnCreate(tilemap.layers["ground2"])
-
     processOnCreate(tilemap.layers["overlay"])
 
 
@@ -126,8 +148,8 @@ def collideWithOffset(r1, x, y, r2):
 
 
 def MovePlayer(elapsed_ms):
-    global map_offset, tilemap
-    global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
+    global tilemap
+    global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, mouse_is_down, mouse_click_pos
 
     objectsLayer = tilemap.layers["objects"]
@@ -144,11 +166,11 @@ def MovePlayer(elapsed_ms):
     move_by_mouse = mouse_is_down
     moved = False;
 
-    if current_keys[pygame.K_LEFT] and map_offset[0] > 0:
+    if current_keys[pygame.K_LEFT] and playerPos[0] > 0:
         nextPlayerPos[0] -= speed
         nextPlayerCollideRect[0] -= speed
         moved = True
-    elif current_keys[pygame.K_RIGHT]:
+    elif current_keys[pygame.K_RIGHT] and playerPos[0] < tilemap.px_width - player.get_width():
         nextPlayerPos[0] += speed
         nextPlayerCollideRect[0] += speed
         moved = True
@@ -187,11 +209,11 @@ def MovePlayer(elapsed_ms):
             nextPlayerCollideRect[0] = playerCollideRect[0]
 
     moved = False
-    if current_keys[pygame.K_UP] and map_offset[1] > 0:
+    if current_keys[pygame.K_UP] and playerPos[1] > 0:
         nextPlayerPos[1] -= speed
         nextPlayerCollideRect[1] -= speed
         moved = True
-    elif current_keys[pygame.K_DOWN]:
+    elif current_keys[pygame.K_DOWN] and playerPos[1] < tilemap.px_height - player.get_height():
         nextPlayerPos[1] += speed
         nextPlayerCollideRect[1] += speed
         moved = True
