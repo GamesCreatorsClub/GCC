@@ -6,7 +6,7 @@ import engine
 global screen, screen_size, current_keys, last_keys
 global tilemap, playerPos, object, objects, doors, keys
 
-# Important stuff - don't remove
+# --------- Important stuff - don't remove ----------------------------------------------------------------
 
 collidedObject = None
 collidedTile = None
@@ -44,17 +44,13 @@ def GameLoop():
     elapsed_ms = pygame.time.Clock().tick(60)
 
     engine.ProcessEvents(elapsed_ms)
-
     engine.MovePlayer(elapsed_ms)
     engine.DrawScreen()
     
-    # flip the screen to show our drawing
     pygame.display.flip()
 
 
-
-
-# Game methods - add your stuff here
+# --------- Game methods - add your stuff here ------------------------------------------------------------
 
 def PreventMove():
     engine.moved = False
@@ -96,6 +92,7 @@ def RemoveCollidedObject():
     objectsLayer.objects.remove(collidedObject)
 
 
+# --------- Important stuff - don't remove ----------------------------------------------------------------
 GameInit()
 GameReset()
 while True:
