@@ -25,14 +25,14 @@ spawned = False</property>
   </object>
   <object id="21" name="An Object to be moved" gid="42" x="490" y="189" width="16" height="16">
    <properties>
-    <property name="OnCollision">if playerCollideRect.right &lt; collidedObject.px:
+    <property name="OnCollision">if engine.playerCollideRect.right &lt; collidedObject.px:
     collidedObject.px += 2
-elif playerCollideRect.left &gt; collidedObject.px + collidedObject.width:
+elif engine.playerCollideRect.left &gt; collidedObject.px + collidedObject.width:
     collidedObject.px -= 2
 
-if playerCollideRect.bottom &lt; collidedObject.py:
+if engine.playerCollideRect.bottom &lt; collidedObject.py:
     collidedObject.py += 2
-elif playerCollideRect.top &gt; collidedObject.py + collidedObject.height:
+elif engine.playerCollideRect.top &gt; collidedObject.py + collidedObject.height:
     collidedObject.py -= 2
 
 PreventMove()
