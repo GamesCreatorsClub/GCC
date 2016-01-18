@@ -64,6 +64,7 @@ def NextMap():
 
     engine.LoadMap(map_names[map_index])
 
+
 def AddCoins(amount):
     global coins
 
@@ -91,6 +92,11 @@ def RemoveCollidedObject():
     objectsLayer = engine.tilemap.layers["objects"]
     objectsLayer.objects.remove(collidedObject)
 
+def Say(msg):
+    # TODO implement it properly!!!
+    print("Saying '" + msg + "'")
+    # engine.drawbubble(10, 10, 200, 200)
+    # engine.drawtext(msg)
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------
 GameInit()

@@ -8,7 +8,7 @@
 - implement moving by clicking
 - implement lives/mana/energy/luck/...
 - draw splash screen
-- implement splash screen
+- implement splash screen (loading screen)
 - implement menu
 - draw inventory
 - define and implement inventory API

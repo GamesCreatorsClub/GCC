@@ -89,28 +89,42 @@ def processObjectCollision(objectsLayer):
     objects = objectsLayer.collide(nextPlayerCollideRect, "OnCollision")
     oi = 0
     oiLen = len(objects)
-    while moved and oi < oiLen:
+    collided = False
+    while not collided and moved and oi < oiLen: # Processing only first object that collided!
         collidedObject = objects[oi]
-        game.collidedObject = collidedObject
-        collided = True
         if collidedObject.type == "rect" and len(collidedObject.tile.collisionRects) > 0:
             collisionRects = collidedObject.tile.collisionRects;
             cr = 0
             crLen = len(collisionRects)
-            collided = False
             while not collided and cr < crLen:
                 if collideWithOffset(nextPlayerCollideRect, collidedObject.px, collidedObject.py, collisionRects[cr]):
                     collided = True
                 cr = cr + 1
+        else:
+            collided = True
 
         if collided:
-            if "OnCollision" in collidedObject:
-                collision = collidedObject["OnCollision"]
-            elif "OnCollision" in collidedObject.properties:
+            if game.collidedObject != None and game.collidedObject != collidedObject:
+                if "OnCollisionEnd" in game.collidedObject.properties:
+                    game.execute(game.collidedObject.properties["OnCollisionEnd"])
+                elif "OnCollisionEnd" in game.collidedObject:
+                    game.execute(game.collidedObject["OnCollisionEnd"])
+
+            game.collidedObject = collidedObject
+            if "OnCollision" in collidedObject.properties:
                 collision = collidedObject.properties["OnCollision"]
+            elif "OnCollision" in collidedObject:
+                collision = collidedObject["OnCollision"]
             game.execute(collision)
         oi = oi + 1
 
+    if not collided:
+        if game.collidedObject != None:
+            if "OnCollisionEnd" in game.collidedObject.properties:
+                game.execute(game.collidedObject.properties["OnCollisionEnd"])
+            elif "OnCollisionEnd" in game.collidedObject:
+                game.execute(game.collidedObject["OnCollisionEnd"])
+        game.collidedObject = None
     return moved
 
 

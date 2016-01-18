@@ -1,0 +1,28 @@
+Allowed properties on tiles:
+
+OnCreate:
+OnCollision:
+
+- - -
+
+Allowed properties on objects:
+
+OnCreate
+OnCollision
+OnCollisionEnd
+OnClick
+
+Also it object is created from tile, then tile's OnCollision can be used, too.
+Order is object's OnCollision and then tile's OnCollision. If object's OnCollision is not defined then tile's
+OnCollision will be used. If object's OnCollision is defined, then tile's OnCollision is not going to be used.
+
+- - -
+
+Object layer should have special object named 'start_position' for player to start at that place.
+
+- - -
+
+Available methods:
+
+NextMap()
+PreventMove()

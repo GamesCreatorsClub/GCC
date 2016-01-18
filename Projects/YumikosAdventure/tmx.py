@@ -880,6 +880,9 @@ class TileMap(object):
         sx, sy = self.pixel_from_screen(x, y)
         return int(sx//self.tile_width), int(sy//self.tile_height)
 
+    def tile(self, id):
+        return self.tilesets[id]
+
 def load(filename, viewport):
     return TileMap.load(filename, viewport)
 
