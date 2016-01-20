@@ -5,7 +5,7 @@
 - implement collision in tmx.py (Daniel)
 - draw Yumiko's image (all poses)
 - implement changing pose depending on direction
-- implement moving by clicking
+x implement moving by clicking
 - implement lives/mana/energy/luck/...
 - draw splash screen
 - implement splash screen (loading screen)

@@ -170,7 +170,7 @@ def MovePlayer(elapsed_ms):
     ground1Layer = tilemap.layers["ground1"]
     ground2Layer = tilemap.layers["ground2"]
 
-    speed = elapsed_ms / 2
+    speed = elapsed_ms / 4
 
     nextPlayerPos[0] = playerPos[0]
     nextPlayerPos[1] = playerPos[1]
