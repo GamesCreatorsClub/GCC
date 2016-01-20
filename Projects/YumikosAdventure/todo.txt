@@ -15,4 +15,10 @@
 - define and implement NPC API
 - define and implement character's speech bubbles API
 - implement introduction to the game (Daniel?) (prog. driven game)
+- bow/arrow, shooting at 'baddies'
 
+- - -
+
+- organise objects in object layer so they can be quickly retrieved by coordinates (get_visible_objects)
+- handing of characters (CreateCharacter in object's OnCreate method)
+- move maps to maps?
