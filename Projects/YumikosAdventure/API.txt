@@ -1,20 +1,27 @@
 Allowed properties on tiles:
 
-OnCreate:
-OnCollision:
+OnCreate - invoked when map is loaded (can be many times during the game)
+OnCollision - invoked while player is collding with the tile
 
 - - -
 
 Allowed properties on objects:
 
-OnCreate
-OnCollision
-OnCollisionEnd
+OnCreate - invoked when map is loaded (can be many times during the game)
+OnCollisionStart - invoked only at the first time object is collided
+OnCollision - invoked while player is collding with the object
+OnCollisionEnd - invoked at the end
 OnClick
 
 Also it object is created from tile, then tile's OnCollision can be used, too.
 Order is object's OnCollision and then tile's OnCollision. If object's OnCollision is not defined then tile's
 OnCollision will be used. If object's OnCollision is defined, then tile's OnCollision is not going to be used.
+
+- - -
+
+Allowed properties on map
+
+OnCreate - invoked when map is loaded (can be many times during the game)
 
 - - -
 

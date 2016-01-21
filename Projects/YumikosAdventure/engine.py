@@ -41,7 +41,7 @@ def setupPlayer(playerPosition):
 
 
 def Reset():
-    LoadMap("adventure-start.tmx")
+    return None
 
 def LoadMap(mapName):
     global tilemap, playerPos
@@ -58,6 +58,10 @@ def LoadMap(mapName):
 
     tilemap.set_focus(playerPos.x, playerPos.y)
 
+    if "OnCreate" in tilemap.properties:
+        onCreate = tilemap.properties["OnCreate"]
+        game.execute(onCreate)
+
     processOnCreate(tilemap.layers["objects"])
     processOnCreate(tilemap.layers["ground1"])
     processOnCreate(tilemap.layers["ground2"])
@@ -67,8 +71,8 @@ def LoadMap(mapName):
 def processOnCreate(layer):
     tiles = layer.find("OnCreate")
     for t in tiles:
-        create = t.properties["OnCreate"]
-        game.execute(create)
+        onCreate = t.properties["OnCreate"]
+        game.execute(onCreate)
 
 
 def processObjectClick(object):
@@ -86,7 +90,7 @@ def processObjectClick(object):
 def processObjectCollision(objectsLayer):
     global moved
 
-    objects = objectsLayer.collide(nextPlayerCollideRect, "OnCollision")
+    objects = objectsLayer.collide2(nextPlayerCollideRect, "OnCollision", "OnCollisionStart")
     oi = 0
     oiLen = len(objects)
     collided = False
@@ -105,27 +109,35 @@ def processObjectCollision(objectsLayer):
 
         if collided:
             if game.collidedObject != None and game.collidedObject != collidedObject:
-                if "OnCollisionEnd" in game.collidedObject.properties:
-                    game.execute(game.collidedObject.properties["OnCollisionEnd"])
-                elif "OnCollisionEnd" in game.collidedObject:
-                    game.execute(game.collidedObject["OnCollisionEnd"])
+                processObjectsOnMethod(game.collidedObject, "OnCollisionEnd")
 
-            game.collidedObject = collidedObject
-            if "OnCollision" in collidedObject.properties:
-                collision = collidedObject.properties["OnCollision"]
-            elif "OnCollision" in collidedObject:
-                collision = collidedObject["OnCollision"]
-            game.execute(collision)
+            if game.collidedObject != collidedObject:
+                game.collidedObject = collidedObject
+                if "tile" in collidedObject:
+                    game.collidedTile = collidedObject.tile
+                processObjectsOnMethod(collidedObject, "OnCollisionStart")
+
+            processObjectsOnMethod(collidedObject, "OnCollision")
+
         oi = oi + 1
 
     if not collided:
         if game.collidedObject != None:
-            if "OnCollisionEnd" in game.collidedObject.properties:
-                game.execute(game.collidedObject.properties["OnCollisionEnd"])
-            elif "OnCollisionEnd" in game.collidedObject:
-                game.execute(game.collidedObject["OnCollisionEnd"])
-        game.collidedObject = None
+            processObjectsOnMethod(game.collidedObject, "OnCollisionEnd")
+            game.collidedObject = None
+
     return moved
+
+def processObjectsOnMethod(collidedObject, methodName):
+    global moved
+
+    collision = None
+    if methodName in collidedObject.properties:
+        collision = collidedObject.properties[methodName]
+    elif methodName in collidedObject:
+        collision = collidedObject[methodName]
+    if collision != None:
+        game.execute(collision)
 
 
 def processTilesCollision(collisionCells, nextPlayerCollideRect):

@@ -343,6 +343,19 @@ class Layer(object):
                 r.append(cell)
         return r
 
+    def collide2(self, rect, propname1, propname2):
+        '''Find all cells the rect is touching that have the indicated property
+        name set.
+        '''
+        r = []
+        for cell in self.get_in_region(rect.left, rect.top, rect.right,
+                rect.bottom):
+            if not cell.intersects(rect):
+                continue
+            if propname1 in cell or propname2 in cell:
+                r.append(cell)
+        return r
+
     def get_in_region(self, x1, y1, x2, y2):
         '''Return cells (in [column][row]) that are within the map-space
         pixel bounds specified by the bottom-left (x1, y1) and top-right
@@ -633,6 +646,17 @@ class ObjectLayer(object):
                 r.append(object)
         return r
 
+    def collide2(self, rect, propname1, propname2):
+        '''Find all objects the rect is touching that have the indicated
+        property name set.
+        '''
+        r = []
+        for object in self.get_in_region(rect.left, rect.top, rect.right,
+                rect.bottom):
+            if propname1 in object or propname1 in self.properties or propname2 in object or propname2 in self.properties:
+                r.append(object)
+        return r
+
     def get_in_region(self, x1, y1, x2, y2):
         '''Return objects that are within the map-space
         pixel bounds specified by the bottom-left (x1, y1) and top-right
@@ -766,6 +790,23 @@ class TileMap(object):
         for tag in map.findall('objectgroup'):
             layer = ObjectLayer.fromxml(tag, tilemap)
             tilemap.layers.add_named(layer, layer.name)
+
+        props = map.find('properties')
+        if not props is None:
+            for c in props.findall('property'):
+                # store additional properties.
+                name = c.attrib['name']
+                # value = c.attrib['value']
+                if 'value' in c.attrib:
+                    value = c.attrib['value']
+                else:
+                    value = c.text
+
+
+                # TODO hax
+                if value.isdigit():
+                    value = int(value)
+                tilemap.properties[name] = value
 
         return tilemap
 
