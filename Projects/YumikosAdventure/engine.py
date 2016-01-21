@@ -92,7 +92,7 @@ def processObjectCollision(objectsLayer):
     collided = False
     while not collided and moved and oi < oiLen: # Processing only first object that collided!
         collidedObject = objects[oi]
-        if collidedObject.type == "rect" and len(collidedObject.tile.collisionRects) > 0:
+        if "tile" in collidedObject and "collisionRects" in collidedObject.tile and len(collidedObject.tile.collisionRects) > 0:
             collisionRects = collidedObject.tile.collisionRects;
             cr = 0
             crLen = len(collisionRects)

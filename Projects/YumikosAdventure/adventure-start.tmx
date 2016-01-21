@@ -59,7 +59,7 @@ PreventMove()</property>
     <property name="OnCollisionEnd" value="collidedObject.tile=engine.tilemap.tilesets[809]"/>
    </properties>
   </object>
-  <object id="34" name="start_position" gid="850" x="320" y="496" width="32" height="32"/>
+  <object id="34" name="start_position" gid="850" x="464" y="112" width="32" height="32"/>
  </objectgroup>
  <layer name="overlay" width="50" height="50">
   <data encoding="base64" compression="zlib">

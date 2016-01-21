@@ -25,4 +25,5 @@ Object layer should have special object named 'start_position' for player to sta
 Available methods:
 
 NextMap()
+Map(mapName)
 PreventMove()

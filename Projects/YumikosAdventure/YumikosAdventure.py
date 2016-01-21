@@ -14,6 +14,7 @@ collidedCell = None
 
 map_names = ["adventure-start.tmx", "first_quest.tmx"]
 map_index = 0
+current_map = map_names[map_index]
 
 def execute(code):
     exec(code)
@@ -62,8 +63,10 @@ def NextMap():
     if map_index == len(map_names):
         map_index = 0
 
-    engine.LoadMap(map_names[map_index])
+    Map(map_names[map_index])
 
+def Map(name):
+    engine.LoadMap(name)
 
 def AddCoins(amount):
     global coins
