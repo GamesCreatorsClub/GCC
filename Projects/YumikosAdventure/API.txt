@@ -29,8 +29,11 @@ Object layer should have special object named 'start_position' for player to sta
 
 - - -
 
-Available methods:
+Available methods and fields:
 
 NextMap()
 Map(mapName)
 PreventMove()
+
+engine.tilesByName - dictionary that has all tileset tile's name collected. Tile must have custom attribute 'name'
+                     or 'Name' to end in this list.

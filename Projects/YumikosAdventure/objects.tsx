@@ -5,6 +5,7 @@
   <properties>
    <property name="OnCollision">AddCoins(1)
 RemoveCollidedObject()</property>
+   <property name="name" value="coin"/>
   </properties>
  </tile>
 </tileset>

@@ -1,11 +1,14 @@
 import pygame, tmx, sys
 
+tilesByName = {}
+
 def Init(screen_size, game_pointer):
     global screen, current_keys, player
     global mouse_click_pos, mouse_is_down
 
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, game
+    global tilesByName
 
     game = game_pointer
 
@@ -27,6 +30,7 @@ def Init(screen_size, game_pointer):
     # nextPlayerCollideRect = playerCollideRect.copy()
 
     mouse_click_pos = [-1, -1]
+    tilesByName = {}
 
 def setupPlayer(playerPosition):
     global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
@@ -44,7 +48,7 @@ def Reset():
     return None
 
 def LoadMap(mapName):
-    global tilemap, playerPos
+    global tilemap, playerPos, tilesByName
 
     tilemap = tmx.load(mapName, screen.get_size())
 
@@ -67,6 +71,14 @@ def LoadMap(mapName):
     processOnCreate(tilemap.layers["ground2"])
     processOnCreate(tilemap.layers["overlay"])
 
+    tilesByName = {}
+
+    for tileId in tilemap.tilesets:
+        tile = tilemap.tilesets[tileId]
+        if "Name" in tile.properties:
+            tilesByName[tile.properties["Name"]] = tile
+        elif "name" in tile.properties:
+            tilesByName[tile.properties["name"]] = tile
 
 def processOnCreate(layer):
     tiles = layer.find("OnCreate")

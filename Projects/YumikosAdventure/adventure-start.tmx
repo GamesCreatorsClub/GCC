@@ -59,8 +59,8 @@ PreventMove()</property>
    <properties>
     <property name="Content" value="KEY_1"/>
     <property name="OnCollision" value="PreventMove()"/>
-    <property name="OnCollisionEnd" value="collidedObject.tile=engine.tilemap.tilesets[809]"/>
-    <property name="OnCollisionStart" value="collidedObject.tile=engine.tilemap.tilesets[810];PreventMove()"/>
+    <property name="OnCollisionEnd" value="collidedObject.tile=engine.tilesByName[&quot;chest-closed&quot;]"/>
+    <property name="OnCollisionStart" value="collidedObject.tile=engine.tilesByName[&quot;chest-open&quot;];PreventMove()"/>
    </properties>
   </object>
   <object id="34" name="start_position" gid="850" x="464" y="112" width="32" height="32"/>
