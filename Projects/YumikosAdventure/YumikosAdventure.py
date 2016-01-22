@@ -44,6 +44,7 @@ def GameLoop():
 
     elapsed_ms = pygame.time.Clock().tick(60)
 
+    engine.Animate()
     engine.ProcessEvents(elapsed_ms)
     engine.MovePlayer(elapsed_ms)
     engine.DrawScreen()

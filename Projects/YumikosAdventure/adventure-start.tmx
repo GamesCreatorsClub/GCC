@@ -1,10 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="39">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="41">
  <properties>
   <property name="OnCreate" value="print(&quot;Map is loaded!&quot;)"/>
  </properties>
  <tileset firstgid="1" source="tilea2.tsx"/>
- <tileset firstgid="769" source="tileb.tsx"/>
+ <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="maps/tileb.png" width="512" height="512"/>
+  <terraintypes>
+   <terrain name="mound" tile="-1"/>
+  </terraintypes>
+  <tile id="40">
+   <properties>
+    <property name="name" value="chest-closed"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="name" value="chest-open"/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <objectgroup draworder="index">
+    <object id="0" x="2.96077" y="1.94301" width="26.832" height="26.3694">
+     <ellipse/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="name" value="sign"/>
+   </properties>
+   <objectgroup draworder="index">
+    <object id="0" x="0.803588" y="13.0766" width="30.8286" height="10.5928"/>
+    <object id="0" x="13.0035" y="24.2538" width="5.84428" height="7.52451"/>
+   </objectgroup>
+  </tile>
+  <tile id="219" terrain=",,,0"/>
+  <tile id="220" terrain=",,0,0"/>
+  <tile id="221" terrain=",,0,"/>
+  <tile id="230">
+   <properties>
+    <property name="name" value="plants-killer-1"/>
+   </properties>
+  </tile>
+  <tile id="235" terrain=",0,,0"/>
+  <tile id="236" terrain="0,0,0,0"/>
+  <tile id="237" terrain="0,,0,"/>
+  <tile id="238" terrain=",0,0,0"/>
+  <tile id="239" terrain="0,,0,0"/>
+  <tile id="246">
+   <properties>
+    <property name="name" value="plants-killer-2"/>
+   </properties>
+  </tile>
+  <tile id="251" terrain=",0,,"/>
+  <tile id="252" terrain="0,0,,"/>
+  <tile id="253" terrain="0,,,"/>
+  <tile id="254" terrain="0,0,,0"/>
+  <tile id="255" terrain="0,0,0,"/>
+ </tileset>
  <tileset firstgid="1025" source="objects.tsx"/>
  <layer name="ground1" width="50" height="50">
   <data encoding="base64" compression="zlib">
@@ -64,6 +118,14 @@ PreventMove()</property>
    </properties>
   </object>
   <object id="34" name="start_position" gid="850" x="464" y="112" width="32" height="32"/>
+  <object id="39" name="killer-plants1" gid="999" x="160" y="176" width="32" height="32">
+   <properties>
+    <property name="Animate" value="true"/>
+    <property name="AnimationSpeed" value="30"/>
+    <property name="Frame1" value="plants-killer-1"/>
+    <property name="Frame2" value="plants-killer-2"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="overlay" width="50" height="50">
   <data encoding="base64" compression="zlib">

@@ -1,6 +1,8 @@
 import pygame, tmx, sys
 
 tilesByName = {}
+autoAnimationObjects = []
+animationObjects = []
 
 def Init(screen_size, game_pointer):
     global screen, current_keys, player
@@ -48,7 +50,7 @@ def Reset():
     return None
 
 def LoadMap(mapName):
-    global tilemap, playerPos, tilesByName
+    global tilemap, playerPos, tilesByName, autoAnimationObjects, animationObjects
 
     tilemap = tmx.load(mapName, screen.get_size())
 
@@ -66,10 +68,19 @@ def LoadMap(mapName):
         onCreate = tilemap.properties["OnCreate"]
         game.execute(onCreate)
 
+    processNames()
+
     processOnCreate(tilemap.layers["objects"])
     processOnCreate(tilemap.layers["ground1"])
     processOnCreate(tilemap.layers["ground2"])
     processOnCreate(tilemap.layers["overlay"])
+
+    autoAnimationObjects = tilemap.layers["objects"].find("Animate")
+    animationObjects = tilemap.layers["objects"].find("OnAnimate")
+
+
+def processNames():
+    global tilesByName
 
     tilesByName = {}
 
@@ -79,6 +90,7 @@ def LoadMap(mapName):
             tilesByName[tile.properties["Name"]] = tile
         elif "name" in tile.properties:
             tilesByName[tile.properties["name"]] = tile
+
 
 def processOnCreate(layer):
     tiles = layer.find("OnCreate")
@@ -183,6 +195,48 @@ def processTilesCollision(collisionCells, nextPlayerCollideRect):
 
 def collideWithOffset(r1, x, y, r2):
     return r1.x < r2.x + x + r2.w and r1.y < r2.y + y + r2.h and r1.x + r1.w > r2.x + x and r1.y + r1.h > r2.y + y
+
+
+def Animate():
+    for object in animationObjects:
+        processObjectsOnMethod(object, "OnAnimate")
+
+    for object in autoAnimationObjects:
+        AnimateObject(object)
+
+def AnimateObject(object):
+
+    if "animation_timeout" in object.properties:
+        animationTimeout = object.properties["animation_timeout"]
+    else:
+        animationTimeout = 1
+
+    if not "AnimationSpeed" in object.properties:
+        object.properties["AnimationSpeed"] = "1"
+    animationSpeed = int(object.properties["AnimationSpeed"])
+
+    animationTimeout = animationTimeout - 1
+    if animationTimeout > 1:
+        object.properties["animation_timeout"] = animationTimeout
+        return
+
+    object.properties["animation_timeout"] = animationSpeed
+
+
+    if "current_frame" not in object.properties:
+        object.properties["current_frame"] = 1
+    currentFrame = object.properties["current_frame"]
+
+    frameName = object.properties["Frame" + str(currentFrame)]
+
+    object.tile = tilesByName[frameName]
+
+    currentFrame = currentFrame + 1
+    if not "Frame" + str(currentFrame) in object.properties:
+        currentFrame = 1
+
+    object.properties["current_frame"] = currentFrame
+
 
 
 def MovePlayer(elapsed_ms):
