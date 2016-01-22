@@ -16,6 +16,12 @@ map_names = ["adventure-start.tmx", "first_quest.tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
+pygame.mixer.pre_init()
+pygame.mixer.init()
+
+# change file for different music
+music = pygame.mixer.music.load("music.wav")
+
 def execute(code):
     exec(code)
 
@@ -23,6 +29,8 @@ def execute(code):
 def GameInit():
     screen_size = (640, 640)
     engine.Init(screen_size, sys.modules[__name__])
+    pygame.mixer.music.play(-1)
+
 
 
 def GameReset():

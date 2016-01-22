@@ -15,6 +15,9 @@ def Init(screen_size, game_pointer):
     game = game_pointer
 
     pygame.init()
+
+
+
     screen = pygame.display.set_mode(screen_size)
 
     current_keys = pygame.key.get_pressed()

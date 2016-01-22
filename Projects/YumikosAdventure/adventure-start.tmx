@@ -99,7 +99,7 @@ PreventMove()
 </property>
    </properties>
   </object>
-  <object id="22" name="Sign" gid="850" x="554" y="106" width="32" height="32">
+  <object id="22" name="Sign" gid="850" x="640" y="336" width="32" height="32">
    <properties>
     <property name="OnClick">Say(&quot;Sign says: 'Come here!'&quot;)
 PreventMove()</property>
@@ -127,7 +127,7 @@ PreventMove()</property>
    </properties>
   </object>
  </objectgroup>
- <layer name="overlay" width="50" height="50">
+ <layer name="overlay" width="50" height="50" visible="0">
   <data encoding="base64" compression="zlib">
    eJzt1MENQEAQBdC9KIVS0AmdUAltWuEki4PDIu8lP5PM6e9hJwQAAHim3tMkZiptnpq3pph5z3Qzu5g+T014vSL843+89R1rr6u7e5xDzJil6bUybDf17M6mdlWWpgAAAAAAfMkCRfoYng==
   </data>
