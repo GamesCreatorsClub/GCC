@@ -80,7 +80,7 @@ spawned = True</property>
 spawned = False</property>
    </properties>
   </object>
-  <object id="21" name="An Object to be moved" gid="809" x="490" y="189" width="16" height="16">
+  <object id="21" name="An Object to be moved" gid="809" x="480" y="176" width="16" height="16">
    <properties>
     <property name="OnCollision">
 

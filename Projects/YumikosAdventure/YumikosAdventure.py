@@ -29,7 +29,7 @@ def execute(code):
 def GameInit():
     screen_size = (640, 640)
     engine.Init(screen_size, sys.modules[__name__])
-    pygame.mixer.music.play(-1)
+    ##pygame.mixer.music.play(-1)
 
 
 
@@ -64,6 +64,9 @@ def GameLoop():
 
 def PreventMove():
     engine.moved = False
+
+def teleport(x,y):
+    engine.teleport(x,y)
 
 def NextMap():
     global map_index, map_names
