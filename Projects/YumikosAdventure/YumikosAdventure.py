@@ -12,12 +12,14 @@ collidedObject = None
 collidedTile = None
 collidedCell = None
 
-map_names = ["adventure-start.tmx", "first_quest.tmx"]
+map_names = ["start.tmx","adventure-start.tmx", "first_quest.tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
 pygame.mixer.pre_init()
 pygame.mixer.init()
+
+noPlayerInput = False
 
 # change file for different music
 music = pygame.mixer.music.load("music.wav")
@@ -48,13 +50,16 @@ def GameReset():
 
 
 def GameLoop():
-    global current_keys, last_keys, tilemap, playerPos, object, objects, mouse_click_pos, mouse_is_down
+    global current_keys, last_keys, tilemap, playerPos, object, objects, mouse_click_pos, mouse_is_down, noPlayerInput
 
     elapsed_ms = pygame.time.Clock().tick(60)
 
     engine.Animate()
     engine.ProcessEvents(elapsed_ms)
-    engine.MovePlayer(elapsed_ms)
+    if not noPlayerInput:
+        engine.MovePlayer(elapsed_ms)
+    else:
+        engine.ProcessClick(elapsed_ms)
     engine.DrawScreen()
     
     pygame.display.flip()
@@ -66,7 +71,7 @@ def PreventMove():
     engine.moved = False
 
 def teleport(x,y):
-    engine.teleport(x,y)
+    engine.teleportToObject("back")
 
 def NextMap():
     global map_index, map_names

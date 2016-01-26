@@ -37,6 +37,7 @@ def Init(screen_size, game_pointer):
     mouse_click_pos = [-1, -1]
     tilesByName = {}
 
+
 def setupPlayer(playerPosition):
     global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
 
@@ -51,6 +52,16 @@ def setupPlayer(playerPosition):
 
 def Reset():
     return None
+
+
+def teleportToObject(name):
+    objectLayer = tilemap.layers["objects"]
+    object = objectLayer.find_by_name(name)
+    if not object == None:
+        setupPlayer((object.px, object.py))
+    else:
+        setupPlayer((tilemap.px_width / 2, tilemap.px_height / 2))
+
 
 def LoadMap(mapName):
     global tilemap, playerPos, tilesByName, autoAnimationObjects, animationObjects
@@ -347,6 +358,95 @@ def MovePlayer(elapsed_ms):
     tilemap.update(elapsed_ms)
 
 
+def MovePlayerMaually(elapsed_ms, direction):
+    global tilemap
+    global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
+    global moved, mouse_is_down, mouse_click_pos
+
+    objectsLayer = tilemap.layers["objects"]
+    ground1Layer = tilemap.layers["ground1"]
+    ground2Layer = tilemap.layers["ground2"]
+
+    speed = elapsed_ms / 4
+
+    nextPlayerPos[0] = playerPos[0]
+    nextPlayerPos[1] = playerPos[1]
+    nextPlayerCollideRect[0] = playerCollideRect[0]
+    nextPlayerCollideRect[1] = playerCollideRect[1]
+
+    move_by_mouse = mouse_is_down
+    moved = False;
+
+    if direction == "left" and playerPos[0] > 0:
+        nextPlayerPos[0] -= speed
+        nextPlayerCollideRect[0] -= speed
+        moved = True
+    elif direction == "right" and playerPos[0] < tilemap.px_width - player.get_width():
+        nextPlayerPos[0] += speed
+        nextPlayerCollideRect[0] += speed
+        moved = True
+
+    if moved:
+        collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+        moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
+
+        if moved:
+            collisionCells = ground2Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+            moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
+
+        if moved:
+            moved = processObjectCollision(objectsLayer)
+
+        if moved:
+            playerPos[0] = nextPlayerPos[0]
+            playerCollideRect[0] = nextPlayerCollideRect[0]
+        else:
+            nextPlayerPos[0] = playerPos[0]
+            nextPlayerCollideRect[0] = playerCollideRect[0]
+
+    moved = False
+    if direction == "up" and playerPos[1] > 0:
+        nextPlayerPos[1] -= speed
+        nextPlayerCollideRect[1] -= speed
+        moved = True
+    elif direction == "down" and playerPos[1] < tilemap.px_height - player.get_height():
+        nextPlayerPos[1] += speed
+        nextPlayerCollideRect[1] += speed
+        moved = True
+
+    if moved:
+        collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+        moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
+
+        if moved:
+            collisionCells = ground2Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
+            moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
+
+        if moved:
+            moved = processObjectCollision(objectsLayer)
+
+        if moved:
+            playerPos[1] = nextPlayerPos[1]
+            playerCollideRect[1] = nextPlayerCollideRect[1]
+        else:
+            nextPlayerPos[1] = playerPos[1]
+            nextPlayerCollideRect[1] = playerCollideRect[1]
+
+    tilemap.set_focus(playerPos[0], playerPos[1])
+    tilemap.update(elapsed_ms)
+
+
+def ProcessClick(elapsed_ms):
+    global tilemap
+    global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
+    global moved, mouse_is_down, mouse_click_pos
+
+    if mouse_click_pos[0] >= 0 and mouse_click_pos[1] >= 0:
+        objectsLayer = tilemap.layers["objects"]
+        clickedCell = objectsLayer.get_at(mouse_click_pos[0] + tilemap.viewport.x, mouse_click_pos[1] + tilemap.viewport.y)
+        processObjectClick(clickedCell)
+
+
 def ProcessEvents(elapsed_ms):
     global mouse_click_pos, mouse_is_down
     global current_keys, last_keys
@@ -360,6 +460,8 @@ def ProcessEvents(elapsed_ms):
             mouse_click_pos[1] = event.pos[1]
             mouse_is_down = True
         elif event.type == pygame.MOUSEBUTTONUP:
+            mouse_click_pos[0] = -1
+            mouse_click_pos[1] = -1
             mouse_is_down = False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_is_down:
