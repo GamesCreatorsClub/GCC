@@ -201,7 +201,9 @@ def collideWithOffset(r1, x, y, r2):
 
 
 def Animate():
+
     for object in animationObjects:
+        game.collidedObject = object
         processObjectsOnMethod(object, "OnAnimate")
 
     for object in autoAnimationObjects:
