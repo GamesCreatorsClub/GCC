@@ -1630,23 +1630,23 @@
  </layer>
  <layer name="ground2" width="128" height="128">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <objectgroup name="objects">
+ <objectgroup name="objects" visible="0">
   <object id="27" name="start_position" gid="850" x="1216" y="1728" width="32" height="32" visible="0">
    <properties>
     <property name="visible" value="1"/>
    </properties>
   </object>
-  <object id="195" name="teleport back" gid="850" x="1216" y="640" width="32" height="32" visible="0">
+  <object id="195" name="teleport back" gid="850" x="1216" y="640" width="32" height="32">
    <properties>
     <property name="OnCollision">print(&quot;hello&quot;)
 teleport(0,-992)</property>
     <property name="visible" value="true"/>
    </properties>
   </object>
-  <object id="196" name="back" gid="850" x="1216" y="1648" visible="0">
+  <object id="196" name="back" gid="850" x="1216" y="1648">
    <properties>
     <property name="OnClick" value=""/>
    </properties>
