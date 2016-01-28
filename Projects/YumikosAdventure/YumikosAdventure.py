@@ -70,8 +70,8 @@ def GameLoop():
 def PreventMove():
     engine.moved = False
 
-def teleport(x,y):
-    engine.teleportToObject("back")
+def teleportToObject(name):
+    engine.teleportToObject(name)
 
 def NextMap():
     global map_index, map_names

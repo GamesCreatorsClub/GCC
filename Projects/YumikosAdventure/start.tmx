@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" nextobjectid="201">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" nextobjectid="236">
  <properties>
   <property name="OnCreate" value="global noPlayerInput; noPlayerInput = True"/>
  </properties>
@@ -1523,7 +1523,7 @@
   </tile>
   <tile id="81">
    <properties>
-    <property name="name" value="sign"/>
+    <property name="name" value="a "/>
    </properties>
    <objectgroup draworder="index">
     <object id="0" x="0.803588" y="13.0766" width="30.8286" height="10.5928"/>
@@ -1633,20 +1633,20 @@
    eJztnTmSFDEQRTuCMTAxMTExMTExMTE4wlyFxWFxBnBYHBaHxWFxWE7DORDR0THdPVVSSpmp+ln6L0LOdHWTJaVSX7XwN5vleXmy2bxK7XVqb070x83xKH3ncWpPUns68f2v6W/fUvue2o/K33+bjn+X2vvUPjTERnT8vVQ+5iyNy7PUnqf2YmKMfqa//Urtd2p/KsfwYzr+U2qfU/si+O69dMz91B6k9pD50gVt/chRWztKtYicE2Gu1NaOUi0i56xxrrTWoh5zAU3L5OYKem24K9Alc0xpmh5zoVbLaCmNYW6urLE25Oixbmj2QTnmxlkzhqOto54adodmH5Rjbpw1Y1jqD+36cHmAnOrF3DhLc/qsYS2V1hbNOl1LKSfRNU0rPWrXMdr14YpDnKWcHE3TWPFfLx9r5l45J7n+uKOUk5H3Oz3o2QdXHX6/lJPc7+THWNsHNXMVjVH2O7kxnuoDr5qApv+X0FBLkMvzqT5ArYst+wqu8fV57lUXry3Q/6i5bEXLPr7EUnXxusO/NcoaT7YstWeNCNq9yRsAMUQkp3Fyn9Xcm2zVUad78/Emx9eFnMbJfVZzb7KnjpLUpdac94pnSXIaJ/dZzb1JCx0lvf4vqUutOb+PNE96P8NRS07j1OifXH/01FGSutSa8/tI88TrGQ40vGv8LeFvSuqSRc5L88TrGY4pvNea3BwfYa+8f70EcW/ovdbk5rh3f9wG6WNkvNeaEeZ4ZLzXmpY5XrOfyt2judMp33jPx5Zo91CixVtDSR965H60NSNavDWU9KFH7i+lk1ufI0bU9VaU9KE093s+o+3BqGt8SR8ivwtpibbORTtfbzzWDc9nQ+fqnHRc16wRW4immebqnHRco52vN2vRTNJxXcv5kkM4rheJrHWOr3cgPn+BjkbrSHLn1FHnHV/vQHz+Ah2N1llaJx9f75DcE4v8TpoHkjVx7j2CpXXy8fWOlrGNfq0rh/faTj2lx/OZnqXr81qxHDPPZ3o09dm6dqDuM1riQn/md4emPudqR0uf9apFtbGxRk6Tqx0tfdZLK9bGtrSGRSVXO1r6rJdWrI2NGrYe5D5Djo3EAVWvejDCuVIXzmOt9RGx1oXo7/3WjJu11m+JwRtrXeh9DUCbXzXjZq31W2LwxloXer+Lpc0vq32tpt8kMUS9/+L9LpY2vxD2QQgxRKXne+WE1IKk7bTxoJ1LBJC0nTYetHPxQprnkuPQ7pto4kE7Fy+keS45TqPtPK6daOIZRadK81w7H0r1I8rzE2uD/t9EC/2/SQn6f8ckwlyh/7cfa5wryP/nBZqWieyHR//vMvT/lkP/70NGW0fp/30I/b/jQP/vLfT/pv83/b/tof/3GND/e/21gf7f04yy36H/9zR8JoD+3yNA/2+8XLaC/t95RlnjyRb6f8tBuzdJ/+826P89NvT/ln/mFc+S0P9b/tk+9P8+hP7f7fGsAfp/t8djBf2/faH/N/2/kaH/99jQ/1sP7/nYEu0eSrR4a6D/d5lo8dZA/+8yiLreCvp/bxl1jaf/9xb6f9tC/++xiaaZ6P9ty1o0E/2/x4bjepHIWof+33ro/z02kf0d6P+th/7f9nGhQP9vfOj/HQ/6f9eDus9Y2v/b85ke+n/7xGU5Zqg+P/T/ngd1zCyh/zeZA7nPkGMjcUDVqx6McK70/56H/t8Xof/3Fvp/0/876v2hfej/3Qb9v6eh/3eMGKIywjUmEhckbaeNB+1cIoCk7bTxoJ2LF/T/tv9uJOj/bf/dSND/e2zo/0200P+blKD/d0wizJWo/t//AKP1BJs=
   </data>
  </layer>
- <objectgroup name="objects" visible="0">
+ <objectgroup name="objects">
   <object id="27" name="start_position" gid="850" x="1216" y="1728" width="32" height="32" visible="0">
    <properties>
     <property name="visible" value="1"/>
    </properties>
   </object>
-  <object id="195" name="teleport back" gid="850" x="1216" y="640" width="32" height="32">
+  <object id="195" name="teleport back" gid="850" x="1216" y="640" width="32" height="32" visible="0">
    <properties>
     <property name="OnCollision">print(&quot;hello&quot;)
-teleport(0,-992)</property>
+teleportToObject(&quot;back&quot;)</property>
     <property name="visible" value="true"/>
    </properties>
   </object>
-  <object id="196" name="back" gid="850" x="1216" y="1648">
+  <object id="196" name="back" gid="850" x="1216" y="1648" visible="0">
    <properties>
     <property name="OnClick" value=""/>
    </properties>
@@ -1656,7 +1656,7 @@ teleport(0,-992)</property>
     <property name="OnAnimate" value="engine.MovePlayerMaually(15, &quot;up&quot;)"/>
    </properties>
   </object>
-  <object id="198" x="-16" y="-16" width="2064" height="2064">
+  <object id="198" x="-16" y="-16" width="2064" height="2064" visible="0">
    <properties>
     <property name="OnClick" value="NextMap()"/>
    </properties>
