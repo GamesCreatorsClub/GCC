@@ -278,11 +278,11 @@ def MovePlayer(elapsed_ms):
     move_by_mouse = mouse_is_down
     moved = False;
 
-    if current_keys[pygame.K_LEFT] and playerPos[0] > 0:
+    if (current_keys[pygame.K_LEFT] or current_keys[pygame.K_a]) and playerPos[0] > 0:
         nextPlayerPos[0] -= speed
         nextPlayerCollideRect[0] -= speed
         moved = True
-    elif current_keys[pygame.K_RIGHT] and playerPos[0] < tilemap.px_width - player.get_width():
+    elif (current_keys[pygame.K_RIGHT] or current_keys[pygame.K_d]) and playerPos[0] < tilemap.px_width - player.get_width():
         nextPlayerPos[0] += speed
         nextPlayerCollideRect[0] += speed
         moved = True
@@ -321,11 +321,11 @@ def MovePlayer(elapsed_ms):
             nextPlayerCollideRect[0] = playerCollideRect[0]
 
     moved = False
-    if current_keys[pygame.K_UP] and playerPos[1] > 0:
+    if (current_keys[pygame.K_UP] or current_keys[pygame.K_w]) and playerPos[1] > 0:
         nextPlayerPos[1] -= speed
         nextPlayerCollideRect[1] -= speed
         moved = True
-    elif current_keys[pygame.K_DOWN] and playerPos[1] < tilemap.px_height - player.get_height():
+    elif (current_keys[pygame.K_DOWN] or current_keys[pygame.K_s]) and playerPos[1] < tilemap.px_height - player.get_height():
         nextPlayerPos[1] += speed
         nextPlayerCollideRect[1] += speed
         moved = True
