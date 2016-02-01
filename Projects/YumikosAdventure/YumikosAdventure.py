@@ -12,7 +12,7 @@ collidedObject = None
 collidedTile = None
 collidedCell = None
 
-map_names = ["start.tmx","adventure-start.tmx", "david-test.tmx"]
+map_names = ["start.tmx", "adventure-start.tmx", "first-quest.tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
@@ -32,7 +32,6 @@ def GameInit():
     screen_size = (640, 640)
     engine.Init(screen_size, sys.modules[__name__])
     ##pygame.mixer.music.play(-1)
-
 
 
 def GameReset():
@@ -57,7 +56,7 @@ def GameLoop():
     engine.Animate()
     engine.ProcessEvents(elapsed_ms)
     if not noPlayerInput:
-        engine.MovePlayer(elapsed_ms)
+        engine.MovePlayerWithKeys(elapsed_ms)
     else:
         engine.ProcessClick(elapsed_ms)
     engine.DrawScreen()
@@ -70,8 +69,10 @@ def GameLoop():
 def PreventMove():
     engine.moved = False
 
+
 def teleportToObject(name):
     engine.teleportToObject(name)
+
 
 def NextMap():
     global map_index, map_names
@@ -82,13 +83,16 @@ def NextMap():
 
     Map(map_names[map_index])
 
+
 def Map(name):
     engine.LoadMap(name)
+
 
 def AddCoins(amount):
     global coins
 
     coins = coins + 1
+
 
 def RemoveCoins(amount):
     global coins
@@ -111,21 +115,26 @@ def RemoveCollidedObject():
     objectsLayer = engine.tilemap.layers["objects"]
     objectsLayer.objects.remove(collidedObject)
 
+
 def Say(msg):
     # TODO implement it properly!!!
     print("Saying '" + msg + "'")
     # engine.drawbubble(10, 10, 200, 200)
     # engine.drawtext(msg)
 
+
 def GetInventory():
     return engine.playerInventory
+
 
 def InventoryContains(object):
     return object in engine.playerInventory
 
+
 def AddObjectToInventory(object):
     engine.playerInventory.append(object)
     engine.RemoveObjectFromMap(object)
+
 
 def RemoveObjectFromInventory(object):
     engine.playerInventory.remove(object)

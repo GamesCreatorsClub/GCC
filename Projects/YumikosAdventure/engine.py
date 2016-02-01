@@ -1,13 +1,22 @@
 import pygame, tmx, sys
 
+LEFT = 1
+RIGHT = 2
+UP = 4
+DOWN = 8
+
 tilesByName = {}
 autoAnimationObjects = []
 animationObjects = []
 
 playerInventory = []
 
+objectsSurface = None
+charactersSurface = None
+
+
 def Init(screen_size, game_pointer):
-    global screen, current_keys, player
+    global screen, current_keys, player, objectsSurface, charactersSurface
     global mouse_click_pos, mouse_is_down
 
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
@@ -21,7 +30,6 @@ def Init(screen_size, game_pointer):
     pygame.init()
 
 
-
     screen = pygame.display.set_mode(screen_size)
 
     current_keys = pygame.key.get_pressed()
@@ -29,14 +37,10 @@ def Init(screen_size, game_pointer):
 
     moved = False
 
-    player = pygame.image.load("images/player.png")
-    # playerPos = pygame.Rect(200, 240, player.get_width(), player.get_height())
-    # playerCollideRect = playerPos.move(8, 16)
-    # playerCollideRect.width = playerCollideRect.width - 16
-    # playerCollideRect.height = playerCollideRect.height - 16
-    #
-    # nextPlayerPos = playerPos.copy()
-    # nextPlayerCollideRect = playerCollideRect.copy()
+    objectsSurface = pygame.image.load("images/objects.png")
+    charactersSurface = pygame.image.load("images/characters.png")
+
+    player = charactersSurface.subsurface(pygame.Rect(0, 0, 32, 32))
 
     mouse_click_pos = [-1, -1]
     tilesByName = {}
@@ -170,6 +174,7 @@ def processObjectCollision(objectsLayer):
 
     return moved
 
+
 def processObjectsOnMethod(collidedObject, methodName):
     global moved
 
@@ -224,6 +229,7 @@ def Animate():
     for object in autoAnimationObjects:
         AnimateObject(object)
 
+
 def AnimateObject(object):
 
     if "animation_timeout" in object.properties:
@@ -258,11 +264,28 @@ def AnimateObject(object):
     object.properties["current_frame"] = currentFrame
 
 
+def MovePlayerWithKeys(elapsed_ms):
+    direction = 0
+    if current_keys[pygame.K_LEFT] or current_keys[pygame.K_a]:
+        direction = direction + LEFT
+    elif current_keys[pygame.K_RIGHT] or current_keys[pygame.K_d]:
+        direction = direction + RIGHT
+    if current_keys[pygame.K_UP] or current_keys[pygame.K_w]:
+        direction = direction + UP
+    elif current_keys[pygame.K_DOWN] or current_keys[pygame.K_s]:
+        direction = direction + DOWN
 
-def MovePlayer(elapsed_ms):
+    movePlayerInternal(elapsed_ms, direction, mouse_is_down)
+
+
+def MovePlayer(elapsed_ms, direction):
+    movePlayerInternal(elapsed_ms, direction, False)
+
+
+def movePlayerInternal(elapsed_ms, direction, move_by_mouse):
     global tilemap
     global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
-    global moved, mouse_is_down, mouse_click_pos
+    global moved, mouse_click_pos
 
     objectsLayer = tilemap.layers["objects"]
     ground1Layer = tilemap.layers["ground1"]
@@ -275,14 +298,13 @@ def MovePlayer(elapsed_ms):
     nextPlayerCollideRect[0] = playerCollideRect[0]
     nextPlayerCollideRect[1] = playerCollideRect[1]
 
-    move_by_mouse = mouse_is_down
     moved = False;
 
-    if (current_keys[pygame.K_LEFT] or current_keys[pygame.K_a]) and playerPos[0] > 0:
+    if direction & LEFT != 0 and playerPos[0] > 0:
         nextPlayerPos[0] -= speed
         nextPlayerCollideRect[0] -= speed
         moved = True
-    elif (current_keys[pygame.K_RIGHT] or current_keys[pygame.K_d]) and playerPos[0] < tilemap.px_width - player.get_width():
+    elif direction & RIGHT != 0 and playerPos[0] < tilemap.px_width - player.get_width():
         nextPlayerPos[0] += speed
         nextPlayerCollideRect[0] += speed
         moved = True
@@ -321,11 +343,11 @@ def MovePlayer(elapsed_ms):
             nextPlayerCollideRect[0] = playerCollideRect[0]
 
     moved = False
-    if (current_keys[pygame.K_UP] or current_keys[pygame.K_w]) and playerPos[1] > 0:
+    if direction & UP != 0 and playerPos[1] > 0:
         nextPlayerPos[1] -= speed
         nextPlayerCollideRect[1] -= speed
         moved = True
-    elif (current_keys[pygame.K_DOWN] or current_keys[pygame.K_s]) and playerPos[1] < tilemap.px_height - player.get_height():
+    elif direction & DOWN != 0 and playerPos[1] < tilemap.px_height - player.get_height():
         nextPlayerPos[1] += speed
         nextPlayerCollideRect[1] += speed
         moved = True
@@ -339,84 +361,6 @@ def MovePlayer(elapsed_ms):
             nextPlayerPos[1] += speed
             nextPlayerCollideRect[1] += speed
             moved = True
-
-    if moved:
-        collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
-        moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
-
-        if moved:
-            collisionCells = ground2Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
-            moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
-
-        if moved:
-            moved = processObjectCollision(objectsLayer)
-
-        if moved:
-            playerPos[1] = nextPlayerPos[1]
-            playerCollideRect[1] = nextPlayerCollideRect[1]
-        else:
-            nextPlayerPos[1] = playerPos[1]
-            nextPlayerCollideRect[1] = playerCollideRect[1]
-
-    tilemap.set_focus(playerPos[0], playerPos[1])
-    tilemap.update(elapsed_ms)
-
-
-def MovePlayerMaually(elapsed_ms, direction):
-    global tilemap
-    global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
-    global moved, mouse_is_down, mouse_click_pos
-
-    objectsLayer = tilemap.layers["objects"]
-    ground1Layer = tilemap.layers["ground1"]
-    ground2Layer = tilemap.layers["ground2"]
-
-    speed = elapsed_ms / 4
-
-    nextPlayerPos[0] = playerPos[0]
-    nextPlayerPos[1] = playerPos[1]
-    nextPlayerCollideRect[0] = playerCollideRect[0]
-    nextPlayerCollideRect[1] = playerCollideRect[1]
-
-    move_by_mouse = mouse_is_down
-    moved = False;
-
-    if direction == "left" and playerPos[0] > 0:
-        nextPlayerPos[0] -= speed
-        nextPlayerCollideRect[0] -= speed
-        moved = True
-    elif direction == "right" and playerPos[0] < tilemap.px_width - player.get_width():
-        nextPlayerPos[0] += speed
-        nextPlayerCollideRect[0] += speed
-        moved = True
-
-    if moved:
-        collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
-        moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
-
-        if moved:
-            collisionCells = ground2Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
-            moved = processTilesCollision(collisionCells, nextPlayerCollideRect)
-
-        if moved:
-            moved = processObjectCollision(objectsLayer)
-
-        if moved:
-            playerPos[0] = nextPlayerPos[0]
-            playerCollideRect[0] = nextPlayerCollideRect[0]
-        else:
-            nextPlayerPos[0] = playerPos[0]
-            nextPlayerCollideRect[0] = playerCollideRect[0]
-
-    moved = False
-    if direction == "up" and playerPos[1] > 0:
-        nextPlayerPos[1] -= speed
-        nextPlayerCollideRect[1] -= speed
-        moved = True
-    elif direction == "down" and playerPos[1] < tilemap.px_height - player.get_height():
-        nextPlayerPos[1] += speed
-        nextPlayerCollideRect[1] += speed
-        moved = True
 
     if moved:
         collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
@@ -481,8 +425,6 @@ def RemoveObjectFromMap(object):
 
     if not object == None:
         objectLayer.objects.remove(object)
-
-
 
 
 def DrawScreen():
