@@ -12,7 +12,7 @@ collidedObject = None
 collidedTile = None
 collidedCell = None
 
-map_names = ["start.tmx","adventure-start.tmx", "david.tmx"]
+map_names = ["start.tmx","adventure-start.tmx", "david-test.tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
@@ -90,7 +90,6 @@ def AddCoins(amount):
 
     coins = coins + 1
 
-
 def RemoveCoins(amount):
     global coins
 
@@ -117,6 +116,20 @@ def Say(msg):
     print("Saying '" + msg + "'")
     # engine.drawbubble(10, 10, 200, 200)
     # engine.drawtext(msg)
+
+def GetInventory():
+    return engine.playerInventory
+
+def InventoryContains(object):
+    return object in engine.playerInventory
+
+def AddObjectToInventory(object):
+    engine.playerInventory.append(object)
+    engine.RemoveObjectFromMap(object)
+
+def RemoveObjectFromInventory(object):
+    engine.playerInventory.remove(object)
+
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------
 GameInit()

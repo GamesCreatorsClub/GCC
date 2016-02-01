@@ -4,6 +4,8 @@ tilesByName = {}
 autoAnimationObjects = []
 animationObjects = []
 
+playerInventory = []
+
 def Init(screen_size, game_pointer):
     global screen, current_keys, player
     global mouse_click_pos, mouse_is_down
@@ -11,6 +13,8 @@ def Init(screen_size, game_pointer):
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, game
     global tilesByName
+
+    global playerInventory
 
     game = game_pointer
 
@@ -470,6 +474,15 @@ def ProcessEvents(elapsed_ms):
 
     last_keys = current_keys
     current_keys = pygame.key.get_pressed()
+
+
+def RemoveObjectFromMap(object):
+    objectLayer = tilemap.layers["objects"]
+
+    if not object == None:
+        objectLayer.objects.remove(object)
+
+
 
 
 def DrawScreen():
