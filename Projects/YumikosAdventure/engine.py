@@ -14,6 +14,7 @@ playerInventory = []
 objectsSurface = None
 charactersSurface = None
 
+objectLayer = None
 
 def Init(screen_size, game_pointer):
     global screen, current_keys, player, objectsSurface, charactersSurface
@@ -63,7 +64,8 @@ def Reset():
 
 
 def teleportToObject(name):
-    objectLayer = tilemap.layers["objects"]
+    global objectLayer
+
     object = objectLayer.find_by_name(name)
     if not object == None:
         setupPlayer((object.px, object.py))
@@ -72,7 +74,7 @@ def teleportToObject(name):
 
 
 def LoadMap(mapName):
-    global tilemap, playerPos, tilesByName, autoAnimationObjects, animationObjects
+    global tilemap, playerPos, tilesByName, autoAnimationObjects, animationObjects, objectLayer
 
     tilemap = tmx.load(mapName, screen.get_size())
 
@@ -223,7 +225,7 @@ def collideWithOffset(r1, x, y, r2):
 def Animate():
 
     for object in animationObjects:
-        game.collidedObject = object
+        game.animatedObject = object
         processObjectsOnMethod(object, "OnAnimate")
 
     for object in autoAnimationObjects:
@@ -421,7 +423,7 @@ def ProcessEvents(elapsed_ms):
 
 
 def RemoveObjectFromMap(object):
-    objectLayer = tilemap.layers["objects"]
+    global objectLayer
 
     if not object == None:
         objectLayer.objects.remove(object)
@@ -442,3 +444,4 @@ def DrawScreen():
             layer.draw(screen)
         if layer.name == "objects":
             screen.blit(player, nextPlayerPos)
+

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="43">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="48">
  <properties>
   <property name="OnCreate" value="global noPlayerInput; noPlayerInput = False"/>
  </properties>
- <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
   <image source="maps/tilea2.png" width="512" height="384"/>
   <terraintypes>
    <terrain name="Grass1" tile="-1"/>
@@ -1499,7 +1499,7 @@
   <tile id="762" terrain="25,25,26,26"/>
   <tile id="763" terrain="25,26,26,26"/>
  </tileset>
- <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32">
+ <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="maps/tileb.png" width="512" height="512"/>
   <terraintypes>
    <terrain name="mound" tile="-1"/>
@@ -1609,7 +1609,7 @@ PreventMove()</property>
     <property name="Content" value="KEY_1"/>
     <property name="OnCollision" value="PreventMove()"/>
     <property name="OnCollisionEnd" value="collidedObject.tile=engine.tilesByName[&quot;chest-closed&quot;]"/>
-    <property name="OnCollisionStart" value="collidedObject.tile=engine.tilesByName[&quot;chest-open&quot;];PreventMove()"/>
+    <property name="OnCollisionStart" value="collidedObject.tile=engine.tilesByName[&quot;chest-open&quot;]; GiveObject(&quot;Key2&quot;)"/>
    </properties>
   </object>
   <object id="34" name="start_position" gid="850" x="592" y="336" width="32" height="32"/>
@@ -1621,11 +1621,43 @@ PreventMove()</property>
     <property name="Frame2" value="plants-killer-2"/>
    </properties>
   </object>
-  <object id="41" gid="1025" x="224" y="64" width="32" height="32">
+  <object id="41" name="Moving Coin" gid="1025" x="224" y="64" width="32" height="32">
    <properties>
     <property name="OnAnimate">if random.randint(0,5) == 2:
-    collidedObject.px = collidedObject.px + random.randint(-1, 1)
-    collidedObject.py = collidedObject.py + random.randint(-1, 1)</property>
+    animatedObject.px = animatedObject.px + random.randint(-1, 1)
+    animatedObject.py = animatedObject.py + random.randint(-1, 1)</property>
+   </properties>
+  </object>
+  <object id="43" name="Door2" gid="1035" x="400" y="488" width="32" height="32">
+   <properties>
+    <property name="OnCollision" value="if not InventoryContains(&quot;Key1&quot;): PreventMove()"/>
+    <property name="OnCollisionEnd" value="collidedObject.tile = engine.tilesByName[&quot;door-left&quot;]"/>
+    <property name="OnCollisionStart">if InventoryContains(&quot;Key1&quot;): collidedObject.tile = engine.tilesByName[&quot;door-down&quot;]
+</property>
+   </properties>
+  </object>
+  <object id="44" name="Key1" gid="1041" x="508" y="344" width="32" height="32">
+   <properties>
+    <property name="OnCollision" value="AddObjectToInventory(collidedObject)"/>
+   </properties>
+  </object>
+  <object id="45" name="Door1" gid="1036" x="572" y="408" width="32" height="32">
+   <properties>
+    <property name="OnCollisionEnd" value="collidedObject.tile = engine.tilesByName[&quot;door-right&quot;]"/>
+    <property name="OnCollisionStart" value="collidedObject.tile = engine.tilesByName[&quot;door-down&quot;]"/>
+   </properties>
+  </object>
+  <object id="46" name="Key2" gid="1041" x="204" y="428" width="32" height="32" visible="0">
+   <properties>
+    <property name="OnCollision" value="AddObjectToInventory(collidedObject)"/>
+   </properties>
+  </object>
+  <object id="47" name="Door3" gid="1033" x="408" y="716" width="32" height="32">
+   <properties>
+    <property name="OnCollision" value="if not InventoryContains(&quot;Key2&quot;): PreventMove()"/>
+    <property name="OnCollisionEnd" value="collidedObject.tile = engine.tilesByName[&quot;door-up&quot;]"/>
+    <property name="OnCollisionStart">if InventoryContains(&quot;Key2&quot;): collidedObject.tile = engine.tilesByName[&quot;door-left&quot;]
+</property>
    </properties>
   </object>
  </objectgroup>

@@ -8,6 +8,7 @@ global tilemap, playerPos, object, objects, doors, keys
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------
 
+animatedObject = None
 collidedObject = None
 collidedTile = None
 collidedCell = None
@@ -127,9 +128,12 @@ def GetInventory():
     return engine.playerInventory
 
 
-def InventoryContains(object):
-    return object in engine.playerInventory
+def InventoryContains(objectName):
+    for object in engine.playerInventory:
+        if object.name == objectName:
+            return True
 
+    return False
 
 def AddObjectToInventory(object):
     engine.playerInventory.append(object)
@@ -138,6 +142,12 @@ def AddObjectToInventory(object):
 
 def RemoveObjectFromInventory(object):
     engine.playerInventory.remove(object)
+
+
+def GiveObject(objectName):
+    object = engine.objectLayer.find_by_name(objectName)
+    if object != None:
+        AddObjectToInventory(object)
 
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------
