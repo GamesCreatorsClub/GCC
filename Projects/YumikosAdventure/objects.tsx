@@ -8,4 +8,24 @@ RemoveCollidedObject()</property>
    <property name="name" value="coin"/>
   </properties>
  </tile>
+ <tile id="8">
+  <properties>
+   <property name="Name" value="door-up"/>
+  </properties>
+ </tile>
+ <tile id="9">
+  <properties>
+   <property name="Name" value="door-down"/>
+  </properties>
+ </tile>
+ <tile id="10">
+  <properties>
+   <property name="Name" value="door-left"/>
+  </properties>
+ </tile>
+ <tile id="11">
+  <properties>
+   <property name="Name" value="door-right"/>
+  </properties>
+ </tile>
 </tileset>
