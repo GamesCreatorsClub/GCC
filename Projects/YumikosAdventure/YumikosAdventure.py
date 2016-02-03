@@ -24,13 +24,14 @@ noPlayerInput = False
 
 # change file for different music
 music = pygame.mixer.music.load("music.wav")
+screen_size = (640, 640)
 
 def execute(code):
     exec(code)
 
 
 def GameInit():
-    screen_size = (640, 640)
+    global screen_size
     engine.Init(screen_size, sys.modules[__name__])
     ##pygame.mixer.music.play(-1)
 
@@ -148,6 +149,12 @@ def GiveObject(objectName):
     object = engine.objectLayer.find_by_name(objectName)
     if object != None:
         AddObjectToInventory(object)
+
+
+def setInventoryVisibility(boolean):
+    engine.setInventoryVisibility(boolean)
+
+
 
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------

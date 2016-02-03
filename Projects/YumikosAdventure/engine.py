@@ -13,10 +13,14 @@ playerInventory = []
 
 objectsSurface = None
 charactersSurface = None
+inventorySurface = None
+
+inventoryBox = None
+showInventory = True
 
 objectLayer = None
 
-def Init(screen_size, game_pointer):
+def Init(screenSize, game_pointer):
     global screen, current_keys, player, objectsSurface, charactersSurface
     global mouse_click_pos, mouse_is_down
 
@@ -25,12 +29,14 @@ def Init(screen_size, game_pointer):
     global tilesByName
 
     global playerInventory
+    global screen_size
+    global inventoryBox, inventorySurface
 
     game = game_pointer
 
     pygame.init()
 
-
+    screen_size = screenSize
     screen = pygame.display.set_mode(screen_size)
 
     current_keys = pygame.key.get_pressed()
@@ -40,8 +46,10 @@ def Init(screen_size, game_pointer):
 
     objectsSurface = pygame.image.load("images/objects.png")
     charactersSurface = pygame.image.load("images/characters.png")
+    inventorySurface = pygame.image.load("images/inventory.png")
 
     player = charactersSurface.subsurface(pygame.Rect(0, 0, 32, 32))
+    inventoryBox = inventorySurface.subsurface(pygame.Rect(0, 0, 36, 36))
 
     mouse_click_pos = [-1, -1]
     tilesByName = {}
@@ -429,6 +437,11 @@ def RemoveObjectFromMap(object):
         objectLayer.objects.remove(object)
 
 
+def setInventoryVisibility(boolean):
+    global showInventory
+    showInventory = boolean
+
+
 def DrawScreen():
     global screen
     global tilemap
@@ -444,4 +457,13 @@ def DrawScreen():
             layer.draw(screen)
         if layer.name == "objects":
             screen.blit(player, nextPlayerPos)
+    if showInventory:
+        drawPointer = [screen_size[0] - 48, 48]
+        for i in range(1, 10):
+             screen.blit(inventoryBox, drawPointer)
+             drawPointer[1] = drawPointer[1] + 36
+        for object in playerInventory:
+            drawPointer = [screen_size[0] - 48, 48]
+            screen.blit(object.tile.surface, drawPointer)
+            drawPointer[1] = drawPointer[1] + 36
 

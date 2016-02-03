@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="48">
  <properties>
-  <property name="OnCreate" value="global noPlayerInput; noPlayerInput = False"/>
+  <property name="OnCreate" value="global noPlayerInput; noPlayerInput = False;setInventoryVisibility(True)"/>
  </properties>
- <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
+ <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16">
   <image source="maps/tilea2.png" width="512" height="384"/>
   <terraintypes>
    <terrain name="Grass1" tile="-1"/>
@@ -1499,7 +1499,7 @@
   <tile id="762" terrain="25,25,26,26"/>
   <tile id="763" terrain="25,26,26,26"/>
  </tileset>
- <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+ <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32">
   <image source="maps/tileb.png" width="512" height="512"/>
   <terraintypes>
    <terrain name="mound" tile="-1"/>
