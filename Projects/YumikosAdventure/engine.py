@@ -457,13 +457,15 @@ def DrawScreen():
             layer.draw(screen)
         if layer.name == "objects":
             screen.blit(player, nextPlayerPos)
+
     if showInventory:
         drawPointer = [screen_size[0] - 48, 48]
         for i in range(1, 10):
              screen.blit(inventoryBox, drawPointer)
              drawPointer[1] = drawPointer[1] + 36
+
+        drawPointer = [screen_size[0] - 48, 48]
         for object in playerInventory:
-            drawPointer = [screen_size[0] - 48, 48]
             screen.blit(object.tile.surface, drawPointer)
             drawPointer[1] = drawPointer[1] + 36
 

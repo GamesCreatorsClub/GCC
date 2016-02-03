@@ -151,7 +151,7 @@ def GiveObject(objectName):
         AddObjectToInventory(object)
 
 
-def setInventoryVisibility(boolean):
+def SetInventoryVisibility(boolean):
     engine.setInventoryVisibility(boolean)
 
 
