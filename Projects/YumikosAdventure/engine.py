@@ -333,10 +333,6 @@ def movePlayerInternal(elapsed_ms, direction, move_by_mouse):
             nextPlayerCollideRect[0] += speed
             moved = True
 
-
-        if not moved:
-            move_by_mouse = False
-
     if moved:
         collisionCells = ground1Layer.get_in_region(nextPlayerPos.left, nextPlayerPos.top, nextPlayerPos.right, nextPlayerPos.bottom)
         moved = processTilesCollision(collisionCells, nextPlayerCollideRect)

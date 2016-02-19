@@ -8,6 +8,8 @@ global tilemap, playerPos, object, objects, doors, keys
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------
 
+pygame.init()
+
 animatedObject = None
 collidedObject = None
 collidedTile = None
@@ -65,7 +67,7 @@ def GameLoop():
 
     engine.ProcessClick(elapsed_ms)
     engine.DrawScreen()
-    
+
     pygame.display.flip()
 
 
@@ -157,6 +159,19 @@ def GiveObject(objectName):
 def SetInventoryVisibility(boolean):
     engine.setInventoryVisibility(boolean)
 
+
+def PushableObject():
+    if engine.playerCollideRect.right < collidedObject.px:
+        collidedObject.px += 4
+    elif engine.playerCollideRect.left > collidedObject.px + collidedObject.width:
+        collidedObject.px -= 4
+
+    if engine.playerCollideRect.bottom < collidedObject.py:
+        collidedObject.py += 4
+    elif engine.playerCollideRect.top > collidedObject.py + collidedObject.height:
+        collidedObject.py -= 4
+
+    PreventMove()
 
 
 

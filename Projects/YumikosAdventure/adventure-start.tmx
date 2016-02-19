@@ -1577,21 +1577,7 @@ spawned = False</property>
   </object>
   <object id="21" name="An Object to be moved" gid="809" x="480" y="176" width="16" height="16">
    <properties>
-    <property name="OnCollision">
-
-if engine.playerCollideRect.right &lt; collidedObject.px:
-    collidedObject.px += 4
-elif engine.playerCollideRect.left &gt; collidedObject.px + collidedObject.width:
-    collidedObject.px -= 4
-
-if engine.playerCollideRect.bottom &lt; collidedObject.py:
-    collidedObject.py += 4
-elif engine.playerCollideRect.top &gt; collidedObject.py + collidedObject.height:
-    collidedObject.py -= 4
-
-
-PreventMove()
-</property>
+    <property name="OnCollision" value="PushableObject()"/>
    </properties>
   </object>
   <object id="22" name="Sign" gid="850" x="640" y="336" width="32" height="32">
