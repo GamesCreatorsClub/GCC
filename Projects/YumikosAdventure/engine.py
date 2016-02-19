@@ -20,9 +20,11 @@ showInventory = True
 
 objectLayer = None
 
+
+
 def Init(screenSize, game_pointer):
     global screen, current_keys, player, objectsSurface, charactersSurface
-    global mouse_click_pos, mouse_is_down
+    global mouse_click_pos, last_mouse_click_pos, mouse_is_down, last_mouse_is_down
 
     global playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, game
@@ -41,6 +43,7 @@ def Init(screenSize, game_pointer):
 
     current_keys = pygame.key.get_pressed()
     mouse_is_down = False
+    last_mouse_is_down = False
 
     moved = False
 
@@ -52,6 +55,7 @@ def Init(screenSize, game_pointer):
     inventoryBox = inventorySurface.subsurface(pygame.Rect(0, 0, 36, 36))
 
     mouse_click_pos = [-1, -1]
+    last_mouse_click_pos = [-1, -1]
     tilesByName = {}
 
 
@@ -329,8 +333,7 @@ def movePlayerInternal(elapsed_ms, direction, move_by_mouse):
             nextPlayerCollideRect[0] += speed
             moved = True
 
-        clickedCell = objectsLayer.get_at(mouse_click_pos[0] + tilemap.viewport.x, mouse_click_pos[1] + tilemap.viewport.y)
-        moved = processObjectClick(clickedCell)
+
         if not moved:
             move_by_mouse = False
 
@@ -399,7 +402,8 @@ def ProcessClick(elapsed_ms):
     global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, mouse_is_down, mouse_click_pos
 
-    if mouse_click_pos[0] >= 0 and mouse_click_pos[1] >= 0:
+    #if mouse_click_pos[0] >= 0 and mouse_click_pos[1] >= 0 and not (last_mouse_click_pos[0] >= 0 and last_mouse_click_pos[1] >= 0):
+    if mouse_is_down and not last_mouse_is_down:
         objectsLayer = tilemap.layers["objects"]
         clickedCell = objectsLayer.get_at(mouse_click_pos[0] + tilemap.viewport.x, mouse_click_pos[1] + tilemap.viewport.y)
         processObjectClick(clickedCell)
@@ -408,23 +412,30 @@ def ProcessClick(elapsed_ms):
 def ProcessEvents(elapsed_ms):
     global mouse_click_pos, mouse_is_down
     global current_keys, last_keys
-
+    last_mouse_click_pos[0] = mouse_click_pos[0]
+    last_mouse_click_pos[1] = mouse_click_pos[1]
+    last_mouse_is_down = mouse_is_down
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
+
             mouse_click_pos[0] = event.pos[0]
             mouse_click_pos[1] = event.pos[1]
+
             mouse_is_down = True
-        elif event.type == pygame.MOUSEBUTTONUP:
+        elif  event.type == pygame.MOUSEBUTTONUP:
+
             mouse_click_pos[0] = -1
             mouse_click_pos[1] = -1
+
             mouse_is_down = False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_is_down:
                 mouse_click_pos[0] = event.pos[0]
                 mouse_click_pos[1] = event.pos[1]
+
 
     last_keys = current_keys
     current_keys = pygame.key.get_pressed()
