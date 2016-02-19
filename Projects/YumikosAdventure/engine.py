@@ -402,7 +402,6 @@ def ProcessClick(elapsed_ms):
     global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
     global moved, mouse_is_down, mouse_click_pos
 
-    #if mouse_click_pos[0] >= 0 and mouse_click_pos[1] >= 0 and not (last_mouse_click_pos[0] >= 0 and last_mouse_click_pos[1] >= 0):
     if mouse_is_down and not last_mouse_is_down:
         objectsLayer = tilemap.layers["objects"]
         clickedCell = objectsLayer.get_at(mouse_click_pos[0] + tilemap.viewport.x, mouse_click_pos[1] + tilemap.viewport.y)
@@ -425,7 +424,7 @@ def ProcessEvents(elapsed_ms):
             mouse_click_pos[1] = event.pos[1]
 
             mouse_is_down = True
-        elif  event.type == pygame.MOUSEBUTTONUP:
+        elif event.type == pygame.MOUSEBUTTONUP:
 
             mouse_click_pos[0] = -1
             mouse_click_pos[1] = -1

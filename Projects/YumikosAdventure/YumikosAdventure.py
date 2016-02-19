@@ -13,7 +13,7 @@ collidedObject = None
 collidedTile = None
 collidedCell = None
 
-map_names = ["start.tmx", "adventure-start.tmx", "david.tmx"]
+map_names = ["start.tmx", "adventure-start.tmx", "first-quest.tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
