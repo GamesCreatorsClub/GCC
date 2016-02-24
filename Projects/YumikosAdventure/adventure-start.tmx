@@ -1597,7 +1597,7 @@ PreventMove()</property>
   <object id="26" name="Chest1" gid="809" x="287" y="425" width="32" height="32">
    <properties>
     <property name="Content" value="KEY_1"/>
-    <property name="OnCollision" value="PreventMove()"/>
+    <property name="OnCollision" value="PreventMove(); Say('Locked')"/>
     <property name="OnCollisionEnd" value="collidedObject.tile=engine.tilesByName[&quot;chest-closed&quot;]"/>
     <property name="OnCollisionStart" value="collidedObject.tile=engine.tilesByName[&quot;chest-open&quot;]; GiveObject(&quot;Key2&quot;)"/>
    </properties>
