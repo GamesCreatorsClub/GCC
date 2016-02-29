@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="48">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="49">
  <properties>
-  <property name="OnCreate" value="global noPlayerInput; noPlayerInput = False; SetInventoryVisibility(True)"/>
+  <property name="OnCreate" value="Say(&quot;Welcome to Yumiko's Adventure&quot;)"/>
  </properties>
  <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
   <image source="maps/tilea2.png" width="512" height="384"/>
@@ -1582,24 +1582,24 @@ spawned = False</property>
   </object>
   <object id="22" name="Sign" gid="850" x="640" y="336" width="32" height="32">
    <properties>
-    <property name="OnClick">Say(&quot;Sign says: 'Come here!'&quot;)
+    <property name="OnClick">SayOnce(&quot;Sign says: 'Come here!'&quot;)
 PreventMove()</property>
     <property name="OnCollision" value="NextMap()"/>
    </properties>
   </object>
   <object id="23" name="coin" gid="1025" x="350" y="124" width="16" height="16"/>
-  <object id="24" name="coin" gid="1025" x="452" y="414" width="16" height="16">
+  <object id="24" name="coin" gid="1025" x="400" y="324" width="16" height="16">
    <properties>
-    <property name="OnCollision" value="AddObjectToInventory(collidedObject)"/>
+    <property name="OnCollision" value="AddObjectToInventory(collidedObject); Say(&quot;Got GOLD coin!&quot;)"/>
    </properties>
   </object>
   <object id="25" name="coin" gid="1025" x="173" y="493" width="16" height="16"/>
   <object id="26" name="Chest1" gid="809" x="287" y="425" width="32" height="32">
    <properties>
     <property name="Content" value="KEY_1"/>
-    <property name="OnCollision" value="PreventMove(); Say('Locked')"/>
+    <property name="OnCollision" value="PreventMove()"/>
     <property name="OnCollisionEnd" value="collidedObject.tile=engine.tilesByName[&quot;chest-closed&quot;]"/>
-    <property name="OnCollisionStart" value="collidedObject.tile=engine.tilesByName[&quot;chest-open&quot;]; GiveObject(&quot;Key2&quot;)"/>
+    <property name="OnCollisionStart" value="collidedObject.tile=engine.tilesByName[&quot;chest-open&quot;]; GiveObject(&quot;Key2&quot;); SayOnce(&quot;Got another key!&quot;)"/>
    </properties>
   </object>
   <object id="34" name="start_position" gid="850" x="592" y="336" width="32" height="32"/>
@@ -1622,13 +1622,15 @@ PreventMove()</property>
    <properties>
     <property name="OnCollision" value="if not InventoryContains(&quot;Key1&quot;): PreventMove()"/>
     <property name="OnCollisionEnd" value="collidedObject.tile = engine.tilesByName[&quot;door-left&quot;]"/>
-    <property name="OnCollisionStart">if InventoryContains(&quot;Key1&quot;): collidedObject.tile = engine.tilesByName[&quot;door-down&quot;]
-</property>
+    <property name="OnCollisionStart">if InventoryContains(&quot;Key1&quot;): 
+    collidedObject.tile = engine.tilesByName[&quot;door-down&quot;]
+else:
+    SayOnce(&quot;Door is locked. Hint: Find a key!&quot;)</property>
    </properties>
   </object>
-  <object id="44" name="Key1" gid="1041" x="508" y="344" width="32" height="32">
+  <object id="44" name="Key1" gid="1041" x="748" y="68" width="32" height="32">
    <properties>
-    <property name="OnCollision" value="AddObjectToInventory(collidedObject)"/>
+    <property name="OnCollision" value="AddObjectToInventory(collidedObject); Say(&quot;Collected a key&quot;)"/>
    </properties>
   </object>
   <object id="45" name="Door1" gid="1036" x="572" y="408" width="32" height="32">
@@ -1646,12 +1648,21 @@ PreventMove()</property>
    <properties>
     <property name="OnCollision" value="if not InventoryContains(&quot;Key2&quot;): PreventMove()"/>
     <property name="OnCollisionEnd" value="collidedObject.tile = engine.tilesByName[&quot;door-up&quot;]"/>
-    <property name="OnCollisionStart">if InventoryContains(&quot;Key2&quot;): collidedObject.tile = engine.tilesByName[&quot;door-left&quot;]
-</property>
+    <property name="OnCollisionStart">if InventoryContains(&quot;Key2&quot;): 
+    collidedObject.tile = engine.tilesByName[&quot;door-left&quot;]
+else:
+    SayOnce(&quot;Door is locked&quot;)</property>
+   </properties>
+  </object>
+  <object id="48" gid="1027" x="216" y="640" width="32" height="32">
+   <properties>
+    <property name="OnAnimate">if DistanceFromPlayer(animatedObject) &lt; 100:
+    MoveObjectAway(animatedObject)
+    </property>
    </properties>
   </object>
  </objectgroup>
- <layer name="overlay" width="50" height="50" visible="0">
+ <layer name="overlay" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt1MENQEAQBdC9KIVS0AmdUAltWuEki4PDIu8lP5PM6e9hJwQAAHim3tMkZiptnpq3pph5z3Qzu5g+T014vSL843+89R1rr6u7e5xDzJil6bUybDf17M6mdlWWpgAAAAAAfMkCRfoYng==
   </data>

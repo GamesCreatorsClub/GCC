@@ -1,39 +1,230 @@
-Allowed properties on tiles:
+==============================================================================
+Custom properties on tiles:
 
-OnCreate - invoked when map is loaded (can be many times during the game)
-OnCollision - invoked while player is collding with the tile
+------------------------------------------------------------------------------
+OnCreate:
+    Invoked when map is loaded (can be many times during the game).
 
-- - -
+------------------------------------------------------------------------------
+OnCollision:
+    Invoked while player is collding with the tile
 
-Allowed properties on objects:
+------------------------------------------------------------------------------
+name: (or Name:)
+    Custom name of tile. It is used in animations or setting up different
+    view of an object.
+    Example: if there is a tile named 'alternative-plant-look' you can use
 
-OnCreate - invoked when map is loaded (can be many times during the game)
-OnCollisionStart - invoked only at the first time object is collided
-OnCollision - invoked while player is collding with the object
-OnCollisionEnd - invoked at the end
-OnClick
+    OnCollisionStart:
+        ollidedObject.tile = engine.tilesByName['alternative-plant-look']
 
-Also it object is created from tile, then tile's OnCollision can be used, too.
-Order is object's OnCollision and then tile's OnCollision. If object's OnCollision is not defined then tile's
-OnCollision will be used. If object's OnCollision is defined, then tile's OnCollision is not going to be used.
+    See: engine.tilesByName - engine.tilesByName will have tiles collected
+    by name defined here.
 
-- - -
+------------------------------------------------------------------------------
+    Note:
+        Code defined as values of above properties is executed when tiles are
+        loaded (when map is loaded).
+==============================================================================
 
-Allowed properties on map
+Custom properties on objects:
 
-OnCreate - invoked when map is loaded (can be many times during the game)
+------------------------------------------------------------------------------
+OnCreate:
+    Invoked when map is loaded (can be many times during the game).
 
-- - -
+------------------------------------------------------------------------------
+OnCollisionStart:
+    Invoked only at the first time player collided with the object.
+    Available in scope: collidedObject.
 
-Object layer should have special object named 'start_position' for player to start at that place.
+------------------------------------------------------------------------------
+OnCollision:
+    Invoked while player is colliding with the object.
+    Available in scope: collidedObject.
 
-- - -
+------------------------------------------------------------------------------
+OnCollisionEnd:
+    Invoked at the end of collision - when player does not collide with the
+    object any more.
+    Available in scope: collidedObject.
 
-Available methods and fields:
+------------------------------------------------------------------------------
+OnClick:
+    Invoked when object is clicked on.
+    Available in scope: clickedObject.
 
-NextMap()
-Map(mapName)
-PreventMove()
+------------------------------------------------------------------------------
+OnAnimate:
+    Invoked every frame. Be careful what you put in here as it is CPU
+    intensive to call this method for many object many times.
+    Available in scope: animatedObject.
 
-engine.tilesByName - dictionary that has all tileset tile's name collected. Tile must have custom attribute 'name'
-                     or 'Name' to end in this list.
+------------------------------------------------------------------------------
+Animate:
+    If set to 'True' then object can be animated by the game. Following
+    other attributes should be present:
+
+AnimationSpeed:
+     Number of frames between two animations. Number 1 means very quick
+     succession of changes, while 60 means one per second.
+
+Frame1:
+     First frame of animation. This is tile's name.
+
+------------------------------------------------------------------------------
+    Note: Also it object is created from tile, then tile's OnCollision
+        can be used, too. Order is object's OnCollision and then tile's
+        OnCollision. If object's OnCollision is not defined then tile's
+        OnCollision will be used. If object's OnCollision is defined, then
+        tile's OnCollision is not going to be used.
+
+==============================================================================
+
+Custom properties on map
+
+------------------------------------------------------------------------------
+OnCreate:
+    Invoked when map is loaded (can be many times during the game).
+
+
+==============================================================================
+
+Object layer should have special object named 'start_position' for player to
+start at that place.
+
+==============================================================================
+
+Methods available in above properties:
+
+------------------------------------------------------------------------------
+NextMap():
+    Loads next map effectively finishing existing map.
+
+------------------------------------------------------------------------------
+Map(mapName):
+    Loads map with file name passed as a parameter.
+
+------------------------------------------------------------------------------
+PreventMove():
+    Prevents players move. Useful to prevent player colliding or going over
+    an object. For instance if called as only method in OnCollision player
+    won't be able to 'walk over' the object in question.
+
+------------------------------------------------------------------------------
+PushableObject()
+    Method that makes object 'pushable'. If called in OnCollision player
+    will be able to push object in question around. It works only on
+    global variable 'collidedObject' so it can be used only if collidedObject
+    is set - which is true for OnCollision, OnCollisionStart and
+    OnCollisionEnd.
+
+------------------------------------------------------------------------------
+RemoveCollidedObject():
+    Removes collided object form the map. It works only on
+    global variable 'collidedObject' so it can be used only if collidedObject
+    is set - which is true for OnCollision, OnCollisionStart and
+    OnCollisionEnd.
+
+    Example: for 'coin' object you following in
+
+    OnCollisionStart:
+        AddCoins(1);RemoveCollidedObject()
+
+------------------------------------------------------------------------------
+Say(text):
+    Displays text in 'console' (bottom of the screen).
+
+------------------------------------------------------------------------------
+SayOnce(text):
+    Displays text in 'console', but does not repeat if same text is last
+    submitted.
+
+------------------------------------------------------------------------------
+Distance(x1, y1, x2, y2):
+    Returns distance between two points.
+
+------------------------------------------------------------------------------
+DistanceFromPlayer(gameObject):
+    Returns number of pixels between object passed in and the player.
+    Game object is same as clickedObject/collidedObject. Example:
+
+    OnCollision:
+        if DistanceFromPlayer(collidedObject) < 40:
+            SayOnce("Please don't get closer!")
+
+------------------------------------------------------------------------------
+DistanceBetweenObjects(object1, object2):
+    Returns number of pixels between two given objects.
+
+------------------------------------------------------------------------------
+SetInventoryVisibility(visibility):
+    Toggles on and off visibility of player's inventory. If passed 'True'
+    inventory is going to be visible. if 'False' then hidden away.
+    Example:
+
+    SetInventoryVisibility(False)
+
+------------------------------------------------------------------------------
+GetInventory():
+    Returns list of inventory objects. Objects are same object as found in
+    collidedObject or clickedObject global variables.
+
+------------------------------------------------------------------------------
+InventoryContains(gameObject):
+    Returns True or False depending if gameObject exists or not.
+
+------------------------------------------------------------------------------
+AddObjectToInventory(gameObject):
+    Adds passed object to the inventory.
+    Example:
+
+    OnCollisionStart:
+        AddObjectToInventory(collidedObject)
+
+    This example will make object 'collectable' by the player
+
+------------------------------------------------------------------------------
+RemoveObjectFromInventory(gameObject):
+    Removes passed object from the inventory. It is opposite of
+    AddObjectToInventry() method.
+
+------------------------------------------------------------------------------
+GiveObject(objectName):
+    Similar to AddObjectToInventry but uses object's name to find object in
+    the object layer of the map. If object with passed in name exists it,
+    internally, calls AddObjectToInventry.
+
+    Example: you can use it for chests for instance. Put following in
+
+    OnCollidedStart:
+        GiveObject("golden-key")
+
+------------------------------------------------------------------------------
+AddCoins(amount):
+    Gives passed amount of coins to the player.
+
+    Example: you can use it for 'coins'
+
+    OnCollidedStart:
+        AddCoins(1)
+
+------------------------------------------------------------------------------
+RemoveCoins(amount):
+    Removes given number of coins from player. Opposite from AddCoins()
+
+------------------------------------------------------------------------------
+Pay(amount):
+    If player has enough coins it will. internally, call RemoveCoins with
+    given amount and return 'True' for successful payment. If players doesn't
+    have enough coins it will just return 'False'.
+
+
+==============================================================================
+Some available properties on 'engine' object:
+
+------------------------------------------------------------------------------
+engine.tilesByName:
+    Dictionary that has all tileset tile's name collected. Tile must have
+    custom attribute 'name' or 'Name' to end in this list.
+

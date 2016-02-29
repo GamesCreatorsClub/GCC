@@ -4,7 +4,7 @@
  <tile id="0">
   <properties>
    <property name="OnCollision">AddCoins(1)
-RemoveCollidedObject()</property>
+RemoveCollidedObject(); Say(&quot;Got one coin&quot;)</property>
    <property name="name" value="coin"/>
   </properties>
  </tile>

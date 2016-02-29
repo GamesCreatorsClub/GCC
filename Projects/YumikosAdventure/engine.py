@@ -11,6 +11,7 @@ RIGHT = 2
 UP = 4
 DOWN = 8
 
+playerPos = []
 tilesByName = {}
 autoAnimationObjects = []
 animationObjects = []
@@ -19,6 +20,7 @@ playerInventory = []
 
 textLines = []
 textLinesTimeout = []
+textLastText = ''
 
 objectsSurface = None
 charactersSurface = None
@@ -155,6 +157,7 @@ def processObjectClick(object):
 
     if clickedObject != None and "OnClick" in clickedObject.properties:
         onClick = clickedObject.properties["OnClick"]
+        game.clickedObject = clickedObject
         game.execute(onClick)
 
     return moved
@@ -462,15 +465,21 @@ def setInventoryVisibility(boolean):
 
 
 def printText(msg):
-    global font, textLines, textLinesTimeout, MAX_TEXT_LINES, DEFAULT_TEXT_TIMEOUT
+    global font, textLines, textLinesTimeout, textLastText, MAX_TEXT_LINES, DEFAULT_TEXT_TIMEOUT
 
     while len(textLines) > MAX_TEXT_LINES:
         del textLines[0]
         del textLinesTimeout[0]
 
-    text = font.render(msg, 1,(255, 255, 255))
+    textWhite = font.render(msg, 1,(255, 255, 255))
+    text = font.render(msg, 1,(0, 0, 0))
+    text.blit(text, (2, 0))
+    text.blit(text, (2, 2))
+    text.blit(text, (0, 2))
+    text.blit(textWhite, (1, 1))
     textLines.append(text)
     textLinesTimeout.append(DEFAULT_TEXT_TIMEOUT)
+    textLastText = msg
 
 
 def DrawScreen():
@@ -478,7 +487,7 @@ def DrawScreen():
     global tilemap
     global nextPlayerPos
     global player
-    global font, textLines, textLinesTimeout, lineHeight
+    global font, textLines, textLinesTimeout, textLastText, lineHeight
 
     nextPlayerPos.move_ip(-tilemap.viewport.x, -tilemap.viewport.y)
 
@@ -508,6 +517,9 @@ def DrawScreen():
         while len(textLinesTimeout) > 0 and textLinesTimeout[0] <= 0:
             del textLines[0]
             del textLinesTimeout[0]
+
+        if len(textLines) == 0:
+            textLastText = ''
 
     if len(textLines) > 0:
         y = screen.get_size()[1] - len(textLines) * lineHeight

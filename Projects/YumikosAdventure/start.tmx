@@ -1658,7 +1658,7 @@ teleportToObject(&quot;back&quot;)</property>
   </object>
   <object id="198" x="-16" y="-16" width="2064" height="2064" visible="0">
    <properties>
-    <property name="OnClick" value="NextMap()"/>
+    <property name="OnClick" value="global noPlayerInput; noPlayerInput = False; SetInventoryVisibility(True); NextMap()"/>
    </properties>
   </object>
  </objectgroup>
