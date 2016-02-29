@@ -128,7 +128,7 @@ def Say(msg):
     print("Saying '" + msg + "'")
     # engine.drawbubble(10, 10, 200, 200)
     # engine.drawtext(msg)
-
+    engine.printText(msg)
 
 def GetInventory():
     return engine.playerInventory

@@ -1,5 +1,11 @@
 import pygame, tmx, sys
 
+MAX_TEXT_LINES = 7
+DEFAULT_TEXT_TIMEOUT = 60 * 10
+MARGIN_BETWEEN_LINES = 5
+
+lineHeight = 0
+
 LEFT = 1
 RIGHT = 2
 UP = 4
@@ -11,6 +17,9 @@ animationObjects = []
 
 playerInventory = []
 
+textLines = []
+textLinesTimeout = []
+
 objectsSurface = None
 charactersSurface = None
 inventorySurface = None
@@ -20,7 +29,7 @@ showInventory = True
 
 objectLayer = None
 
-
+font = None
 
 def Init(screenSize, game_pointer):
     global screen, current_keys, player, objectsSurface, charactersSurface
@@ -33,6 +42,10 @@ def Init(screenSize, game_pointer):
     global playerInventory
     global screen_size
     global inventoryBox, inventorySurface
+    global font, lineHeight, MARGIN_BETWEEN_LINES
+
+    font = pygame.font.SysFont("apple casual" , 24)
+    lineHeight = font.get_height() + MARGIN_BETWEEN_LINES
 
     game = game_pointer
 
@@ -448,11 +461,24 @@ def setInventoryVisibility(boolean):
     showInventory = boolean
 
 
+def printText(msg):
+    global font, textLines, textLinesTimeout, MAX_TEXT_LINES, DEFAULT_TEXT_TIMEOUT
+
+    while len(textLines) > MAX_TEXT_LINES:
+        del textLines[0]
+        del textLinesTimeout[0]
+
+    text = font.render(msg, 1,(255, 255, 255))
+    textLines.append(text)
+    textLinesTimeout.append(DEFAULT_TEXT_TIMEOUT)
+
+
 def DrawScreen():
     global screen
     global tilemap
     global nextPlayerPos
     global player
+    global font, textLines, textLinesTimeout, lineHeight
 
     nextPlayerPos.move_ip(-tilemap.viewport.x, -tilemap.viewport.y)
 
@@ -475,3 +501,18 @@ def DrawScreen():
             screen.blit(object.tile.surface, drawPointer)
             drawPointer[1] = drawPointer[1] + 36
 
+    if len(textLines) > 0:
+        for i in range(0, len(textLinesTimeout)):
+            textLinesTimeout[i] -= 1
+
+        while len(textLinesTimeout) > 0 and textLinesTimeout[0] <= 0:
+            del textLines[0]
+            del textLinesTimeout[0]
+
+    if len(textLines) > 0:
+        y = screen.get_size()[1] - len(textLines) * lineHeight
+        x = 20
+
+        for text in textLines:
+            screen.blit(text, (x, y))
+            y = y + lineHeight
