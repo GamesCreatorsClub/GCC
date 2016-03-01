@@ -3,7 +3,7 @@
  <properties>
   <property name="OnCreate" value="global noPlayerInput; noPlayerInput = True;SetInventoryVisibility(False)"/>
  </properties>
- <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
+ <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16">
   <image source="maps/tilea2.png" width="512" height="384"/>
   <terraintypes>
    <terrain name="Grass1" tile="-1"/>
@@ -1499,7 +1499,7 @@
   <tile id="762" terrain="25,25,26,26"/>
   <tile id="763" terrain="25,26,26,26"/>
  </tileset>
- <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+ <tileset firstgid="769" name="tileb" tilewidth="32" tileheight="32">
   <image source="maps/tileb.png" width="512" height="512"/>
   <terraintypes>
    <terrain name="mound" tile="-1"/>
@@ -1545,7 +1545,7 @@
   <tile id="255" terrain="0,0,0,"/>
  </tileset>
  <tileset firstgid="1025" source="objects.tsx"/>
- <tileset firstgid="1153" name="trees" tilewidth="16" tileheight="16" tilecount="96" columns="8">
+ <tileset firstgid="1153" name="trees" tilewidth="16" tileheight="16">
   <image source="maps/trees.png" width="128" height="192"/>
   <tile id="0">
    <objectgroup draworder="index">
@@ -1641,8 +1641,7 @@
   </object>
   <object id="195" name="teleport back" gid="850" x="1216" y="640" width="32" height="32" visible="0">
    <properties>
-    <property name="OnCollision">print(&quot;hello&quot;)
-teleportToObject(&quot;back&quot;)</property>
+    <property name="OnCollision" value="print(&quot;hello&quot;);TeleportToObject(&quot;back&quot;)"/>
     <property name="visible" value="true"/>
    </properties>
   </object>

@@ -16,7 +16,7 @@ collidedTile = None
 collidedCell = None
 clickedObject = None
 
-map_names = ["start.tmx", "example-map.tmx", "first-quest.tmx"]
+map_names = ["start.tmx", "example-map.tmx", "david.tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
@@ -78,7 +78,7 @@ def PreventMove():
     engine.moved = False
 
 
-def teleportToObject(name):
+def TeleportToObject(name):
     engine.teleportToObject(name)
 
 

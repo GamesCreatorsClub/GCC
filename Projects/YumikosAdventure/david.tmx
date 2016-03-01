@@ -1,0 +1,1905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" nextobjectid="292">
+ <tileset firstgid="1" name="tilea2" tilewidth="16" tileheight="16">
+  <image source="maps/tilea2.png" width="512" height="384"/>
+  <terraintypes>
+   <terrain name="Grass1" tile="-1"/>
+   <terrain name="Stone Path" tile="-1"/>
+   <terrain name="Sand Path" tile="-1"/>
+   <terrain name="Stone House" tile="-1"/>
+   <terrain name="Hole" tile="-1"/>
+   <terrain name="Flowers" tile="-1"/>
+   <terrain name="Long Grass" tile="-1"/>
+   <terrain name="Grass2" tile="-1"/>
+   <terrain name="Dirt Main" tile="494"/>
+   <terrain name="DirtMound" tile="496"/>
+   <terrain name="Empty" tile="-1"/>
+   <terrain name="Stone Pit" tile="-1"/>
+   <terrain name="DirtGrass" tile="686"/>
+   <terrain name="LavaPath" tile="-1"/>
+   <terrain name="Mound" tile="-1"/>
+   <terrain name="ColorDarkGravel" tile="-1"/>
+   <terrain name="Carpet1" tile="-1"/>
+   <terrain name="Carpet1Outline" tile="-1"/>
+   <terrain name="Carpet2" tile="-1"/>
+   <terrain name="Carpet2Outline" tile="-1"/>
+   <terrain name="Carpet3" tile="-1"/>
+   <terrain name="Carpet3Outline" tile="-1"/>
+   <terrain name="Carpet4" tile="-1"/>
+   <terrain name="Carpet4Outline" tile="-1"/>
+   <terrain name="Fence" tile="-1"/>
+   <terrain name="StonePath2" tile="693"/>
+   <terrain name="Dirt Hole" tile="438"/>
+  </terraintypes>
+  <tile id="0" terrain="0,0,0,0"/>
+  <tile id="1" terrain="0,0,0,0"/>
+  <tile id="2" terrain="0,0,0,0"/>
+  <tile id="3" terrain="0,0,0,0"/>
+  <tile id="4" terrain="0,24,0,24">
+   <objectgroup draworder="index">
+    <object id="0" x="12.2825" y="9.27388" width="3.27533" height="6.41806"/>
+   </objectgroup>
+  </tile>
+  <tile id="5" terrain="24,0,24,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.204708" y="9.18032" width="3.54828" height="6.65047"/>
+   </objectgroup>
+  </tile>
+  <tile id="6" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.17059" y="9.10915" width="3.54828" height="6.5851"/>
+    <object id="0" x="4.1624" y="9.10952" width="7.7448" height="4.67417"/>
+    <object id="0" x="12.3166" y="9.2159" width="3.30945" height="6.47842"/>
+   </objectgroup>
+  </tile>
+  <tile id="7" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.238826" y="9.28707" width="3.54828" height="6.50958"/>
+    <object id="0" x="4.29887" y="9.31423" width="7.47185" height="4.23064"/>
+    <object id="0" x="12.2825" y="9.32265" width="3.51416" height="6.37164"/>
+   </objectgroup>
+  </tile>
+  <tile id="8" terrain="0,0,0,1"/>
+  <tile id="9" terrain="0,0,1,0"/>
+  <tile id="10" terrain="0,1,1,1"/>
+  <tile id="11" terrain="1,0,1,1"/>
+  <tile id="12" terrain="0,0,0,2"/>
+  <tile id="13" terrain="0,0,2,0"/>
+  <tile id="14" terrain="0,2,2,2"/>
+  <tile id="15" terrain="2,0,2,2"/>
+  <tile id="16">
+   <objectgroup draworder="index">
+    <object id="0" x="11.2944" y="10.1938" width="4.51777" height="5.49148"/>
+   </objectgroup>
+  </tile>
+  <tile id="17">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="10.1652" width="4.51777" height="5.57085"/>
+   </objectgroup>
+  </tile>
+  <tile id="18">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="10.1366" width="4.56853" height="5.62489"/>
+    <object id="0" x="5.25381" y="10.1523" width="5.60914" height="5.63452"/>
+    <object id="0" x="11.2183" y="10.1938" width="4.64467" height="5.6184"/>
+   </objectgroup>
+  </tile>
+  <tile id="19">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="10.1079" width="4.56853" height="5.57738"/>
+    <object id="0" x="5.1269" y="10.1269" width="5.73604" height="5.60914"/>
+    <object id="0" x="11.2437" y="10.1366" width="4.59391" height="5.65029"/>
+   </objectgroup>
+  </tile>
+  <tile id="20" terrain="10,10,10,0"/>
+  <tile id="21" terrain="10,10,0,10"/>
+  <tile id="22" terrain="10,0,0,0"/>
+  <tile id="23" terrain="0,10,0,0"/>
+  <tile id="24" terrain="17,17,17,16"/>
+  <tile id="25" terrain="17,17,16,17"/>
+  <tile id="26" terrain="17,16,16,16"/>
+  <tile id="27" terrain="16,17,16,16"/>
+  <tile id="32" terrain="0,0,0,0"/>
+  <tile id="33" terrain="0,0,0,0"/>
+  <tile id="34" terrain="0,0,0,0"/>
+  <tile id="35" terrain="0,0,0,0"/>
+  <tile id="36" terrain="0,24,0,24">
+   <objectgroup draworder="index">
+    <object id="0" x="12.3849" y="9.2159" width="3.37769" height="6.37602"/>
+   </objectgroup>
+  </tile>
+  <tile id="37" terrain="24,0,24,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.204708" y="9.10915" width="3.48004" height="6.78987"/>
+   </objectgroup>
+  </tile>
+  <tile id="38" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.17059" y="0.17059" width="3.51416" height="15.5919"/>
+    <object id="0" x="4.29887" y="3.13886" width="7.50597" height="4.50358"/>
+    <object id="0" x="12.2484" y="0.17059" width="3.51416" height="15.5578"/>
+   </objectgroup>
+  </tile>
+  <tile id="39" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.238826" y="0.17059" width="3.51416" height="15.6261"/>
+    <object id="0" x="4.26476" y="3.27533" width="7.64244" height="4.46946"/>
+    <object id="0" x="12.2143" y="0.102354" width="3.61651" height="15.7284"/>
+   </objectgroup>
+  </tile>
+  <tile id="40" terrain="0,1,0,0"/>
+  <tile id="41" terrain="1,0,0,0"/>
+  <tile id="42" terrain="1,1,0,1"/>
+  <tile id="43" terrain="1,1,1,0"/>
+  <tile id="44" terrain="0,2,0,0"/>
+  <tile id="45" terrain="2,0,0,0"/>
+  <tile id="46" terrain="2,2,0,2"/>
+  <tile id="47" terrain="2,2,2,0"/>
+  <tile id="48">
+   <objectgroup draworder="index">
+    <object id="0" x="11.2437" y="7.30176" width="4.61929" height="8.48501"/>
+   </objectgroup>
+  </tile>
+  <tile id="49">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="7.24449" width="4.61929" height="8.5931"/>
+   </objectgroup>
+  </tile>
+  <tile id="50">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="7.24449" width="4.61929" height="8.4662"/>
+    <object id="0" x="5.17766" y="7.2335" width="5.55838" height="5.58376"/>
+    <object id="0" x="11.1929" y="7.24449" width="4.61929" height="8.56766"/>
+   </objectgroup>
+  </tile>
+  <tile id="51">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="7.18722" width="4.64467" height="8.54886"/>
+    <object id="0" x="11.1929" y="7.15859" width="4.64467" height="8.70438"/>
+    <object id="0" x="5.17766" y="7.15736" width="5.76142" height="5.71066"/>
+   </objectgroup>
+  </tile>
+  <tile id="52" terrain="10,0,10,10"/>
+  <tile id="53" terrain="0,10,10,10"/>
+  <tile id="54" terrain="0,0,10,0"/>
+  <tile id="55" terrain="0,0,0,10"/>
+  <tile id="56" terrain="17,16,17,17"/>
+  <tile id="57" terrain="16,17,17,17"/>
+  <tile id="58" terrain="16,16,17,16"/>
+  <tile id="59" terrain="16,16,16,17"/>
+  <tile id="64" terrain="0,0,0,0"/>
+  <tile id="65" terrain="0,0,0,0"/>
+  <tile id="66" terrain="0,0,0,0"/>
+  <tile id="67" terrain="0,0,0,0"/>
+  <tile id="68" terrain="0,24,0,24">
+   <objectgroup draworder="index">
+    <object id="0" x="12.5896" y="9.10915" width="3.17298" height="6.82395"/>
+   </objectgroup>
+  </tile>
+  <tile id="69" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.272944" y="9.14474" width="3.54828" height="6.54952"/>
+    <object id="0" x="4.23064" y="9.17776" width="7.57421" height="4.5377"/>
+    <object id="0" x="12.3166" y="9.14474" width="3.48004" height="6.75428"/>
+   </objectgroup>
+  </tile>
+  <tile id="70" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.102354" y="9.10915" width="3.61651" height="6.55105"/>
+    <object id="0" x="4.23064" y="9.17776" width="7.64244" height="4.50358"/>
+    <object id="0" x="12.419" y="9.2159" width="3.34357" height="6.54666"/>
+   </objectgroup>
+  </tile>
+  <tile id="71" terrain="24,0,24,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.17059" y="9.18032" width="3.61651" height="6.71867"/>
+   </objectgroup>
+  </tile>
+  <tile id="72" terrain="0,0,0,1"/>
+  <tile id="73" terrain="0,0,1,1"/>
+  <tile id="74" terrain="0,0,1,1"/>
+  <tile id="75" terrain="0,0,1,0"/>
+  <tile id="76" terrain="0,0,0,2"/>
+  <tile id="77" terrain="0,0,2,2"/>
+  <tile id="78" terrain="0,0,2,2"/>
+  <tile id="79" terrain="0,0,2,0"/>
+  <tile id="80">
+   <objectgroup draworder="index">
+    <object id="0" x="11.2437" y="10.1938" width="4.49239" height="5.51682"/>
+   </objectgroup>
+  </tile>
+  <tile id="81">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="10.1938" width="4.64467" height="5.44074"/>
+    <object id="0" x="5.20305" y="10.1777" width="5.50761" height="5.63452"/>
+    <object id="0" x="11.2437" y="10.1366" width="4.39086" height="5.65023"/>
+   </objectgroup>
+  </tile>
+  <tile id="82">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="10.2225" width="4.64467" height="5.53894"/>
+    <object id="0" x="5.15228" y="10.2284" width="5.6599" height="5.6599"/>
+    <object id="0" x="11.2437" y="10.1938" width="4.59391" height="5.7453"/>
+   </objectgroup>
+  </tile>
+  <tile id="83">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="10.1652" width="4.64467" height="5.49467"/>
+   </objectgroup>
+  </tile>
+  <tile id="84" terrain="10,10,10,0"/>
+  <tile id="85" terrain="10,10,0,0"/>
+  <tile id="86" terrain="10,10,0,0"/>
+  <tile id="87" terrain="10,10,0,10"/>
+  <tile id="88" terrain="17,17,17,16"/>
+  <tile id="89" terrain="17,17,16,16"/>
+  <tile id="90" terrain="17,17,16,16"/>
+  <tile id="91" terrain="17,17,16,17"/>
+  <tile id="96" terrain="0,0,0,0"/>
+  <tile id="97" terrain="0,0,0,0"/>
+  <tile id="98" terrain="0,0,0,0"/>
+  <tile id="99" terrain="0,0,0,0"/>
+  <tile id="100" terrain="0,24,0,24">
+   <objectgroup draworder="index">
+    <object id="0" x="12.3507" y="3.23802" width="3.10474" height="12.4222"/>
+   </objectgroup>
+  </tile>
+  <tile id="101" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.102354" y="3.16685" width="3.61651" height="12.8345"/>
+    <object id="0" x="4.29887" y="3.13886" width="7.43773" height="4.67417"/>
+    <object id="0" x="12.2143" y="3.13127" width="3.51416" height="12.7336"/>
+   </objectgroup>
+  </tile>
+  <tile id="102" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.272944" y="3.13127" width="3.48004" height="12.5289"/>
+    <object id="0" x="4.36711" y="3.13886" width="7.47185" height="4.43535"/>
+    <object id="0" x="12.3166" y="3.13127" width="3.37769" height="12.529"/>
+   </objectgroup>
+  </tile>
+  <tile id="103" terrain="24,0,24,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.136472" y="3.20244" width="3.65063" height="12.6284"/>
+   </objectgroup>
+  </tile>
+  <tile id="104" terrain="0,1,0,1"/>
+  <tile id="105" terrain="1,1,1,1"/>
+  <tile id="106" terrain="1,1,1,1"/>
+  <tile id="107" terrain="1,0,1,0"/>
+  <tile id="108" terrain="0,2,0,2"/>
+  <tile id="109" terrain="2,2,2,2"/>
+  <tile id="110" terrain="2,2,2,2"/>
+  <tile id="111" terrain="2,0,2,0"/>
+  <tile id="112">
+   <objectgroup draworder="index">
+    <object id="0" x="11.2183" y="7.10132" width="4.59391" height="8.71087"/>
+   </objectgroup>
+  </tile>
+  <tile id="113">
+   <objectgroup draworder="index">
+    <object id="0" x="0.253807" y="7.15859" width="4.3401" height="8.27288"/>
+    <object id="0" x="5.20305" y="7.18274" width="5.6599" height="5.60914"/>
+    <object id="0" x="11.2437" y="7.21585" width="4.56853" height="8.67243"/>
+   </objectgroup>
+  </tile>
+  <tile id="114">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="7.12995" width="4.49239" height="8.73303"/>
+    <object id="0" x="5.1269" y="7.18274" width="5.6599" height="5.71066"/>
+    <object id="0" x="11.2183" y="7.07268" width="4.64467" height="8.73948"/>
+   </objectgroup>
+  </tile>
+  <tile id="115">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="7.30176" width="4.61929" height="8.56123"/>
+   </objectgroup>
+  </tile>
+  <tile id="116" terrain="10,0,10,0"/>
+  <tile id="117" terrain="0,0,0,0"/>
+  <tile id="118" terrain="0,0,0,0"/>
+  <tile id="119" terrain="0,10,0,10"/>
+  <tile id="120" terrain="17,16,17,16"/>
+  <tile id="121" terrain="16,16,16,16"/>
+  <tile id="122" terrain="16,16,16,16"/>
+  <tile id="123" terrain="16,17,16,17"/>
+  <tile id="128" terrain="0,0,0,0"/>
+  <tile id="129" terrain="0,0,0,0"/>
+  <tile id="130" terrain="0,0,0,0"/>
+  <tile id="131" terrain="0,0,0,0"/>
+  <tile id="132" terrain="0,24,0,24">
+   <objectgroup draworder="index">
+    <object id="0" x="12.3507" y="9.2159" width="3.00239" height="6.44432"/>
+   </objectgroup>
+  </tile>
+  <tile id="133" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.17059" y="9.2159" width="3.68475" height="6.58079"/>
+    <object id="0" x="4.23064" y="9.21187" width="7.60832" height="4.67417"/>
+    <object id="0" x="12.2825" y="9.18032" width="3.51416" height="6.44575"/>
+   </objectgroup>
+  </tile>
+  <tile id="134" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.136472" y="9.2159" width="3.71887" height="6.64899"/>
+    <object id="0" x="4.12828" y="9.14364" width="7.81303" height="4.70829"/>
+    <object id="0" x="12.2484" y="9.14474" width="3.5824" height="6.54955"/>
+   </objectgroup>
+  </tile>
+  <tile id="135" terrain="24,0,24,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.136472" y="9.18032" width="3.71887" height="6.68455"/>
+   </objectgroup>
+  </tile>
+  <tile id="136" terrain="0,1,0,1"/>
+  <tile id="137" terrain="1,1,1,1"/>
+  <tile id="138" terrain="1,1,1,1"/>
+  <tile id="139" terrain="1,0,1,0"/>
+  <tile id="140" terrain="0,2,0,2"/>
+  <tile id="141" terrain="2,2,2,2"/>
+  <tile id="142" terrain="2,2,2,2"/>
+  <tile id="143" terrain="2,0,2,0"/>
+  <tile id="144">
+   <objectgroup draworder="index">
+    <object id="0" x="11.1675" y="10.1366" width="4.64467" height="5.54871"/>
+   </objectgroup>
+  </tile>
+  <tile id="145">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="10.1079" width="4.59391" height="5.70428"/>
+    <object id="0" x="5.10152" y="10.1523" width="5.7868" height="5.73604"/>
+    <object id="0" x="11.2183" y="10.1652" width="4.61929" height="5.72315"/>
+   </objectgroup>
+  </tile>
+  <tile id="146">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="10.1079" width="4.69543" height="5.70426"/>
+    <object id="0" x="5.17766" y="10.1015" width="5.76142" height="5.63452"/>
+    <object id="0" x="11.2944" y="10.1079" width="4.54315" height="5.80582"/>
+   </objectgroup>
+  </tile>
+  <tile id="147">
+   <objectgroup draworder="index">
+    <object id="0" x="0.253807" y="10.1938" width="4.54315" height="5.69448"/>
+   </objectgroup>
+  </tile>
+  <tile id="148" terrain="10,0,10,0"/>
+  <tile id="149" terrain="0,0,0,0"/>
+  <tile id="150" terrain="0,0,0,0"/>
+  <tile id="151" terrain="0,10,0,10"/>
+  <tile id="152" terrain="17,16,17,16"/>
+  <tile id="153" terrain="16,16,16,16"/>
+  <tile id="154" terrain="16,16,16,16"/>
+  <tile id="155" terrain="16,17,16,17"/>
+  <tile id="160" terrain="0,0,0,0"/>
+  <tile id="161" terrain="0,0,0,0"/>
+  <tile id="162" terrain="0,0,0,0"/>
+  <tile id="163" terrain="0,0,0,0"/>
+  <tile id="164" terrain="0,24,0,24">
+   <objectgroup draworder="index">
+    <object id="0" x="12.2143" y="9.28707" width="3.44592" height="6.37314"/>
+   </objectgroup>
+  </tile>
+  <tile id="165" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.204708" y="0.136472" width="3.48004" height="15.4555"/>
+    <object id="0" x="4.29887" y="3.44592" width="7.47185" height="4.1624"/>
+    <object id="0" x="12.4872" y="0.238826" width="3.24121" height="15.319"/>
+   </objectgroup>
+  </tile>
+  <tile id="166" terrain="24,24,24,24">
+   <objectgroup draworder="index">
+    <object id="0" x="0.375299" y="0.238826" width="3.51416" height="15.4896"/>
+    <object id="0" x="4.29887" y="3.17298" width="7.60832" height="4.50358"/>
+    <object id="0" x="12.3507" y="0.204708" width="3.51416" height="15.5578"/>
+   </objectgroup>
+  </tile>
+  <tile id="167" terrain="24,0,24,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.204708" y="0.102354" width="3.51416" height="15.9672"/>
+   </objectgroup>
+  </tile>
+  <tile id="168" terrain="0,1,0,0"/>
+  <tile id="169" terrain="1,1,0,0"/>
+  <tile id="170" terrain="1,1,0,0"/>
+  <tile id="171" terrain="1,0,0,0"/>
+  <tile id="172" terrain="0,2,0,0"/>
+  <tile id="173" terrain="2,2,0,0"/>
+  <tile id="174" terrain="2,2,0,0"/>
+  <tile id="175" terrain="2,0,0,0"/>
+  <tile id="176">
+   <objectgroup draworder="index">
+    <object id="0" x="11.1421" y="7.24449" width="4.67005" height="8.6438"/>
+   </objectgroup>
+  </tile>
+  <tile id="177">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="7.21585" width="4.64467" height="8.62171"/>
+    <object id="0" x="5.20305" y="7.20812" width="5.60914" height="5.58376"/>
+    <object id="0" x="11.2944" y="7.18722" width="4.49239" height="8.70115"/>
+   </objectgroup>
+  </tile>
+  <tile id="178">
+   <objectgroup draworder="index">
+    <object id="0" x="0.126904" y="7.10132" width="4.74619" height="8.60933"/>
+    <object id="0" x="5.15228" y="7.08122" width="5.63452" height="5.76142"/>
+    <object id="0" x="11.2183" y="7.07268" width="4.67005" height="8.76484"/>
+   </objectgroup>
+  </tile>
+  <tile id="179">
+   <objectgroup draworder="index">
+    <object id="0" x="0.253807" y="7.10132" width="4.61929" height="8.68549"/>
+   </objectgroup>
+  </tile>
+  <tile id="180" terrain="10,0,10,10"/>
+  <tile id="181" terrain="0,0,10,10"/>
+  <tile id="182" terrain="0,0,10,10"/>
+  <tile id="183" terrain="0,10,10,10"/>
+  <tile id="184" terrain="17,16,17,17"/>
+  <tile id="185" terrain="16,16,17,17"/>
+  <tile id="186" terrain="16,16,17,17"/>
+  <tile id="187" terrain="16,17,17,17"/>
+  <tile id="192" terrain="0,0,0,5"/>
+  <tile id="193" terrain="0,0,5,0"/>
+  <tile id="194" terrain="0,5,5,5"/>
+  <tile id="195" terrain="5,0,5,5"/>
+  <tile id="196" terrain="0,0,0,6">
+   <objectgroup draworder="index">
+    <object id="0" x="3.5" y="2.375" width="12.125" height="13.375"/>
+   </objectgroup>
+  </tile>
+  <tile id="197" terrain="0,0,6,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5625" y="1.8125" width="15.1875" height="14.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="198" terrain="0,6,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.0625" y="-0.25" width="16.0625" height="16.125"/>
+   </objectgroup>
+  </tile>
+  <tile id="199" terrain="6,0,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.3125" y="-0.125" width="16.25" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="200" terrain="0,0,,"/>
+  <tile id="201" terrain="0,0,,0"/>
+  <tile id="203" terrain=",0,,"/>
+  <tile id="204" terrain="4,4,4,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.625" y="0.375" width="15.375" height="5.25"/>
+    <object id="0" x="0" y="0" width="5.25" height="15.5"/>
+   </objectgroup>
+  </tile>
+  <tile id="205" terrain="4,4,3,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="0.0507614" width="14.6193" height="5.73604"/>
+    <object id="0" x="9.41624" y="6.11675" width="5.43147" height="9.64467"/>
+   </objectgroup>
+  </tile>
+  <tile id="206" terrain="4,3,3,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.126904" y="0.101523" width="5.6599" height="5.6599"/>
+   </objectgroup>
+  </tile>
+  <tile id="207" terrain="3,4,3,3">
+   <objectgroup draworder="index">
+    <object id="0" x="9.31472" y="0.126904" width="6.49746" height="5.68528"/>
+   </objectgroup>
+  </tile>
+  <tile id="208">
+   <objectgroup draworder="index">
+    <object id="0" x="10.1777" y="2.13198" width="5.68528" height="13.7563"/>
+    <object id="0" x="13.198" y="0.253807" width="2.66497" height="1.64975"/>
+   </objectgroup>
+  </tile>
+  <tile id="209">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.126904" width="3.70558" height="15.8376"/>
+    <object id="0" x="4.18782" y="2.18274" width="2.56345" height="13.7056"/>
+   </objectgroup>
+  </tile>
+  <tile id="210">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="0.152284" width="3.47716" height="1.49746"/>
+    <object id="0" x="0.253807" y="2.08122" width="6.42132" height="13.6802"/>
+    <object id="0" x="10.2284" y="0.203046" width="5.50761" height="15.6345"/>
+   </objectgroup>
+  </tile>
+  <tile id="211">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="0.126904" width="6.5736" height="15.6853"/>
+    <object id="0" x="10.1777" y="2.1066" width="5.60914" height="13.731"/>
+    <object id="0" x="13.0964" y="0.203046" width="2.69036" height="1.70051"/>
+   </objectgroup>
+  </tile>
+  <tile id="212" terrain="11,11,11,"/>
+  <tile id="213" terrain="11,11,,11"/>
+  <tile id="214" terrain="11,,,"/>
+  <tile id="215" terrain=",11,,"/>
+  <tile id="216" terrain="19,19,19,18"/>
+  <tile id="217" terrain="19,19,18,19"/>
+  <tile id="218" terrain="19,18,18,18"/>
+  <tile id="219" terrain="18,19,18,18"/>
+  <tile id="224" terrain="0,5,0,0"/>
+  <tile id="225" terrain="5,0,0,0"/>
+  <tile id="226" terrain="5,5,0,5"/>
+  <tile id="227" terrain="5,5,5,0"/>
+  <tile id="228" terrain="0,6,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.625" y="-0.5625" width="15.375" height="14.4375"/>
+   </objectgroup>
+  </tile>
+  <tile id="229" terrain="6,0,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="-0.0625" width="13.9375" height="14.4375"/>
+   </objectgroup>
+  </tile>
+  <tile id="230" terrain="6,6,0,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="0" width="16.1875" height="15.75"/>
+   </objectgroup>
+  </tile>
+  <tile id="231" terrain="6,6,6,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="15.75" height="16.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="232" terrain="0,,0,0"/>
+  <tile id="233" terrain=",0,0,0"/>
+  <tile id="235" terrain=",,,0"/>
+  <tile id="236" terrain=",3,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.0761421" width="5.73604" height="13.6802"/>
+    <object id="0" x="6.24365" y="8.12183" width="9.61929" height="5.6599"/>
+   </objectgroup>
+  </tile>
+  <tile id="237" terrain="3,4,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="8.14721" width="14.6954" height="5.68528"/>
+    <object id="0" x="9.2132" y="0.101523" width="5.6599" height="7.7665"/>
+   </objectgroup>
+  </tile>
+  <tile id="238" terrain="3,3,4,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.126904" y="8.12183" width="5.7868" height="7.79188"/>
+   </objectgroup>
+  </tile>
+  <tile id="239" terrain="3,3,3,4">
+   <objectgroup draworder="index">
+    <object id="0" x="9.23858" y="8.14721" width="6.64975" height="5.71066"/>
+    <object id="0" x="9.39086" y="14.1117" width="5.55838" height="1.85279"/>
+   </objectgroup>
+  </tile>
+  <tile id="240">
+   <objectgroup draworder="index">
+    <object id="0" x="10.2284" y="0.203046" width="5.63452" height="15.6853"/>
+   </objectgroup>
+  </tile>
+  <tile id="241">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="0.101523" width="6.64975" height="15.6091"/>
+   </objectgroup>
+  </tile>
+  <tile id="242">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="0.126904" width="6.64975" height="15.5076"/>
+    <object id="0" x="10.1777" y="0.228426" width="5.53299" height="15.533"/>
+   </objectgroup>
+  </tile>
+  <tile id="243">
+   <objectgroup draworder="index">
+    <object id="0" x="0.126904" y="0.101523" width="6.67513" height="15.7107"/>
+    <object id="0" x="10.1523" y="0.177665" width="5.71066" height="15.6345"/>
+   </objectgroup>
+  </tile>
+  <tile id="244" terrain="11,,11,11"/>
+  <tile id="245" terrain=",11,11,11"/>
+  <tile id="246" terrain=",,11,"/>
+  <tile id="247" terrain=",,,11"/>
+  <tile id="248" terrain="19,18,19,19"/>
+  <tile id="249" terrain="18,19,19,19"/>
+  <tile id="250" terrain="18,18,19,18"/>
+  <tile id="251" terrain="18,18,18,19"/>
+  <tile id="256" terrain="0,0,0,5"/>
+  <tile id="257" terrain="0,0,5,5"/>
+  <tile id="258" terrain="0,0,5,5"/>
+  <tile id="259" terrain="0,0,5,0"/>
+  <tile id="260" terrain="0,0,0,6">
+   <objectgroup draworder="index">
+    <object id="0" x="2.5625" y="2.625" width="13.0625" height="13.375"/>
+   </objectgroup>
+  </tile>
+  <tile id="261" terrain="0,0,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5625" y="1.5625" width="16.3125" height="14.125"/>
+   </objectgroup>
+  </tile>
+  <tile id="262" terrain="0,0,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5" y="2.3125" width="16.3125" height="13.5"/>
+   </objectgroup>
+  </tile>
+  <tile id="263" terrain="0,0,6,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.375" y="1.75" width="15.3125" height="14.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="264" terrain="0,0,0,"/>
+  <tile id="265" terrain="0,0,,"/>
+  <tile id="266" terrain="0,0,,"/>
+  <tile id="267" terrain="0,0,,0"/>
+  <tile id="268" terrain="4,4,4,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.253807" y="0.101523" width="15.5838" height="5.76142"/>
+    <object id="0" x="0.253807" y="6.01523" width="5.43147" height="9.74619"/>
+   </objectgroup>
+  </tile>
+  <tile id="269" terrain="4,4,3,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="0.177665" width="15.533" height="5.63452"/>
+   </objectgroup>
+  </tile>
+  <tile id="270" terrain="4,4,3,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="0.152284" width="15.4569" height="5.60914"/>
+   </objectgroup>
+  </tile>
+  <tile id="271" terrain="4,4,,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.253807" y="0.0253807" width="14.6701" height="5.86294"/>
+    <object id="0" x="9.18782" y="6.06599" width="5.55838" height="9.74619"/>
+   </objectgroup>
+  </tile>
+  <tile id="272">
+   <objectgroup draworder="index">
+    <object id="0" x="10.1523" y="2.1066" width="5.6599" height="13.731"/>
+    <object id="0" x="13.3503" y="0.101523" width="2.48731" height="1.75127"/>
+   </objectgroup>
+  </tile>
+  <tile id="273">
+   <objectgroup draworder="index">
+    <object id="0" x="0.101523" y="0.177665" width="3.62944" height="1.62437"/>
+    <object id="0" x="0.253807" y="2.1066" width="6.5736" height="13.6802"/>
+    <object id="0" x="10.2792" y="2.18274" width="5.53299" height="13.6041"/>
+    <object id="0" x="13.2741" y="0.203046" width="2.53807" height="1.70051"/>
+   </objectgroup>
+  </tile>
+  <tile id="274">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.177665" width="3.62944" height="1.62437"/>
+    <object id="0" x="0.253807" y="2.13198" width="6.4467" height="13.5787"/>
+    <object id="0" x="10.2792" y="2.2335" width="5.55838" height="13.5279"/>
+    <object id="0" x="13.2487" y="0.126904" width="2.43655" height="1.77665"/>
+   </objectgroup>
+  </tile>
+  <tile id="275">
+   <objectgroup draworder="index">
+    <object id="0" x="0.203046" y="0.101523" width="3.57868" height="1.80203"/>
+    <object id="0" x="0.228426" y="2.1066" width="6.59898" height="13.6041"/>
+   </objectgroup>
+  </tile>
+  <tile id="276" terrain="11,11,11,"/>
+  <tile id="277" terrain="11,11,,"/>
+  <tile id="278" terrain="11,11,,"/>
+  <tile id="279" terrain="11,11,,11"/>
+  <tile id="280" terrain="19,19,19,18"/>
+  <tile id="281" terrain="19,19,18,18"/>
+  <tile id="282" terrain="19,19,18,18"/>
+  <tile id="283" terrain="19,19,18,19"/>
+  <tile id="288" terrain="0,5,0,5"/>
+  <tile id="289" terrain="5,5,5,5"/>
+  <tile id="290" terrain="5,5,5,5"/>
+  <tile id="291" terrain="5,0,5,0"/>
+  <tile id="292" terrain="0,6,0,6">
+   <objectgroup draworder="index">
+    <object id="0" x="1.875" y="-0.4375" width="14" height="16.5625"/>
+   </objectgroup>
+  </tile>
+  <tile id="293" terrain="6,6,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="-0.125" width="16.125" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="294" terrain="6,6,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.0625" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="295" terrain="6,0,6,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="-0.375" width="14.5" height="16.3125"/>
+   </objectgroup>
+  </tile>
+  <tile id="296" terrain="0,,0,"/>
+  <tile id="299" terrain=",0,,0"/>
+  <tile id="300" terrain="4,3,4,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="0.126904" width="5.45685" height="15.4822"/>
+   </objectgroup>
+  </tile>
+  <tile id="301" terrain="3,3,3,3"/>
+  <tile id="302" terrain="3,3,3,3"/>
+  <tile id="303" terrain="3,4,3,4">
+   <objectgroup draworder="index">
+    <object id="0" x="9.28934" y="0.152284" width="5.45685" height="15.6345"/>
+   </objectgroup>
+  </tile>
+  <tile id="304">
+   <objectgroup draworder="index">
+    <object id="0" x="10.2284" y="0.126904" width="5.58376" height="15.6599"/>
+   </objectgroup>
+  </tile>
+  <tile id="305">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.126904" width="6.62437" height="15.7107"/>
+    <object id="0" x="10.1777" y="0.101523" width="5.60914" height="15.7107"/>
+   </objectgroup>
+  </tile>
+  <tile id="306">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.0761421" width="6.75127" height="15.6853"/>
+    <object id="0" x="10.2538" y="0.152284" width="5.60914" height="15.6599"/>
+   </objectgroup>
+  </tile>
+  <tile id="307">
+   <objectgroup draworder="index">
+    <object id="0" x="0.126904" y="0.152284" width="6.70051" height="15.6853"/>
+   </objectgroup>
+  </tile>
+  <tile id="308" terrain="11,,11,"/>
+  <tile id="311" terrain=",11,,11"/>
+  <tile id="312" terrain="19,18,19,18"/>
+  <tile id="313" terrain="18,18,18,18"/>
+  <tile id="314" terrain="18,18,18,18"/>
+  <tile id="315" terrain="18,19,18,19"/>
+  <tile id="320" terrain="0,5,0,5"/>
+  <tile id="321" terrain="5,5,5,5"/>
+  <tile id="322" terrain="5,5,5,5"/>
+  <tile id="323" terrain="5,0,5,0"/>
+  <tile id="324" terrain="0,6,0,6">
+   <objectgroup draworder="index">
+    <object id="0" x="1" y="-0.375" width="14.875" height="16.4375"/>
+   </objectgroup>
+  </tile>
+  <tile id="325" terrain="6,6,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.0625" y="-0.0625" width="16.1875" height="16.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="326" terrain="6,6,6,6">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.4375" y="-0.1875" width="16.3125" height="16.3125"/>
+   </objectgroup>
+  </tile>
+  <tile id="327" terrain="6,0,6,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.3125" y="-0.3125" width="15.1875" height="16.625"/>
+   </objectgroup>
+  </tile>
+  <tile id="328" terrain="0,,0,"/>
+  <tile id="331" terrain=",0,,0"/>
+  <tile id="332" terrain="4,3,4,3">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.126904" width="5.58376" height="15.6345"/>
+   </objectgroup>
+  </tile>
+  <tile id="333" terrain="3,3,3,3"/>
+  <tile id="334" terrain="3,3,3,3"/>
+  <tile id="335" terrain="3,4,3,4">
+   <objectgroup draworder="index">
+    <object id="0" x="9.23858" y="0.203046" width="5.43147" height="15.6091"/>
+   </objectgroup>
+  </tile>
+  <tile id="336">
+   <objectgroup draworder="index">
+    <object id="0" x="10.1523" y="0.177665" width="5.6599" height="15.6091"/>
+   </objectgroup>
+  </tile>
+  <tile id="337">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="0.101523" width="6.67513" height="15.6345"/>
+    <object id="0" x="10.2792" y="2.18274" width="5.60914" height="13.6802"/>
+    <object id="0" x="13.2487" y="0.279188" width="2.63959" height="1.62437"/>
+   </objectgroup>
+  </tile>
+  <tile id="338">
+   <objectgroup draworder="index">
+    <object id="0" x="0.152284" y="0.177665" width="3.62944" height="1.72589"/>
+    <object id="0" x="0.228426" y="2.05584" width="6.5736" height="13.8579"/>
+    <object id="0" x="10.2792" y="0.152284" width="5.53299" height="15.5838"/>
+   </objectgroup>
+  </tile>
+  <tile id="339">
+   <objectgroup draworder="index">
+    <object id="0" x="0.101523" y="0.177665" width="6.75127" height="15.6599"/>
+   </objectgroup>
+  </tile>
+  <tile id="340" terrain="11,,11,"/>
+  <tile id="343" terrain=",11,,11"/>
+  <tile id="344" terrain="19,18,19,18"/>
+  <tile id="345" terrain="18,18,18,18"/>
+  <tile id="346" terrain="18,18,18,18"/>
+  <tile id="347" terrain="18,19,18,19"/>
+  <tile id="352" terrain="0,5,0,0"/>
+  <tile id="353" terrain="5,5,0,0"/>
+  <tile id="354" terrain="5,5,0,0"/>
+  <tile id="355" terrain="5,0,0,0"/>
+  <tile id="356" terrain="0,6,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.75" y="-0.25" width="15.4375" height="15.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="357" terrain="6,6,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="-0.0625" width="16.0625" height="15"/>
+   </objectgroup>
+  </tile>
+  <tile id="358" terrain="6,6,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.25" y="-0.6875" width="16.125" height="15"/>
+   </objectgroup>
+  </tile>
+  <tile id="359" terrain="6,0,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.3125" y="-0.5" width="15.5" height="15.125"/>
+   </objectgroup>
+  </tile>
+  <tile id="360" terrain="0,,0,0"/>
+  <tile id="361" terrain=",,0,"/>
+  <tile id="362" terrain=",,0,0"/>
+  <tile id="363" terrain=",0,0,0"/>
+  <tile id="364" terrain="4,3,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="0.177665" width="5.60914" height="13.6041"/>
+    <object id="0" x="6.26904" y="8.22335" width="9.56853" height="5.58376"/>
+   </objectgroup>
+  </tile>
+  <tile id="365" terrain="3,3,,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.253807" y="8.19797" width="15.3807" height="5.50761"/>
+   </objectgroup>
+  </tile>
+  <tile id="366" terrain="3,3,4,">
+   <objectgroup draworder="index">
+    <object id="0" x="0.228426" y="8.14721" width="15.533" height="5.63452"/>
+   </objectgroup>
+  </tile>
+  <tile id="367" terrain="3,4,,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="8.22335" width="14.6701" height="5.58376"/>
+    <object id="0" x="9.28934" y="0.228426" width="5.50761" height="7.71574"/>
+   </objectgroup>
+  </tile>
+  <tile id="368">
+   <objectgroup draworder="index">
+    <object id="0" x="10.1015" y="0.126904" width="5.81218" height="15.736"/>
+   </objectgroup>
+  </tile>
+  <tile id="369">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="0.126904" width="6.59898" height="15.5584"/>
+    <object id="0" x="10.203" y="0.177665" width="5.6599" height="15.7614"/>
+   </objectgroup>
+  </tile>
+  <tile id="370">
+   <objectgroup draworder="index">
+    <object id="0" x="0.126904" y="0.101523" width="6.62437" height="15.736"/>
+    <object id="0" x="10.1523" y="0.126904" width="5.71066" height="15.6091"/>
+   </objectgroup>
+  </tile>
+  <tile id="371">
+   <objectgroup draworder="index">
+    <object id="0" x="0.177665" y="0.152284" width="6.62437" height="15.6853"/>
+   </objectgroup>
+  </tile>
+  <tile id="372" terrain="11,,11,11"/>
+  <tile id="373" terrain=",,11,11"/>
+  <tile id="374" terrain=",,11,11"/>
+  <tile id="375" terrain=",11,11,11"/>
+  <tile id="376" terrain="19,18,19,19"/>
+  <tile id="377" terrain="18,18,19,19"/>
+  <tile id="378" terrain="18,18,19,19"/>
+  <tile id="379" terrain="18,19,19,19"/>
+  <tile id="384" terrain="0,0,0,7"/>
+  <tile id="385" terrain="0,0,7,0"/>
+  <tile id="386" terrain="0,7,7,7"/>
+  <tile id="387" terrain="7,0,7,7"/>
+  <tile id="388" terrain="0,0,0,14">
+   <objectgroup draworder="index">
+    <object id="0" x="2" y="7.6875" width="4.9375" height="8.1875"/>
+    <object id="0" x="7.5625" y="0.0625" width="8.625" height="5"/>
+    <object id="0" x="4.25" y="3.8125" width="5.125" height="5.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="389" terrain="0,0,14,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="-0.25" width="10.0625" height="7.5625"/>
+    <object id="0" x="9.0625" y="7" width="5.625" height="9.375"/>
+    <object id="0" x="6.5625" y="3.125" width="6.25" height="5.75"/>
+   </objectgroup>
+  </tile>
+  <tile id="390" terrain="0,14,14,14">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="-0.3125" width="4.5625" height="3.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="391" terrain="14,0,14,14">
+   <objectgroup draworder="index">
+    <object id="0" x="10" y="0.0625" width="5.9375" height="5.875"/>
+   </objectgroup>
+  </tile>
+  <tile id="392" terrain="0,0,0,4">
+   <objectgroup draworder="index">
+    <object id="0" x="3.875" y="2.75" width="12.0625" height="13.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="393" terrain="0,0,4,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.0625" y="1.1875" width="13.9375" height="14.375"/>
+   </objectgroup>
+  </tile>
+  <tile id="394" terrain="0,4,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="3.375" width="16" height="12.4375"/>
+    <object id="0" x="4.75" y="-0.5625" width="10.8125" height="11.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="395" terrain="4,0,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0.1875" width="9.625" height="15.5"/>
+    <object id="0" x="0" y="4.9375" width="16" height="11.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="396" terrain=",,,8"/>
+  <tile id="397" terrain=",,8,"/>
+  <tile id="398" terrain=",8,8,8"/>
+  <tile id="399" terrain="8,,8,8"/>
+  <tile id="400" terrain=",,,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="401">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="402" terrain=",9,9,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="403" terrain="9,,9,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="404" terrain=",,,26">
+   <objectgroup draworder="index">
+    <object id="0" x="0.9375" y="5.4375" width="5.0625" height="9.875"/>
+    <object id="0" x="3.9375" y="0.9375" width="12" height="4.5625"/>
+   </objectgroup>
+  </tile>
+  <tile id="405" terrain=",,26,">
+   <objectgroup draworder="index">
+    <object id="0" x="0.875" y="1.75" width="11" height="6.9375"/>
+    <object id="0" x="7.75" y="5.0625" width="8.25" height="11"/>
+   </objectgroup>
+  </tile>
+  <tile id="406" terrain=",26,26,26">
+   <objectgroup draworder="index">
+    <object id="0" x="0.0625" y="0" width="8.875" height="9.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="407" terrain="26,,26,26">
+   <objectgroup draworder="index">
+    <object id="0" x="7.125" y="-0.3125" width="8.8125" height="9.8125"/>
+   </objectgroup>
+  </tile>
+  <tile id="408" terrain="21,21,21,20"/>
+  <tile id="409" terrain="21,21,20,21"/>
+  <tile id="410" terrain="21,20,20,20"/>
+  <tile id="411" terrain="20,21,20,20"/>
+  <tile id="416" terrain="0,7,0,0"/>
+  <tile id="417" terrain="7,0,0,0"/>
+  <tile id="418" terrain="7,7,0,7"/>
+  <tile id="419" terrain="7,7,7,0"/>
+  <tile id="420" terrain="0,14,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="1.4375" y="0.375" width="7.0625" height="10.6875"/>
+    <object id="0" x="2.6875" y="8.4375" width="13.375" height="6.4375"/>
+   </objectgroup>
+  </tile>
+  <tile id="421" terrain="14,0,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="7.875" width="10" height="6.9375"/>
+    <object id="0" x="8.0625" y="-0.125" width="5.75" height="12.1875"/>
+   </objectgroup>
+  </tile>
+  <tile id="422" terrain="14,14,0,14">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.625" y="9.4375" width="7.375" height="6.625"/>
+   </objectgroup>
+  </tile>
+  <tile id="423" terrain="14,14,14,0">
+   <objectgroup draworder="index">
+    <object id="0" x="9.9375" y="9.6875" width="5.9375" height="6.375"/>
+   </objectgroup>
+  </tile>
+  <tile id="424" terrain="0,4,0,0"/>
+  <tile id="425" terrain="4,0,0,0"/>
+  <tile id="426" terrain="4,4,0,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0.0625" y="0" width="15.6875" height="12.75"/>
+    <object id="0" x="4.75" y="0" width="11" height="15.875"/>
+   </objectgroup>
+  </tile>
+  <tile id="427" terrain="4,4,4,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="-0.125" width="11" height="15.6875"/>
+    <object id="0" x="-0.25" y="-0.1875" width="15.9375" height="12.1875"/>
+   </objectgroup>
+  </tile>
+  <tile id="428" terrain=",8,,"/>
+  <tile id="429" terrain="8,,,"/>
+  <tile id="430" terrain="8,8,,8"/>
+  <tile id="431" terrain="8,8,8,"/>
+  <tile id="432" terrain=",9,,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="433">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="434" terrain="9,9,,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="435" terrain="9,9,9,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="436" terrain=",26,,">
+   <objectgroup draworder="index">
+    <object id="0" x="4.25" y="-0.4375" width="6.5" height="8.8125"/>
+    <object id="0" x="4.5" y="5.25" width="11.5" height="5.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="437" terrain="26,,,">
+   <objectgroup draworder="index">
+    <object id="0" x="6.4375" y="-0.1875" width="5.875" height="10"/>
+    <object id="0" x="-0.25" y="5.125" width="11.5625" height="5.3125"/>
+   </objectgroup>
+  </tile>
+  <tile id="438" terrain="26,26,,26">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.25" y="8.3125" width="7.6875" height="7.875"/>
+   </objectgroup>
+  </tile>
+  <tile id="439" terrain="26,26,26,">
+   <objectgroup draworder="index">
+    <object id="0" x="7.0625" y="7.4375" width="8.75" height="8.6875"/>
+   </objectgroup>
+  </tile>
+  <tile id="440" terrain="21,20,21,21"/>
+  <tile id="441" terrain="20,21,21,21"/>
+  <tile id="442" terrain="20,20,21,20"/>
+  <tile id="443" terrain="20,20,20,21"/>
+  <tile id="448" terrain="0,0,0,7"/>
+  <tile id="449" terrain="0,0,7,7"/>
+  <tile id="450" terrain="0,0,7,7"/>
+  <tile id="451" terrain="0,0,7,0"/>
+  <tile id="452" terrain="0,0,0,14">
+   <objectgroup draworder="index">
+    <object id="0" x="1.8125" y="6.375" width="5.4375" height="9.5625"/>
+    <object id="0" x="5" y="0.9375" width="11.1875" height="4.8125"/>
+   </objectgroup>
+  </tile>
+  <tile id="453" terrain="0,0,14,14">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5" y="-0.1875" width="16.5625" height="5.625"/>
+   </objectgroup>
+  </tile>
+  <tile id="454" terrain="0,0,14,14">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="0" width="16.375" height="6"/>
+   </objectgroup>
+  </tile>
+  <tile id="455" terrain="0,0,14,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.3125" y="-0.375" width="9.5625" height="8.1875"/>
+    <object id="0" x="7.4375" y="3.0625" width="8.25" height="12.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="456" terrain="0,0,0,4">
+   <objectgroup draworder="index">
+    <object id="0" x="3" y="2.5625" width="12.9375" height="13.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="457" terrain="0,0,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="1" width="15.875" height="14.8125"/>
+   </objectgroup>
+  </tile>
+  <tile id="458" terrain="0,0,4,4">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="1.0625" width="16.0625" height="14.75"/>
+   </objectgroup>
+  </tile>
+  <tile id="459" terrain="0,0,4,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="0.9375" width="14.9375" height="14.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="460" terrain=",,,8"/>
+  <tile id="461" terrain=",,8,8"/>
+  <tile id="462" terrain=",,8,8"/>
+  <tile id="463" terrain=",,8,"/>
+  <tile id="464" terrain=",,,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="465" terrain=",,9,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="466" terrain=",,9,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="467" terrain=",,9,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="468" terrain=",,,26">
+   <objectgroup draworder="index">
+    <object id="0" x="5.8125" y="10.0625" width="7" height="6.0625"/>
+    <object id="0" x="8.5625" y="5.5625" width="7.375" height="5.625"/>
+   </objectgroup>
+  </tile>
+  <tile id="469" terrain=",,26,26">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5625" y="1.9375" width="16.625" height="8.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="470" terrain=",,26,26">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.6875" y="2.4375" width="16.5625" height="9.1875"/>
+   </objectgroup>
+  </tile>
+  <tile id="471" terrain=",,26,">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5" y="3.125" width="13" height="6.875"/>
+    <object id="0" x="7.0625" y="4.3125" width="7.4375" height="11.8125"/>
+   </objectgroup>
+  </tile>
+  <tile id="472" terrain="21,21,21,20"/>
+  <tile id="473" terrain="21,21,20,20"/>
+  <tile id="474" terrain="21,21,20,20"/>
+  <tile id="475" terrain="21,21,20,21"/>
+  <tile id="480" terrain="0,7,0,7"/>
+  <tile id="481" terrain="7,7,7,7"/>
+  <tile id="482" terrain="7,7,7,7"/>
+  <tile id="483" terrain="7,0,7,0"/>
+  <tile id="484" terrain="0,14,0,14">
+   <objectgroup draworder="index">
+    <object id="0" x="0.75" y="-0.125" width="7.0625" height="16.4375"/>
+   </objectgroup>
+  </tile>
+  <tile id="485" terrain="14,14,14,14"/>
+  <tile id="486" terrain="14,14,14,14"/>
+  <tile id="487" terrain="14,0,14,0">
+   <objectgroup draworder="index">
+    <object id="0" x="7.9375" y="-0.25" width="7.9375" height="16.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="488" terrain="0,4,0,4">
+   <objectgroup draworder="index">
+    <object id="0" x="2.6875" y="-0.1875" width="13.1875" height="16.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="489" terrain="4,4,4,4"/>
+  <tile id="490" terrain="4,4,4,4"/>
+  <tile id="491" terrain="4,0,4,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="-0.125" width="15.0625" height="15.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="492" terrain=",8,,8"/>
+  <tile id="493" terrain="8,8,8,8"/>
+  <tile id="494" terrain="8,8,8,8"/>
+  <tile id="495" terrain="8,,8,"/>
+  <tile id="496" terrain=",9,,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="497" terrain="9,9,9,9"/>
+  <tile id="498" terrain="9,9,9,9"/>
+  <tile id="499" terrain="9,,9,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="500" terrain=",26,,26">
+   <objectgroup draworder="index">
+    <object id="0" x="4.0625" y="-0.3125" width="7.9375" height="16.4375"/>
+   </objectgroup>
+  </tile>
+  <tile id="501" terrain="26,26,26,26"/>
+  <tile id="502" terrain="26,26,26,26"/>
+  <tile id="503" terrain="26,,26,">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.875" y="0.25" width="9.875" height="8.875"/>
+    <object id="0" x="4.5625" y="2.875" width="8.125" height="12.6875"/>
+   </objectgroup>
+  </tile>
+  <tile id="504" terrain="21,20,21,20"/>
+  <tile id="505" terrain="20,20,20,20"/>
+  <tile id="506" terrain="20,20,20,20"/>
+  <tile id="507" terrain="20,21,20,21"/>
+  <tile id="512" terrain="0,7,0,7"/>
+  <tile id="513" terrain="7,7,7,7"/>
+  <tile id="514" terrain="7,7,7,7"/>
+  <tile id="515" terrain="7,0,7,0"/>
+  <tile id="516" terrain="0,14,0,14">
+   <objectgroup draworder="index">
+    <object id="0" x="0.875" y="-0.5" width="6.125" height="16.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="517" terrain="14,14,14,14"/>
+  <tile id="518" terrain="14,14,14,14"/>
+  <tile id="519" terrain="14,0,14,0">
+   <objectgroup draworder="index">
+    <object id="0" x="7.4375" y="-0.1875" width="8.375" height="15.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="520" terrain="0,4,0,4">
+   <objectgroup draworder="index">
+    <object id="0" x="2" y="-0.6875" width="14" height="16.625"/>
+   </objectgroup>
+  </tile>
+  <tile id="521" terrain="4,4,4,4"/>
+  <tile id="522" terrain="4,4,4,4"/>
+  <tile id="523" terrain="4,0,4,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.0625" y="0" width="15.125" height="16.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="524" terrain=",8,,8"/>
+  <tile id="525" terrain="8,8,8,8"/>
+  <tile id="526" terrain="8,8,8,8"/>
+  <tile id="527" terrain="8,,8,"/>
+  <tile id="528" terrain=",9,,9">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="529" terrain="9,9,9,9"/>
+  <tile id="530" terrain="9,9,9,9"/>
+  <tile id="531" terrain="9,,9,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="532" terrain=",26,,26">
+   <objectgroup draworder="index">
+    <object id="0" x="5.6875" y="-0.1875" width="6.3125" height="16.125"/>
+   </objectgroup>
+  </tile>
+  <tile id="533" terrain="26,26,26,26"/>
+  <tile id="534" terrain="26,26,26,26"/>
+  <tile id="535" terrain="26,,26,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="-0.25" width="10.75" height="10.3125"/>
+    <object id="0" x="5.6875" y="5.75" width="7.375" height="10.1875"/>
+   </objectgroup>
+  </tile>
+  <tile id="536" terrain="21,20,21,20"/>
+  <tile id="537" terrain="20,20,20,20"/>
+  <tile id="538" terrain="20,20,20,20"/>
+  <tile id="539" terrain="20,21,20,21"/>
+  <tile id="544" terrain="0,7,0,0"/>
+  <tile id="545" terrain="7,7,0,0"/>
+  <tile id="546" terrain="7,7,0,0"/>
+  <tile id="547" terrain="7,0,0,0"/>
+  <tile id="548" terrain="0,14,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="-0.5" width="8.375" height="10.5"/>
+    <object id="0" x="2.25" y="7.3125" width="13.9375" height="7.6875"/>
+   </objectgroup>
+  </tile>
+  <tile id="549" terrain="14,14,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5" y="7.625" width="16.5" height="8.6875"/>
+   </objectgroup>
+  </tile>
+  <tile id="550" terrain="14,14,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.1875" y="9.1875" width="16.125" height="6.75"/>
+   </objectgroup>
+  </tile>
+  <tile id="551" terrain="14,0,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="8.75" y="0.0625" width="6.1875" height="10.1875"/>
+    <object id="0" x="-0.1875" y="7.4375" width="9.25" height="6.75"/>
+    <object id="0" x="7.875" y="8.75" width="6.5" height="5.375"/>
+   </objectgroup>
+  </tile>
+  <tile id="552" terrain="0,4,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.9375" y="-0.5625" width="15.1875" height="15.375"/>
+   </objectgroup>
+  </tile>
+  <tile id="553" terrain="4,4,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="-0.0625" width="16.0625" height="15.0625"/>
+   </objectgroup>
+  </tile>
+  <tile id="554" terrain="4,4,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.3125" y="-0.0625" width="16.3125" height="14.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="555" terrain="4,0,0,0">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="-0.25" width="15.0625" height="15"/>
+   </objectgroup>
+  </tile>
+  <tile id="556" terrain=",8,,"/>
+  <tile id="557" terrain="8,8,,"/>
+  <tile id="558" terrain="8,8,,"/>
+  <tile id="559" terrain="8,,,"/>
+  <tile id="560" terrain=",9,,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="561" terrain="9,9,,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="562" terrain="9,9,,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="563" terrain="9,,,">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="564" terrain=",26,,">
+   <objectgroup draworder="index">
+    <object id="0" x="4.1875" y="-0.4375" width="7.375" height="11.5625"/>
+    <object id="0" x="4.0625" y="7.4375" width="11.8125" height="4.8125"/>
+   </objectgroup>
+  </tile>
+  <tile id="565" terrain="26,26,,">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.8125" y="9.5" width="16.75" height="4.625"/>
+   </objectgroup>
+  </tile>
+  <tile id="566" terrain="26,26,,">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5625" y="9.125" width="16.5" height="4.125"/>
+   </objectgroup>
+  </tile>
+  <tile id="567" terrain="26,,,">
+   <objectgroup draworder="index">
+    <object id="0" x="5.8125" y="0" width="5.5625" height="10.625"/>
+    <object id="0" x="-1" y="5.3125" width="12" height="4.8125"/>
+   </objectgroup>
+  </tile>
+  <tile id="568" terrain="21,20,21,21"/>
+  <tile id="569" terrain="20,20,21,21"/>
+  <tile id="570" terrain="20,20,21,21"/>
+  <tile id="571" terrain="20,21,21,21"/>
+  <tile id="576" terrain="13,13,13,13"/>
+  <tile id="577" terrain="13,13,13,13"/>
+  <tile id="578" terrain="13,13,13,13"/>
+  <tile id="579" terrain="13,13,13,13"/>
+  <tile id="580" terrain="13,,13,"/>
+  <tile id="581" terrain=",13,,13"/>
+  <tile id="582" terrain="13,,,"/>
+  <tile id="583" terrain=",13,,"/>
+  <tile id="584" terrain="13,13,13,15"/>
+  <tile id="585" terrain="13,13,15,13"/>
+  <tile id="586" terrain="13,15,15,15"/>
+  <tile id="587" terrain="15,13,15,15"/>
+  <tile id="588" terrain=",,,12"/>
+  <tile id="590" terrain=",12,12,12"/>
+  <tile id="591" terrain="12,,12,12"/>
+  <tile id="596" terrain=",,,25"/>
+  <tile id="597" terrain=",,25,"/>
+  <tile id="598" terrain=",25,25,25"/>
+  <tile id="599" terrain="25,,25,25"/>
+  <tile id="600" terrain="23,23,23,22"/>
+  <tile id="601" terrain="23,23,22,23"/>
+  <tile id="602" terrain="23,22,22,22"/>
+  <tile id="603" terrain="22,23,22,22"/>
+  <tile id="608" terrain="13,13,13,13"/>
+  <tile id="609" terrain="13,13,13,13"/>
+  <tile id="610" terrain="13,13,13,13"/>
+  <tile id="611" terrain="13,13,13,13"/>
+  <tile id="612" terrain="13,,13,13"/>
+  <tile id="613" terrain=",13,13,13"/>
+  <tile id="614" terrain=",,13,"/>
+  <tile id="615" terrain=",,,13"/>
+  <tile id="616" terrain="13,15,13,13"/>
+  <tile id="617" terrain="15,13,13,13"/>
+  <tile id="618" terrain="15,15,13,15"/>
+  <tile id="619" terrain="15,15,15,13"/>
+  <tile id="620" terrain=",12,,"/>
+  <tile id="622" terrain="12,12,,12"/>
+  <tile id="623" terrain="12,12,12,"/>
+  <tile id="628" terrain=",25,,"/>
+  <tile id="629" terrain="25,,,"/>
+  <tile id="630" terrain="25,25,,25"/>
+  <tile id="631" terrain="25,25,25,"/>
+  <tile id="632" terrain="23,22,23,23"/>
+  <tile id="633" terrain="22,23,23,23"/>
+  <tile id="634" terrain="22,22,23,22"/>
+  <tile id="635" terrain="22,22,22,23"/>
+  <tile id="640" terrain="13,13,13,13"/>
+  <tile id="641" terrain="13,13,13,13"/>
+  <tile id="642" terrain="13,13,13,13"/>
+  <tile id="643" terrain="13,13,13,13"/>
+  <tile id="644" terrain="13,13,13,"/>
+  <tile id="645" terrain="13,13,,"/>
+  <tile id="646" terrain="13,13,,"/>
+  <tile id="647" terrain="13,13,,13"/>
+  <tile id="648" terrain="13,13,13,15"/>
+  <tile id="649" terrain="13,13,15,15"/>
+  <tile id="650" terrain="13,13,15,15"/>
+  <tile id="651" terrain="13,13,15,13"/>
+  <tile id="652" terrain=",,,12"/>
+  <tile id="653" terrain=",,12,12"/>
+  <tile id="654" terrain=",,12,12"/>
+  <tile id="655" terrain=",,12,"/>
+  <tile id="660" terrain=",,,25"/>
+  <tile id="661" terrain=",,25,25"/>
+  <tile id="662" terrain=",,25,25"/>
+  <tile id="663" terrain=",,25,"/>
+  <tile id="664" terrain="23,23,23,22"/>
+  <tile id="665" terrain="23,23,22,22"/>
+  <tile id="666" terrain="23,23,22,22"/>
+  <tile id="667" terrain="23,23,22,23"/>
+  <tile id="672" terrain="13,13,13,13"/>
+  <tile id="673" terrain="13,13,13,13"/>
+  <tile id="674" terrain="13,13,13,13"/>
+  <tile id="675" terrain="13,13,13,13"/>
+  <tile id="676" terrain="13,,13,"/>
+  <tile id="679" terrain=",13,,13"/>
+  <tile id="680" terrain="13,15,13,15"/>
+  <tile id="681" terrain="15,15,15,15"/>
+  <tile id="682" terrain="15,15,15,15"/>
+  <tile id="683" terrain="15,13,15,13"/>
+  <tile id="684" terrain=",12,,12"/>
+  <tile id="685" terrain="12,12,12,12"/>
+  <tile id="686" terrain="12,12,12,12"/>
+  <tile id="687" terrain="12,,12,"/>
+  <tile id="692" terrain=",25,,25"/>
+  <tile id="693" terrain="25,25,25,25"/>
+  <tile id="694" terrain="25,25,25,25"/>
+  <tile id="695" terrain="25,,25,"/>
+  <tile id="696" terrain="23,22,23,22"/>
+  <tile id="697" terrain="22,22,22,22"/>
+  <tile id="698" terrain="22,22,22,22"/>
+  <tile id="699" terrain="22,23,22,23"/>
+  <tile id="704" terrain="13,13,13,13"/>
+  <tile id="705" terrain="13,13,13,13"/>
+  <tile id="706" terrain="13,13,13,13"/>
+  <tile id="707" terrain="13,13,13,13"/>
+  <tile id="708" terrain="13,,13,"/>
+  <tile id="711" terrain=",13,,13"/>
+  <tile id="712" terrain="13,15,13,15"/>
+  <tile id="713" terrain="15,15,15,15"/>
+  <tile id="714" terrain="15,15,15,15"/>
+  <tile id="715" terrain="15,13,15,13"/>
+  <tile id="716" terrain=",12,,12"/>
+  <tile id="717" terrain="12,12,12,12"/>
+  <tile id="718" terrain="12,12,12,12"/>
+  <tile id="719" terrain="12,,12,"/>
+  <tile id="724" terrain=",25,,25"/>
+  <tile id="725" terrain="25,25,25,25"/>
+  <tile id="726" terrain="25,25,25,25"/>
+  <tile id="727" terrain="25,,25,"/>
+  <tile id="728" terrain="23,22,23,22"/>
+  <tile id="729" terrain="22,22,22,22"/>
+  <tile id="730" terrain="22,22,22,22"/>
+  <tile id="731" terrain="22,23,22,23"/>
+  <tile id="736" terrain="13,13,13,13"/>
+  <tile id="737" terrain="13,13,13,13"/>
+  <tile id="738" terrain="13,13,13,13"/>
+  <tile id="739" terrain="13,13,13,13"/>
+  <tile id="740" terrain="13,,13,13"/>
+  <tile id="741" terrain=",,13,13"/>
+  <tile id="742" terrain=",,13,13"/>
+  <tile id="743" terrain=",13,13,13"/>
+  <tile id="744" terrain="13,15,13,13"/>
+  <tile id="745" terrain="15,15,13,13"/>
+  <tile id="746" terrain="15,15,13,13"/>
+  <tile id="747" terrain="15,13,13,13"/>
+  <tile id="748" terrain=",12,,"/>
+  <tile id="749" terrain="12,12,,"/>
+  <tile id="750" terrain="12,12,,"/>
+  <tile id="751" terrain="12,,,"/>
+  <tile id="756" terrain=",25,,"/>
+  <tile id="757" terrain="25,25,,"/>
+  <tile id="758" terrain="25,25,,"/>
+  <tile id="759" terrain="25,,,"/>
+  <tile id="760" terrain="23,22,23,23"/>
+  <tile id="761" terrain="22,22,23,23"/>
+  <tile id="762" terrain="22,22,23,23"/>
+  <tile id="763" terrain="22,23,23,23"/>
+ </tileset>
+ <tileset firstgid="769" source="tileb.tsx"/>
+ <tileset firstgid="1025" source="objects.tsx"/>
+ <tileset firstgid="1153" name="tree" tilewidth="16" tileheight="16">
+  <image source="maps/trees.png" width="128" height="192"/>
+ </tileset>
+ <tileset firstgid="1249" name="characters" tilewidth="32" tileheight="32">
+  <image source="images/characters.png" width="512" height="512"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="yumiko-stand1"/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="name" value="stone-stand"/>
+   </properties>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="name" value="stone-blink"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="ground1" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer name="ground2" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJzt201PGzEQxvFI8P2/RYFLWy60XPreC6EXChdoP0wHRZX6kt31rL322M//J1nKAWWNPfZ4nGS3AwDU9Ol0t/ts7Yu1r6ete4PabmzO99ZurX1j/uXc2Zx/t3Zv7YH5l/Noc/5k7Ye1n8w/AMCJOkIbdYQ26ghtKnUEeU4beU4beU6bSp4bHXlcG3lcG3lcG3k8DXlSG3lSG3lSW608SZ7RRp7RRp7RRj0GYAScZeNoMRecZeNoMRecZeNoMRecZeNgLgAAAAAAAPrGZy3aWtzvE3NxtLjf5/O9OFrc79eIOfaYuGrEHHuMNr5DoI3PrQ/Ig9rIg9rIg9rIg/WRc7Wp5lzi/kA156rG/b88OXekNaMa9zlGWjOcNf1YM9pYMwAAAADgN9JdGvxGukuDH3dp2rhLQ284s2jjzKKN30Jp47dQ2Bp1kTbqor+RD7WRD7WRD7VtnQ/JL9rIL9rIL9qotzAqzjbaONto42yjjbMNAADL9iete3AcdZw26rg6niqtf+96po5rvweWzA3e9UwdN9YeyHr2az1mJXMD69mPMQMAAEBNz/V/6zsItDXSHQT+N3fH91z/t76DQFvcQYyt1uc/APoT9fshc6hZtEWtWXqMyx7PB1FrlqhxOZqoNUvUuEQdUeOyxzMegDLmznjsDYCuHus/ADG9sLrnzNq5tYtANVDPIo7pVJ9e2utX1l5buwzS16hS5zXimE716cpev7H21tp1kL5GlTqvEcd0qk/v7PV7ax+sfTzS19p7WcS987fUeV0a0yVbjMHaPq3Zy3L6731eybFaeq/ceU2VMga11smavSwn/3mfVzLXbpW3vXOVMgal+zrVxzUxP9X/lHHwPs8TL0vPz8nbc+/tnauUMfD2del/LxlPU/3PeUaJ+Fx6fs7+PvfeW8TVsb7mxGDJdTQlZxxKxOeW5/K5956Lq5LrMicGS66jKTnrK3Xu5sbT+3xPnG91vvbE7NoY9GpR36b2v4fz4J9KrkvP3/4CKx9uwQ==
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="27" name="start_position" gid="850" x="160" y="224" width="32" height="32"/>
+  <object id="197" name="Portal1" gid="1027" x="144" y="1248">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec1&quot;)"/>
+   </properties>
+  </object>
+  <object id="198" name="Portal2" gid="1027" x="576" y="1120">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec2&quot;)"/>
+   </properties>
+  </object>
+  <object id="199" name="Portal4" gid="1027" x="1312" y="208">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec4&quot;)"/>
+   </properties>
+  </object>
+  <object id="200" name="Portal5" gid="1027" x="944" y="576">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec2&quot;)"/>
+   </properties>
+  </object>
+  <object id="201" name="Portal6" gid="1027" x="688" y="800">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec1&quot;)"/>
+   </properties>
+  </object>
+  <object id="202" name="Portal7" gid="1027" x="1136" y="1264">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec5&quot;)"/>
+   </properties>
+  </object>
+  <object id="203" name="Portal8" gid="1027" x="192" y="1696">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec2&quot;)"/>
+   </properties>
+  </object>
+  <object id="204" name="Portal9" gid="1027" x="544" y="1760">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec5&quot;)"/>
+   </properties>
+  </object>
+  <object id="205" name="Portal10" gid="1027" x="1552" y="256">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;sec5&quot;)"/>
+   </properties>
+  </object>
+  <object id="206" name="Portal11" gid="1027" x="1824" y="272">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;end thing&quot;)"/>
+   </properties>
+  </object>
+  <object id="207" name="PortalToStart" gid="1027" x="1136" y="1760">
+   <properties>
+    <property name="OnCollision" value="TeleportToObject(&quot;start&quot;)"/>
+   </properties>
+  </object>
+  <object id="209" name="sec1" gid="1029" x="704" y="448"/>
+  <object id="210" name="sec3" gid="1029" x="1168" y="1520"/>
+  <object id="211" name="sec2" gid="1029" x="640" y="1328"/>
+  <object id="212" name="sec4" gid="1029" x="1232" y="944"/>
+  <object id="213" name="sec5" gid="1029" x="1440" y="1120"/>
+  <object id="214" name="end thing" gid="1029" x="1680" y="912"/>
+  <object id="216" name="END" gid="1030" x="1712" y="1808">
+   <properties>
+    <property name="Animate" value="true"/>
+    <property name="AnimationSpeed" value="1"/>
+    <property name="Frame1" value="portal-blue"/>
+    <property name="Frame2" value="portal-green"/>
+    <property name="Frame3" value="portal-red"/>
+    <property name="OnCollision" value="NextMap()"/>
+   </properties>
+  </object>
+  <object id="217" name="start" gid="850" x="160" y="224"/>
+  <object id="219" gid="851" x="1584" y="960"/>
+  <object id="220" gid="851" x="48" y="640"/>
+  <object id="221" gid="851" x="912" y="304"/>
+  <object id="224" gid="851" x="2000" y="1744"/>
+  <object id="225" gid="851" x="1920" y="1296"/>
+  <object id="226" gid="852" x="528" y="656"/>
+  <object id="227" gid="852" x="304" y="128"/>
+  <object id="228" gid="852" x="272" y="48"/>
+  <object id="229" gid="852" x="512" y="48"/>
+  <object id="230" gid="852" x="640" y="32"/>
+  <object id="231" gid="852" x="1024" y="48"/>
+  <object id="232" gid="852" x="1744" y="64"/>
+  <object id="233" gid="852" x="1984" y="80"/>
+  <object id="234" gid="852" x="2000" y="384"/>
+  <object id="235" gid="852" x="1920" y="624"/>
+  <object id="236" gid="852" x="1680" y="784"/>
+  <object id="237" gid="851" x="1184" y="32"/>
+  <object id="238" gid="851" x="944" y="48"/>
+  <object id="239" gid="851" x="720" y="48"/>
+  <object id="240" gid="851" x="688" y="96"/>
+  <object id="241" gid="851" x="1040" y="96"/>
+  <object id="242" gid="851" x="1216" y="272"/>
+  <object id="243" gid="851" x="1424" y="64"/>
+  <object id="244" gid="851" x="1696" y="16"/>
+  <object id="246" name="Rock" gid="918" x="1584" y="592">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="248" name="Rock" gid="918" x="1024" y="496">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="249" name="Rock" gid="918" x="672" y="320">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="250" name="Rock" gid="918" x="496" y="608">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="251" name="Rock" gid="918" x="48" y="944">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="252" name="Rock" gid="918" x="1520" y="1728">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="253" name="Rock" gid="918" x="1712" y="720">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="254" name="Rock" gid="918" x="1744" y="224">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="255" name="Rock" gid="918" x="1920" y="1488">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="256" name="Rock" gid="918" x="48" y="768">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="257" name="Rock" gid="918" x="288" y="320">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="258" name="Rock" gid="918" x="32" y="1600">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="259" name="Rock" gid="918" x="48" y="1696">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="260" name="Rock" gid="918" x="112" y="1360">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="261" name="Rock" gid="918" x="400" y="1232">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="262" name="Rock" gid="918" x="448" y="896">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="263" name="Rock" gid="918" x="272" y="816">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="264" name="Rock" gid="918" x="160" y="448">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="265" name="Rock" gid="918" x="144" y="592">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="266" name="Rock" gid="918" x="16" y="480">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="267" name="Rock" gid="918" x="1104" y="96">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="268" name="Rock" gid="918" x="1600" y="96">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="269" name="Rock" gid="918" x="2016" y="976">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="270" name="Rock" gid="918" x="2016" y="688">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="271" name="Rock" gid="918" x="1792" y="1216">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="273" name="Rock" gid="918" x="1392" y="1632">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="274" name="Rock" gid="918" x="368" y="1488">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="275" name="Rock" gid="918" x="880" y="864">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="276" name="Rock" gid="918" x="640" y="896">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="277" name="Rock" gid="918" x="672" y="496">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="278" name="Rock" gid="918" x="1216" y="496">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="281" name="Rock" gid="918" x="1632" y="1856">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="282" name="Rock" gid="918" x="1712" y="1856">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="283" name="Rock" gid="918" x="1616" y="1792">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="284" name="Rock" gid="918" x="1632" y="1728">
+   <properties>
+    <property name="OnCollision" value="PreventMove()"/>
+   </properties>
+  </object>
+  <object id="285" name="soldier" gid="1297" x="1632" y="1536">
+   <properties>
+    <property name="Animate" value="true"/>
+    <property name="AnimationSpeed" value="10"/>
+    <property name="Frame1" value="stone-stand"/>
+    <property name="Frame2" value="stone-stand"/>
+    <property name="Frame3" value="stone-stand"/>
+    <property name="Frame4" value="stone-stand"/>
+    <property name="Frame5" value="stone-stand"/>
+    <property name="Frame6" value="stone-blink"/>
+   </properties>
+  </object>
+  <object id="289" name="soldier" gid="1297" x="1760" y="1744">
+   <properties>
+    <property name="Animate" value="true"/>
+    <property name="AnimationSpeed" value="10"/>
+    <property name="Frame1" value="stone-stand"/>
+    <property name="Frame2" value="stone-stand"/>
+    <property name="Frame3" value="stone-stand"/>
+    <property name="Frame4" value="stone-stand"/>
+    <property name="Frame5" value="stone-stand"/>
+    <property name="Frame6" value="stone-blink"/>
+   </properties>
+  </object>
+  <object id="290" name="soldier" gid="1297" x="1632" y="16">
+   <properties>
+    <property name="Animate" value="true"/>
+    <property name="AnimationSpeed" value="10"/>
+    <property name="Frame1" value="stone-stand"/>
+    <property name="Frame2" value="stone-stand"/>
+    <property name="Frame3" value="stone-stand"/>
+    <property name="Frame4" value="stone-stand"/>
+    <property name="Frame5" value="stone-stand"/>
+    <property name="Frame6" value="stone-blink"/>
+   </properties>
+  </object>
+  <object id="291" name="Guy" gid="1281" x="128" y="624">
+   <properties>
+    <property name="OnAnimate">dist = math.sqrt(((animatedObject.px - engine.playerPos[0]) * (animatedObject.px - engine.playerPos[0])) + ((animatedObject.py - engine.playerPos[1]) * (animatedObject.py - engine.playerPos[1])))
+
+if dist &lt; 384:
+    animatedObject.px -= 4</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="overlay" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB
+  </data>
+ </layer>
+</map>
