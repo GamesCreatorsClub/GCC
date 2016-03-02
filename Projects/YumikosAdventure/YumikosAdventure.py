@@ -15,8 +15,9 @@ collidedObject = None
 collidedTile = None
 collidedCell = None
 clickedObject = None
+createdObject = None
 
-map_names = ["start.tmx", "example-map.tmx", "drylands.tmx","Jamesmap (goblin_forest).tmx"]
+map_names = ["start.tmx", "example-map.tmx", "drylands.tmx", "Jamesmap (goblin_forest).tmx"]
 map_index = 0
 current_map = map_names[map_index]
 
@@ -191,7 +192,9 @@ def MoveObjectTowards(gameObject, speed):
     else:
         gameObject.py = engine.playerCollideRect.y
 
-
+def RecordPosition(gameObject):
+    gameObject.properties['startx'] = gameObject.px
+    gameObject.properties['starty'] = gameObject.py
 
 def DistanceFromPlayer(gameObject):
     py1 = engine.playerCollideRect.top

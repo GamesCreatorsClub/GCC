@@ -147,6 +147,7 @@ def processOnCreate(layer):
     tiles = layer.find("OnCreate")
     for t in tiles:
         onCreate = t.properties["OnCreate"]
+        game.createdObject = t
         game.execute(onCreate)
 
 
