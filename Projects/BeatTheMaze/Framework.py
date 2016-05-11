@@ -98,6 +98,25 @@ level5 = [
 level6 = [
 "                                ",
 "                                ",
+"              o                 ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"          #########             ",
+"                                ",
+"                                ",
+"                                ",
+"              x                 ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+]
+
+level7 = [
+"                                ",
+"                                ",
 "                                ",
 "                                ",
 "                                ",
@@ -114,7 +133,7 @@ level6 = [
 "                                ",
 ]
 
-level7 = [
+level8 = [
 "                                ",
 "                                ",
 "                                ",
@@ -133,7 +152,7 @@ level7 = [
 "                                ",
 ]
 
-level8 = [
+level9 = [
 "                                ",
 "                                ",
 "                                ",
@@ -152,7 +171,7 @@ level8 = [
 "                                ",
 ]
 
-level9 = [
+level10 = [
 "                                ",
 "                                ",
 "                                ",
@@ -171,7 +190,7 @@ level9 = [
 "                                ",
 ]
 
-level10 = [
+level11 = [
 "                                ",
 "                                ",
 "       #############            ",
@@ -190,7 +209,7 @@ level10 = [
 "                                ",
 ]
 
-levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10]
+levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11]
 level = 0
 
 Left = [-1, 0]
@@ -205,6 +224,7 @@ level_exit = None
 update_player = None
 CELL_WIDTH = 0
 CELL_HEIGHT = 0
+speed_up = 1
 keys = []
 return_pressed = False
 
@@ -246,15 +266,25 @@ def init(updatePlayer):
     createMap(level1, player, level_exit)
 
 
-def exit_pos():
+def exitPos():
     global level_exit, CELL_WIDTH, CELL_HEIGHT
-    return [level_exit["rect"].x / CELL_WIDTH, level_exit["rect"].y / CELL_HEIGHT]
+    return pygame.Rect(level_exit["rect"].x / CELL_WIDTH, level_exit["rect"].y / CELL_HEIGHT, 1, 1)
 
-def player_pos():
+def playerPos():
     global player, CELL_WIDTH, CELL_HEIGHT
-    return [player["rect"].x / CELL_WIDTH, player["rect"].y / CELL_HEIGHT]
+    return pygame.Rect(player["rect"].x / CELL_WIDTH, player["rect"].y / CELL_HEIGHT, 1, 1)
 
-def maze(x, y):
+def map(direction):
+    global levels, level
+
+    player_pos = playerPos().move(direction)
+
+    map = levels[level]
+    line = map[player_pos.y]
+
+    return not line[player_pos.x] == '#'
+
+def mapAt(x, y):
     global levels, level
 
     map = levels[level]
@@ -354,7 +384,7 @@ def drawScreen():
 
 
 def mainLoop():
-    global player, game_state, level_exit, levels, level
+    global player, game_state, level_exit, levels, level, speed_up
     global CELL_WIDTH, CELL_HEIGHT, screen_rect, keys
 
     # === Main Game Loop ===
@@ -415,7 +445,7 @@ def mainLoop():
 
         elif game_state == 4:
             player_rect = player["rect"]
-            for i in range(0, player["speed"] * 4):
+            for i in range(0, player["speed"] * speed_up):
                 player_rect = player_rect.move(direction)
             if player_rect.collidelist(walls) == -1:
                 player["rect"] = player_rect

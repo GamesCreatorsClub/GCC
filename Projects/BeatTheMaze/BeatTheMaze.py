@@ -1,11 +1,11 @@
 import framework
 from framework import Left, Right, Up, Down
-
+from framework import playerPos, exitPos, map
 
 
 def nextPlayerPosition():
-    player = framework.player_pos()
-    exit = framework.exit_pos()
+    player = playerPos()
+    exit = exitPos()
 
     # Logic to move player around the map goes here
 
