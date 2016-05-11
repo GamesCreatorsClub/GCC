@@ -246,9 +246,21 @@ def init(updatePlayer):
     createMap(level1, player, level_exit)
 
 
-def exit():
-    global level_exit
-    return [level_exit[0] / CELL_WIDTH, level_exit[1] / CELL_HEIGHT]
+def exit_pos():
+    global level_exit, CELL_WIDTH, CELL_HEIGHT
+    return [level_exit["rect"].x / CELL_WIDTH, level_exit["rect"].y / CELL_HEIGHT]
+
+def player_pos():
+    global player, CELL_WIDTH, CELL_HEIGHT
+    return [player["rect"].x / CELL_WIDTH, player["rect"].y / CELL_HEIGHT]
+
+def maze(x, y):
+    global levels, level
+
+    map = levels[level]
+    line = map[y]
+
+    return not line[x] == ' '
 
 def drawPlayer(player):
     screen.blit(player['image'], player['rect'])
@@ -354,6 +366,9 @@ def mainLoop():
                 sys.exit()
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit()
 
         if game_state == 0:
             player_rect = player["rect"]
@@ -371,9 +386,6 @@ def mainLoop():
                 elif keys[pygame.K_RETURN]:
                     game_state = 4
                     direction = update_player()
-                elif keys[pygame.K_ESCAPE]:
-                    pygame.quit()
-                    sys.exit()
         elif game_state == 1:
             clearScreen("DarkOliveGreen")
             if level >= len(levels):
@@ -394,7 +406,8 @@ def mainLoop():
             player_rect = player["rect"]
             for i in range(0, player["speed"]):
                 player_rect = player_rect.move(direction)
-            player["rect"] = player_rect
+            if player_rect.collidelist(walls) == -1:
+                player["rect"] = player_rect
             if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
                 game_state = 0
             else:
@@ -404,7 +417,8 @@ def mainLoop():
             player_rect = player["rect"]
             for i in range(0, player["speed"] * 4):
                 player_rect = player_rect.move(direction)
-            player["rect"] = player_rect
+            if player_rect.collidelist(walls) == -1:
+                player["rect"] = player_rect
             if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
                 if player_rect.colliderect(level_exit['rect']):
                     level = level + 1
