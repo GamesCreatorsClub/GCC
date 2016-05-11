@@ -73,6 +73,10 @@ def Init(screenSize, game_pointer):
     last_mouse_click_pos = [-1, -1]
     tilesByName = {}
 
+    font_Small = pygame.font.SysFont("Arial", 12)
+    font_Medium = pygame.font.SysFont("Arial", 24)
+    font_Large = pygame.font.SysFont("Arial", 48)
+
 
 def setupPlayer(playerPosition):
     global player, playerPos, nextPlayerPos, playerCollideRect, nextPlayerCollideRect
@@ -482,6 +486,25 @@ def printText(msg):
     textLinesTimeout.append(DEFAULT_TEXT_TIMEOUT)
     textLastText = msg
 
+
+
+def Text_Small(text,position,colour):
+    text = str(text)
+    font_colour = pygame.Color(colour)
+    rendered_text = font_Small.render(text, 1, font_colour).convert_alpha()
+    screen.blit(rendered_text, position)
+    
+def Text_Medium(text,position,colour):
+    text = str(text)
+    font_colour = pygame.Color(colour)
+    rendered_text = font_Medium.render(text, 1, font_colour).convert_alpha()
+    screen.blit(rendered_text, position)
+    
+def Text_Large(text,position,colour):
+    text = str(text)
+    font_colour = pygame.Color(colour)
+    rendered_text = font_Large.render(text, 1, font_colour).convert_alpha()
+    screen.blit(rendered_text, position)
 
 def DrawScreen():
     global screen

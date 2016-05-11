@@ -100,13 +100,13 @@ def Map(name):
 def AddCoins(amount):
     global coins
 
-    coins = coins + 1
+    coins = coins + amount
 
 
 def RemoveCoins(amount):
     global coins
 
-    coins = coins - 1
+    coins = coins - amount
     if coins < 0:
         coins = 0
 
@@ -182,15 +182,15 @@ def MoveObjectTowards(gameObject, speed):
         gameObject.px -= speed
     elif engine.playerCollideRect.left > gameObject.px + gameObject.width:
         gameObject.px += speed
-    else:
-        gameObject.px = engine.playerCollideRect.x
+##    else:
+##        gameObject.px = engine.playerCollideRect.x
 
     if engine.playerCollideRect.bottom < gameObject.py:
         gameObject.py -= speed
     elif engine.playerCollideRect.top > gameObject.py + gameObject.height:
         gameObject.py += speed
-    else:
-        gameObject.py = engine.playerCollideRect.y
+##    else:
+##        gameObject.py = engine.playerCollideRect.y
 
 def RecordPosition(gameObject):
     gameObject.properties['startx'] = gameObject.px
@@ -211,6 +211,15 @@ def DistanceBetweenObjects(gameObject1, gameObject2):
 
 def Distance(x1, y1, x2, y2):
     return math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
+
+def DrawText_S(text,position,colour):
+        engine.Text_Small(text,position,colour)
+        
+def DrawText_M(text,position,colour):
+        engine.Text_Medium(text,position,colour)
+        
+def DrawText_L(text,position,colour):
+        engine.Text_Large(text,position,colour)
 
 
 # --------- Important stuff - don't remove ----------------------------------------------------------------
