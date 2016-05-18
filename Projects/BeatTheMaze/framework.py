@@ -227,6 +227,8 @@ CELL_HEIGHT = 0
 speed_up = 1
 keys = []
 return_pressed = False
+score = 0
+moves = 0
 
 def init(updatePlayer):
     global wall_sprite, CELL_WIDTH, CELL_HEIGHT, screen
@@ -385,7 +387,7 @@ def drawScreen():
 
 def mainLoop():
     global player, game_state, level_exit, levels, level, speed_up
-    global CELL_WIDTH, CELL_HEIGHT, screen_rect, keys
+    global CELL_WIDTH, CELL_HEIGHT, screen_rect, keys, score, moves
 
     # === Main Game Loop ===
     while True:
@@ -436,6 +438,8 @@ def mainLoop():
             player_rect = player["rect"]
             for i in range(0, player["speed"]):
                 player_rect = player_rect.move(direction)
+            if moves > 1024:
+                game_state = 2
             if player_rect.collidelist(walls) == -1:
                 player["rect"] = player_rect
             if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
@@ -447,10 +451,14 @@ def mainLoop():
             player_rect = player["rect"]
             for i in range(0, player["speed"] * speed_up):
                 player_rect = player_rect.move(direction)
+            moves = moves + 1
+            if moves > 1024:
+                game_state = 2
             if player_rect.collidelist(walls) == -1:
                 player["rect"] = player_rect
             if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
                 if player_rect.colliderect(level_exit['rect']):
+                    score = score + level * 100 - int(moves / 10)
                     level = level + 1
                     game_state = 1
                 elif not player_rect.colliderect(screen_rect):
@@ -460,6 +468,8 @@ def mainLoop():
             else:
                 drawScreen()
 
+        drawSmallText("Score: " + str(score), (11, 21), "Black")
+        drawSmallText("Score: " + str(score), (10, 20), "White")
         pygame.display.flip()
         # End of the game loop
 
