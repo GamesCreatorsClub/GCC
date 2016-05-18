@@ -229,6 +229,7 @@ keys = []
 return_pressed = False
 score = 0
 moves = 0
+automatic = False
 
 def init(updatePlayer):
     global wall_sprite, CELL_WIDTH, CELL_HEIGHT, screen
@@ -384,10 +385,18 @@ def drawScreen():
     # Exit
     screen.blit(level_exit['image'], level_exit['rect'])
 
+STATE_MAIN = 0
+STATE_MOVE = 1
+STATE_MOVING = 2
+STATE_WIN = 3
+STATE_LOSE = 4
+
 
 def mainLoop():
     global player, game_state, level_exit, levels, level, speed_up
     global CELL_WIDTH, CELL_HEIGHT, screen_rect, keys, score, moves
+    global automatic
+    global STATE_MAIN, STATE_MOVE, STATE_MOVING, STATE_WIN, STATE_LOSE
 
     # === Main Game Loop ===
     while True:
@@ -402,74 +411,80 @@ def mainLoop():
             pygame.quit()
             sys.exit()
 
-        if game_state == 0:
-            player_rect = player["rect"]
-            # Check if we have reached the exit or hit enemy
-            if player_rect.colliderect(level_exit['rect']):
-                level = level + 1
-                game_state = 1
-            elif not player_rect.colliderect(screen_rect):
-                game_state = 2
+        if game_state == STATE_MAIN:
+            automatic = False
+            if keys[pygame.K_SPACE]:
+                automatic = False
+                direction = update_player()
+                game_state = STATE_MOVE
+            elif keys[pygame.K_RETURN]:
+                automatic = True
+                direction = update_player()
+                game_state = STATE_MOVE
             else:
                 drawScreen()
-                if keys[pygame.K_SPACE]:
-                    game_state = 3
-                    direction = update_player()
-                elif keys[pygame.K_RETURN]:
-                    game_state = 4
-                    direction = update_player()
-        elif game_state == 1:
-            clearScreen("DarkOliveGreen")
-            if level >= len(levels):
-                drawLargeText("Congratulations! You Made It!", (100, 100), "Green")
-            else:
-                drawLargeText("You Made Through Level!", (110, 100), "Green")
-                drawLargeText("Press Enter for next level", (110, 140), "Green")
-                createMap(levels[level], player, level_exit)
-                checkForResetGame(player)
 
-        elif game_state == 2:
-            level = 0
-            clearScreen("FireBrick")
-            drawLargeText("Oh No - You Lose!", (90, 100), "Red")
-            checkForResetGame(player)
 
-        elif game_state == 3:
-            player_rect = player["rect"]
-            for i in range(0, player["speed"]):
-                player_rect = player_rect.move(direction)
+        if game_state == STATE_MOVE:
+            moves = moves + 1
             if moves > 1024:
-                game_state = 2
-            if player_rect.collidelist(walls) == -1:
-                player["rect"] = player_rect
-            if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
-                game_state = 0
+                game_state = STATE_LOSE
             else:
-                drawScreen()
+                direction = update_player()
+                game_state = STATE_MOVING
 
-        elif game_state == 4:
+
+        if game_state == STATE_MOVING:
             player_rect = player["rect"]
             for i in range(0, player["speed"] * speed_up):
                 player_rect = player_rect.move(direction)
-            moves = moves + 1
-            if moves > 1024:
-                game_state = 2
-            if player_rect.collidelist(walls) == -1:
+
+            if player_rect.colliderect(level_exit['rect']):
                 player["rect"] = player_rect
-            if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
-                if player_rect.colliderect(level_exit['rect']):
-                    score = score + level * 100 - int(moves / 10)
-                    level = level + 1
-                    game_state = 1
-                elif not player_rect.colliderect(screen_rect):
-                    game_state = 2
-                else:
-                    direction = update_player()
+
+                level = level + 1
+                deduct = int(moves / 10) -1
+                if deduct < 0:
+                    deduct = 0
+                score = score + 100 - deduct
+                moves = 0
+                game_state = STATE_WIN
+
+            elif not player_rect.colliderect(screen_rect):
+                game_state = STATE_LOSE
+            elif player_rect.collidelist(walls) != -1:
+                player_rect = player["rect"]
+                drawScreen()
             else:
+                player["rect"] = player_rect
                 drawScreen()
 
-        drawSmallText("Score: " + str(score), (11, 21), "Black")
-        drawSmallText("Score: " + str(score), (10, 20), "White")
+            if player_rect.x % CELL_WIDTH == 0 and player_rect.y % CELL_HEIGHT == 0:
+                if not automatic:
+                    game_state = STATE_MAIN
+                else:
+                    game_state = STATE_MOVE
+
+        if game_state == STATE_WIN:
+            clearScreen("DarkOliveGreen")
+            if level >= len(levels):
+                drawLargeText("Congratulations! You made tt!", (260, 200), "Green")
+            else:
+                drawLargeText("You made through the level!", (260, 200), "Green")
+                drawLargeText("Press Enter for the next level", (260, 240), "Green")
+                createMap(levels[level], player, level_exit)
+                checkForResetGame(player)
+
+        if game_state == STATE_LOSE:
+            level = 0
+            moves = 0
+            automatic = False
+            clearScreen("FireBrick")
+            drawLargeText("Oh No - You Lose!", (350, 220), "Red")
+            checkForResetGame(player)
+
+        drawLargeText("Score: " + str(score), (11, 21), "Black")
+        drawLargeText("Score: " + str(score), (10, 20), "White")
         pygame.display.flip()
         # End of the game loop
 
