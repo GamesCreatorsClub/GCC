@@ -250,6 +250,7 @@ score = 0
 moves = 0
 automatic = False
 breadcrumbs = []
+keys = []
 
 def init(updatePlayer):
     global wall_sprite, CELL_WIDTH, CELL_HEIGHT, screen
@@ -508,7 +509,7 @@ STATE_LOSE = 4
 def mainLoop():
     global player, game_state, level_exit, levels, level, speed_up
     global CELL_WIDTH, CELL_HEIGHT, screen_rect, keys, score, moves
-    global automatic
+    global automatic, keys
     global STATE_MAIN, STATE_MOVE, STATE_MOVING, STATE_WIN, STATE_LOSE
 
     cheating = False
@@ -543,14 +544,14 @@ def mainLoop():
 
 
         if game_state == STATE_MOVE:
-            moves = moves + 1
+            #moves = moves + 1
             if moves > 1024:
                 game_state = STATE_LOSE
             else:
                 direction = update_player()
                 game_state = STATE_MOVING
                 if direction == None:
-                    game_state = STATE_MAIN
+                    game_state = STATE_MOVE
                 else:
                     step = direction[0] + direction[1]
                     if step != 1 and step != -1:
