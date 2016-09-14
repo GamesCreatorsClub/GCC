@@ -40,11 +40,42 @@ def nextPlayerPosition():
     # Logic to move player around the map goes here:
 
 
+    breadcrumb = currentBreadcrumb()
+    if breadcrumb == None:
+        if map(Right) and not hasVisited(Right):
+            addBreadcrumb(Right)
+            return Right
 
+        originalDirection = Right
+        lastDirection = Right
+        nextDirection = turn(lastDirection)
+    else:
+        originalDirection = breadcrumb[3]
+        lastDirection = breadcrumb[2]
+        nextDirection = turn(lastDirection)
+
+    while nextDirection != originalDirection:
+        if map(nextDirection) and not hasVisited(nextDirection):
+            if breadcrumb == None:
+                addBreadcrumb(nextDirection)
+            else:
+                breadcrumb[2] = nextDirection
+            return nextDirection
+        nextDirection = turn(nextDirection)
 
     # And this is result of our computation
-    return Left
+    return goBack()
 
+
+def turn(direction):
+    if direction == Down:
+        return Left
+    if direction == Left:
+        return Up
+    if direction == Up:
+        return Right
+
+    return Down
 
 
 framework.init(nextPlayerPosition)
