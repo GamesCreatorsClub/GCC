@@ -1,9 +1,10 @@
-import framework
+import framework, pygame
 from framework import Left, Right, Up, Down
-from framework import playerPos, exitPos, map, mapAt
+from framework import playerPos, exitPos, map, mapAt, keys
 from framework import lastBreadcrumb, goBack, currentBreadcrumb, hasVisited, addBreadcrumb
 
 def nextPlayerPosition():
+
     player = playerPos()
     exit = exitPos()
 
@@ -38,33 +39,10 @@ def nextPlayerPosition():
     # If player moves twice more time than there are squares on the map it is game over
 
     # Logic to move player around the map goes here:
+    if player.x < exit.x:
+        return Right
 
-
-    breadcrumb = currentBreadcrumb()
-    if breadcrumb == None:
-        if map(Right) and not hasVisited(Right):
-            addBreadcrumb(Right)
-            return Right
-
-        originalDirection = Right
-        lastDirection = Right
-        nextDirection = turn(lastDirection)
-    else:
-        originalDirection = breadcrumb[3]
-        lastDirection = breadcrumb[2]
-        nextDirection = turn(lastDirection)
-
-    while nextDirection != originalDirection:
-        if map(nextDirection) and not hasVisited(nextDirection):
-            if breadcrumb == None:
-                addBreadcrumb(nextDirection)
-            else:
-                breadcrumb[2] = nextDirection
-            return nextDirection
-        nextDirection = turn(nextDirection)
-
-    # And this is result of our computation
-    return goBack()
+    return Left
 
 
 def turn(direction):
