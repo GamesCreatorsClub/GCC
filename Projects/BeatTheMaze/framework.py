@@ -209,8 +209,27 @@ level11 = [
 "                                ",
 ]
 
-levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11]
-level = 0
+level12 = [
+"                                ",
+"     #######################    ",
+"     #               #     #    ",
+"     # ############# # ### #    ",
+"     # #           # ##### #    ",
+"     # # ######### #       #    ",
+"     # #         # # #######    ",
+"     # ######### # #     x #    ",
+"     #           #o#########    ",
+"     # ######### # # #     #    ",
+"     # #         # # # ### #    ",
+"     # #  ######## # # # # #    ",
+"     # #           # # # # #    ",
+"     # ############# # # # #    ",
+"     #                 #   #    ",
+"     #######################    ",
+]
+
+levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11, level12]
+level = 11
 
 Left = [-1, 0]
 Right = [1, 0]
@@ -250,8 +269,10 @@ def init(updatePlayer):
     CELL_WIDTH = wall_sprite.get_width()
     CELL_HEIGHT = wall_sprite.get_height()
 
+    selectedLevel = levels[level]
+
     # Global Game Data
-    screen = pygame.display.set_mode((len(level1[0]) * CELL_WIDTH, len(level1) * CELL_HEIGHT))
+    screen = pygame.display.set_mode((len(selectedLevel[0]) * CELL_WIDTH, len(selectedLevel) * CELL_HEIGHT))
 
     screen_rect = pygame.Rect(-1, -1, screen.get_width(), screen.get_height())
 
@@ -272,7 +293,7 @@ def init(updatePlayer):
 
 
     initFonts()
-    createMap(level1, player, level_exit)
+    createMap(selectedLevel, player, level_exit)
 
 
 def exitPos():
