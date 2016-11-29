@@ -3,8 +3,18 @@
 import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 import time
+import movement
 import re
 
+
+def moveServo(servoid, angle):
+    f = open("/dev/servoblaster", 'w')
+    f.write(str(servoid) + "=" + str(angle) + "\n")
+    f.close()
+    print("moved servo " + str(servoid) + " to " + str(angle))
+
+
+movement.init(moveServo)
 
 GPIO.setmode(GPIO.BCM)
 
@@ -32,18 +42,9 @@ sbscribedservos = [0, 1, 2, 3, 4, 5, 6, 7]
 
 servoRegex = re.compile("robot/servo/(\d)")
 
-DELAY = 0.15
-FORWARD1 = 160
-FORWARD2 = 180
-FORWARD3 = 200
-BACK1 = 145
-BACK2 = 125
-BACK3 = 105
-STOP = 155
-FORWARD = FORWARD3
-BACK = BACK3
 
-straight = True
+
+
 count = 0
 
 def onConnect(client, data, rc):
@@ -51,12 +52,6 @@ def onConnect(client, data, rc):
     client.subscribe("robot/servo/#")
 
 
-def moveServo(servoid, angle):
-   f = open("/dev/servoblaster", 'w')
-   f.write(str(servoid) + "=" + str(angle) + "\n")
-   f.close()
-   print("moved servo " + str(servoid) +  " to " + str(angle))
-   
 def onMessage(client, data, msg):
     payload = str(msg.payload, 'utf-8')
 
@@ -76,21 +71,29 @@ def onMessage(client, data, msg):
         else:
             args1 = 0
         if command_name == "forward":
-            moveMotors(int(args1))
+            movement.moveMotors(int(args1))
         elif command_name == "back":
-            moveMotors(-int(args1))
+            movement.moveMotors(-int(args1))
         elif command_name == "align":
-            straightenWheels()
+            movement.straightenWheels()
         elif command_name == "slant":
-            slantWheels()
+            movement.slantWheels()
         elif command_name == "rotate":
-            turnOnSpot(int(args1))
-        elif command_name == "left":
-            turnOnSpot(-int(args1))
-        elif command_name == "right":
-            turnOnSpot(int(args1))
+            movement.turnOnSpot(int(args1))
+        elif command_name == "pivotLeft":
+            movement.turnOnSpot(-int(args1))
+        elif command_name == "pivotRight":
+            movement.turnOnSpot(int(args1))
         elif command_name == "stop":
-            stopAllWheels()
+            movement.stopAllWheels()
+        elif command_name == "sideways":
+            movement.sidewaysWheels()
+        elif command_name == "crabLeft":
+            movement.crabAlong(-int(args1))
+        elif command_name == "crabRight":
+            movement.crabAlong(int(args1))
+        elif command_name == "moveServo":
+            moveServo(int(command_args_list[0]), int(command_args_list[0]))
 
 
 
@@ -101,79 +104,15 @@ client.on_message = onMessage
 client.subscribe("robot/servo/#", 0)
 client.subscribe("robot/drive", 0)
 
-def straightenWheels():
-    global straight, DELAY
-
-    moveServo(1, 160)
-    moveServo(3, 160)
-    moveServo(5, 170)
-    moveServo(7, 163)
-    if not straight:
-        time.sleep(DELAY)
-        straight = True
-
-def slantWheels():
-    global straight, DELAY
-
-    moveServo(1, 103)
-    moveServo(3, 213)
-    moveServo(5, 227)
-    moveServo(7, 101)
-    if straight:
-        time.sleep(DELAY)
-        straight = False
-
-def stopAllWheels():
-    moveServo(0, STOP)
-    moveServo(2, STOP)
-    moveServo(4, STOP)
-    moveServo(6, STOP)
-
-def turnOnSpot(amount):
-    forward = FORWARD1
-    back = BACK1
-    if (amount < 0):
-        slantWheels()
-        moveServo(0, forward)
-        moveServo(2, forward)
-        moveServo(4, forward)
-        moveServo(6, forward)
-    elif (amount > 0):
-        slantWheels()
-        moveServo(0, back)
-        moveServo(2, back)
-        moveServo(4, back)
-        moveServo(6, back)
-    else:
-        moveServo(0, STOP)
-        moveServo(2, STOP)
-        moveServo(4, STOP)
-        moveServo(6, STOP)
-
-def moveMotors(amount):
-    forward = FORWARD
-    back = BACK
-    if (amount > 0):
-        straightenWheels()
-        moveServo(0, forward)
-        moveServo(2, back)
-        moveServo(4, forward)
-        moveServo(6, back)
-    elif (amount < 0):
-        straightenWheels()
-        moveServo(0, back)
-        moveServo(2, forward)
-        moveServo(4, back)
-        moveServo(6, forward)
-    else:
-        moveServo(0, STOP)
-        moveServo(2, STOP)
-        moveServo(4, STOP)
-        moveServo(6, STOP)
+def moveServo(servoid, angle):
+   f = open("/dev/servoblaster", 'w')
+   f.write(str(servoid) + "=" + str(angle) + "\n")
+   f.close()
+   print("moved servo " + str(servoid) +  " to " + str(angle))
 
 
 
-def read():
+def readSensor():
     GPIO.output(TRIG, True)
     time.sleep(0.00001)
     GPIO.output(TRIG, False)
