@@ -83,7 +83,7 @@ def moveMotors(amount):
     forward = STOP + amount
     back = STOP - amount
 
-    straightenWheels()
+#    straightenWheels()
     moveServo(0, forward)
     moveServo(2, back)
     moveServo(4, forward)

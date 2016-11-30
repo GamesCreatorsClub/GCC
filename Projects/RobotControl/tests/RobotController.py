@@ -84,6 +84,10 @@ while True:
             pygame.draw.rect(screen, (255, 255, 255), rects["RIGHT"])
         elif danceTimer <= 10:
             client.publish("robot/drive", "align")
+    elif keys[pygame.K_UP]:
+        client.publish("robot/drive", "motors>" + str(speed))
+    elif keys[pygame.K_DOWN]:
+        client.publish("robot/drive", "motors>" + str(-speed))
     else:
         client.publish("robot/drive", "stop")
     #

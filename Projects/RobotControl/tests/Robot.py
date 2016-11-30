@@ -71,9 +71,13 @@ def onMessage(client, data, msg):
         else:
             args1 = 0
         if command_name == "forward":
+            movement.straightenWheels()
             movement.moveMotors(int(args1))
         elif command_name == "back":
+            movement.straightenWheels()
             movement.moveMotors(-int(args1))
+        elif command_name == "motors":
+            movement.moveMotors(int(args1))
         elif command_name == "align":
             movement.straightenWheels()
         elif command_name == "slant":
