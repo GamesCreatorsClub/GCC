@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
-import paho.mqtt.client as mqtt
-import RPi.GPIO as GPIO
-import time
-import movement
 import re
+import time
+
+import RPi.GPIO as GPIO
+import paho.mqtt.client as mqtt
+
+from client import movement
 
 
 def moveServo(servoid, angle):

@@ -1,14 +1,39 @@
 import paho.mqtt.client as mqtt
-import pygame, sys, time
+import pygame, sys, os
+import agent
 
 pygame.init()
 
-client = mqtt.Client("Controller")
+client = mqtt.Client("Controller2")
 
-client.connect("172.24.1.185", 1883, 60)
+id = "Drive"
+
+
+def onConnect(client, data, rc):
+    if rc == 0:
+        print("Connected")
+        agent.init(client, id, "Drive.py")
+    else:
+        print("Connection returned error result: " + str(rc))
+        os._exit(rc)
+
+def onMessage(client, data, msg):
+    global exit
+
+    if agent.process(msg):
+        if agent.returncode(id):
+            exit = True
+    else:
+        print("Wrong topic '" + msg.topic + "'")
+
+
+client.on_connect = onConnect
+client.on_message = onMessage
+
+print("Controller: Starting...")
+client.connect("gcc-wifi-ap.thenet", 1885, 60)
 
 screen = pygame.display.set_mode((600,600))
-
 
 rects = {
     "UP": pygame.Rect(200, 0, 200, 200),
@@ -26,26 +51,23 @@ straight = True
 danceTimer = 0
 speed = 10
 
-angle = 155
-def moveServo(servo, angle):
-    print(str(servo) + ": " + str(angle))
-    client.publish("servo/" + str(servo), str(angle))
-
-
 
 while True:
     for event in pygame.event.get():
-       if event.type == pygame.QUIT:
-           pygame.quit()
-           sys.exit()
-       if event.type == pygame.MOUSEBUTTONDOWN:
-           if event.button == 5:
-               speed = speed - 1
-           if event.button == 4:
-               speed = speed + 1
-           speed = speed % 100
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 5:
+                speed = speed - 1
+            if event.button == 4:
+                speed = speed + 1
+            speed = speed % 100
+            print("New speed: " + str(speed))
+
     keys = pygame.key.get_pressed()
 
+    client.loop()
     screen.fill((0, 0, 0))
 
     if keys[pygame.K_w]:
@@ -87,18 +109,18 @@ while True:
         client.publish("drive", "motors>" + str(speed))
     elif keys[pygame.K_DOWN]:
         client.publish("drive", "motors>" + str(-speed))
+    elif keys[pygame.K_i]:
+        speed = speed + 10
+        if speed > 100:
+            speed = 100
+        print("New speed: " + str(speed))
+    elif keys[pygame.K_o]:
+        speed = speed - 10
+        if speed < 0:
+            speed = 0
+        print("New speed: " + str(speed))
     else:
         client.publish("drive", "stop")
-    #
-    # servo = 7
-    # if keys[pygame.K_UP]:
-    #
-    #     angle = angle + 1
-    #     moveServo(servo, angle)
-    # if keys[pygame.K_DOWN]:
-    #     angle = angle - 1
-    #     moveServo(servo, angle)
-    #
 
 
     danceTimer += 1
