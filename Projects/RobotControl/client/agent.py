@@ -33,5 +33,9 @@ def process(msg):
 
     return False
 
+
+def stopAgent(id):
+    pass
+
 def returncode(id):
     return returncodes[id]

@@ -12,7 +12,7 @@ id = "Drive"
 def onConnect(client, data, rc):
     if rc == 0:
         print("Connected")
-        agent.init(client, id, "Drive.py")
+        agent.init(client, id, "DriveAgent.py")
     else:
         print("Connection returned error result: " + str(rc))
         os._exit(rc)
@@ -21,7 +21,7 @@ def onMessage(client, data, msg):
     global exit
 
     if agent.process(msg):
-        if agent.returncode(id):
+        if agent.returncode(id) != None:
             exit = True
     else:
         print("Wrong topic '" + msg.topic + "'")
