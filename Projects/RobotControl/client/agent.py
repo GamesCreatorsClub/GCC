@@ -1,7 +1,14 @@
 
 returncodes = {}
 
-def init(client, id, filename):
+def init(client, filename, id = None):
+    if id == None:
+        if filename.endswith(".py"):
+            id = filename[ : len(filename) - 3]
+        else:
+            id = filename
+        id = id.replace("/", "-")
+
     file = open(filename)
     fileContent = file.read()
     file.close()

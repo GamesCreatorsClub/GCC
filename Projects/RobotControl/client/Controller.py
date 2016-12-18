@@ -6,13 +6,10 @@ pygame.init()
 
 client = mqtt.Client("Controller2")
 
-id = "Drive"
-
-
 def onConnect(client, data, rc):
     if rc == 0:
         print("Connected")
-        agent.init(client, id, "DriveAgent.py")
+        agent.init(client, "DriveAgent.py")
     else:
         print("Connection returned error result: " + str(rc))
         os._exit(rc)
@@ -21,7 +18,7 @@ def onMessage(client, data, msg):
     global exit
 
     if agent.process(msg):
-        if agent.returncode(id) != None:
+        if agent.returncode("DriveAgent") != None:
             exit = True
     else:
         print("Wrong topic '" + msg.topic + "'")
@@ -49,7 +46,7 @@ frameclock = pygame.time.Clock()
 straight = True
 
 danceTimer = 0
-speed = 10
+speed = 15
 
 
 while True:
