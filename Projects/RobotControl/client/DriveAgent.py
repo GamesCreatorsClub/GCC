@@ -13,6 +13,8 @@ SIDEWAYS = 3
 
 wheelPosition = STRAIGHT
 
+client = mqtt.Client("DriveAgent")
+
 
 def straightenWheels():
     global wheelPosition, DELAY, STRAIGHT
@@ -90,8 +92,6 @@ def wheelSpeed(wheelName, speed):
     client.publish(topic, str(speed))
     print("Published topic=" +  topic + "; msg=" + str(speed))
 
-
-client = mqtt.Client("Drive")
 
 def onConnect(client, data, rc):
     client.subscribe("drive/#")

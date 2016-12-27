@@ -3,8 +3,12 @@ import pygame, sys, os
 import agent
 
 pygame.init()
+bigFont = pygame.font.SysFont("apple casual", 48)
+frameclock = pygame.time.Clock()
+screen = pygame.display.set_mode((600,600))
 
-client = mqtt.Client("Controller2")
+client = mqtt.Client("DriveController")
+
 
 def onConnect(client, data, rc):
     if rc == 0:
@@ -27,10 +31,9 @@ def onMessage(client, data, msg):
 client.on_connect = onConnect
 client.on_message = onMessage
 
-print("Controller: Starting...")
+print("DriveController: Starting...")
 client.connect("172.24.1.185", 1883, 60)
 
-screen = pygame.display.set_mode((600,600))
 
 rects = {
     "UP": pygame.Rect(200, 0, 200, 200),
@@ -41,7 +44,6 @@ rects = {
 }
 
 
-frameclock = pygame.time.Clock()
 
 straight = True
 
@@ -139,6 +141,9 @@ while True:
 
 
     pygame.draw.rect(screen, (value, value, value), rects["SPEED"])
+
+    text = bigFont.render("Speed: " + str(speed), 1, (255, 255, 255))
+    screen.blit(text, pygame.Rect(0, 0, 0, 0))
 
     pygame.display.flip()
     frameclock.tick(30)

@@ -66,8 +66,16 @@ def execute(id, payload):
     if DEBUG:
         print("exec/" + str(id) + "/status > " + str(popen.returncode))
 
+def handleSystemMessages(topic, payload):
+    print("Got system message on " + topic + ": " + payload)
+    if topic == "shutdown" and payload == "secret_message":
+        print("Shutting down now!")
+        subprocess.call(["/usr/bin/sudo", "/sbin/shutdown", "-h", "now"])
+
+
 def onConnect(client, data, rc):
     if rc == 0:
+        client.subscribe("system/#", 0)
         client.subscribe("exec/#", 0)
         client.subscribe("servo/#", 0)
         client.subscribe("wheel/#", 0)
@@ -96,7 +104,8 @@ def onMessage(client, data, msg):
             thread = threading.Thread(target=execute, args=(id, payload))
             thread.daemon = True
             thread.start()
-
+        elif topic.startswith("system/"):
+            handleSystemMessages(topic[7:], payload)
 
 def moveServo(servoid, angle):
     f = open("/dev/servoblaster", 'w')
