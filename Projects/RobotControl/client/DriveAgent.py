@@ -4,94 +4,91 @@ import paho.mqtt.client as mqtt
 import time
 
 DELAY = 0.15
-FORWARD1 = 160
-FORWARD2 = 180
-FORWARD3 = 200
-BACK1 = 145
-BACK2 = 125
-BACK3 = 105
-STOP = 155
-FORWARD = FORWARD3
-BACK = BACK3
 
-straight = True
+speed = 100
+
+STRAIGHT = 1
+SLANT = 2
+SIDEWAYS = 3
+
+wheelPosition = STRAIGHT
 
 
 def straightenWheels():
-    global straight, DELAY
+    global wheelPosition, DELAY, STRAIGHT
 
-    moveServo(1, 172)
-    moveServo(3, 160)
-    moveServo(5, 160)
-    moveServo(7, 160)
-    if not straight:
+    wheelDeg("fl", 0)
+    wheelDeg("fr", 0)
+    wheelDeg("bl", 0)
+    wheelDeg("br", 0)
+
+    if wheelPosition != STRAIGHT:
         time.sleep(DELAY)
-        straight = True
+        wheelPosition = STRAIGHT
 
 def slantWheels():
-    global straight, DELAY
+    global wheelPosition, DELAY, SLANT
 
-    moveServo(1, 103)
-    moveServo(3, 213)
-    moveServo(5, 227)
-    moveServo(7, 101)
-    if straight:
+    wheelDeg("fl", 45.0)
+    wheelDeg("fr", -45.0)
+    wheelDeg("bl", -45.0)
+    wheelDeg("br", 45.0)
+    if wheelPosition != SLANT:
         time.sleep(DELAY)
-        straight = False
+        wheelPosition = SLANT
 
 
 def sidewaysWheels():
-    global straight, DELAY
+    global wheelPosition, DELAY, SIDEWAYS
 
-    moveServo(1, 70)
-    moveServo(3, 254)
-    moveServo(5, 252)
-    moveServo(7, 70)
-    if straight:
+    wheelDeg("fl", 90.0)
+    wheelDeg("fr", -90.0)
+    wheelDeg("bl", -90.0)
+    wheelDeg("br", 90.0)
+    if wheelPosition != SIDEWAYS:
         time.sleep(DELAY)
-        straight = False
+        wheelPosition = SIDEWAYS
 
 
 def stopAllWheels():
-    moveServo(0, STOP)
-    moveServo(2, STOP)
-    moveServo(4, STOP)
-    moveServo(6, STOP)
+    wheelSpeed("fl", 0)
+    wheelSpeed("fr", 0)
+    wheelSpeed("bl", 0)
+    wheelSpeed("br", 0)
 
 
 def turnOnSpot(amount):
-    forward = STOP + amount
-    back = STOP - amount
-
     slantWheels()
-    moveServo(0, back)
-    moveServo(2, back)
-    moveServo(4, back)
-    moveServo(6, back)
+    wheelSpeed("fl", amount)
+    wheelSpeed("fr", -amount)
+    wheelSpeed("bl", amount)
+    wheelSpeed("br", -amount)
 
 
 def moveMotors(amount):
-    forward = STOP + amount
-    back = STOP - amount
-
-    moveServo(0, forward)
-    moveServo(2, back)
-    moveServo(4, forward)
-    moveServo(6, back)
+    straightenWheels()
+    wheelSpeed("fl", amount)
+    wheelSpeed("fr", amount)
+    wheelSpeed("bl", amount)
+    wheelSpeed("br", amount)
 
 def crabAlong(amount):
-    forward = STOP + amount
-    back = STOP - amount
-
     sidewaysWheels()
-    moveServo(0, back)
-    moveServo(2, back)
-    moveServo(4, forward)
-    moveServo(6, forward)
+    wheelSpeed("fl", amount)
+    wheelSpeed("fr", -amount)
+    wheelSpeed("bl", -amount)
+    wheelSpeed("br", amount)
 
 
-def moveServo(servoId, angle):
-    client.publish("servo/" + str(servoId), str(angle))
+def wheelDeg(wheelName, angle):
+    topic = "wheel/" + wheelName + "/deg"
+    client.publish(topic, str(angle))
+    print("Published topic=" +  topic + "; msg=" + str(angle))
+
+def wheelSpeed(wheelName, speed):
+    topic = "wheel/" + wheelName + "/speed"
+    client.publish(topic, str(speed))
+    print("Published topic=" +  topic + "; msg=" + str(speed))
 
 
 client = mqtt.Client("Drive")
@@ -106,41 +103,36 @@ def onMessage(client, data, msg):
     payload = str(msg.payload, 'utf-8')
 
     if msg.topic == "drive":
-        command_name = payload.split(">")[0]
+        command = payload.split(">")[0]
         if len(payload.split(">")) > 1:
             command_args_list = payload.split(">")[1].split(",")
             args1 = command_args_list[0]
         else:
             args1 = 0
-        if command_name == "forward":
-            straightenWheels()
+        if command == "forward":
             moveMotors(int(args1))
-        elif command_name == "back":
-            straightenWheels()
+        elif command == "back":
             moveMotors(-int(args1))
-        elif command_name == "motors":
+        elif command == "motors":
             moveMotors(int(args1))
-        elif command_name == "align":
+        elif command == "align":
             straightenWheels()
-        elif command_name == "slant":
+        elif command == "slant":
             slantWheels()
-        elif command_name == "rotate":
+        elif command == "rotate":
             turnOnSpot(int(args1))
-        elif command_name == "pivotLeft":
+        elif command == "pivotLeft":
             turnOnSpot(-int(args1))
-        elif command_name == "pivotRight":
+        elif command == "pivotRight":
             turnOnSpot(int(args1))
-        elif command_name == "stop":
+        elif command == "stop":
             stopAllWheels()
-        elif command_name == "sideways":
+        elif command == "sideways":
             sidewaysWheels()
-        elif command_name == "crabLeft":
+        elif command == "crabLeft":
             crabAlong(-int(args1))
-        elif command_name == "crabRight":
+        elif command == "crabRight":
             crabAlong(int(args1))
-        elif command_name == "moveServo":
-            moveServo(int(command_args_list[0]), int(command_args_list[0]))
-
 
 
 client.on_connect = onConnect

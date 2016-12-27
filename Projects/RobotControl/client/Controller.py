@@ -28,7 +28,7 @@ client.on_connect = onConnect
 client.on_message = onMessage
 
 print("Controller: Starting...")
-client.connect("gcc-wifi-ap.thenet", 1885, 60)
+client.connect("172.24.1.185", 1883, 60)
 
 screen = pygame.display.set_mode((600,600))
 
@@ -46,7 +46,7 @@ frameclock = pygame.time.Clock()
 straight = True
 
 danceTimer = 0
-speed = 15
+speed = 50
 
 
 while True:
@@ -106,15 +106,23 @@ while True:
         client.publish("drive", "motors>" + str(speed))
     elif keys[pygame.K_DOWN]:
         client.publish("drive", "motors>" + str(-speed))
-    elif keys[pygame.K_i]:
-        speed = speed + 10
-        if speed > 100:
-            speed = 100
+    elif keys[pygame.K_1]:
+        speed = 50
         print("New speed: " + str(speed))
-    elif keys[pygame.K_o]:
-        speed = speed - 10
-        if speed < 0:
-            speed = 0
+    elif keys[pygame.K_2]:
+        speed = 75
+        print("New speed: " + str(speed))
+    elif keys[pygame.K_3]:
+        speed = 100
+        print("New speed: " + str(speed))
+    elif keys[pygame.K_4]:
+        speed = 150
+        print("New speed: " + str(speed))
+    elif keys[pygame.K_5]:
+        speed = 200
+        print("New speed: " + str(speed))
+    elif keys[pygame.K_5]:
+        speed = 300
         print("New speed: " + str(speed))
     else:
         client.publish("drive", "stop")

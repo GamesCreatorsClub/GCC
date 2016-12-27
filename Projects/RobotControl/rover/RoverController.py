@@ -6,10 +6,16 @@ import threading
 
 import paho.mqtt.client as mqtt
 
+import wheelhandler
+
+print("Starting RoverController...")
+
 client = mqtt.Client("Rover")
 
 SERVO_REGEX = re.compile("servo/(\d)")
-DEBUG = True
+DEBUG = False
+
+wheelhandler.DEBUG = DEBUG
 
 subprocesses = {}
 
@@ -23,7 +29,10 @@ def execute(id, payload):
     text_file.write(payload)
     text_file.close()
 
-    print("Got msg on topic no " + id)
+    if DEBUG:
+        print("Got msg on topic no " + id)
+
+    print("Starting new agent " + id )
 
     popen = subprocess.Popen(["python3",  str(id) + ".py"], stdout = subprocess.PIPE, universal_newlines = True)
 
@@ -61,8 +70,9 @@ def onConnect(client, data, rc):
     if rc == 0:
         client.subscribe("exec/#", 0)
         client.subscribe("servo/#", 0)
+        client.subscribe("wheel/#", 0)
     else:
-        print("Connection returned error result: " + str(rc))
+        print("ERROR: Connection returned error result: " + str(rc))
         os._exit(rc)
 
 def onMessage(client, data, msg):
@@ -71,18 +81,21 @@ def onMessage(client, data, msg):
     payload = str(msg.payload, 'utf-8')
     topic = msg.topic
 
-    servoMatch = SERVO_REGEX.match(msg.topic)
 
-    if servoMatch:
-        servo = int(servoMatch.group(1))
-        moveServo(servo, payload)
+    if  topic.startswith("wheel/"):
+        wheelhandler.handleWheel(topic, payload)
+    else:
+        servoMatch = SERVO_REGEX.match(msg.topic)
+        if servoMatch:
+            servo = int(servoMatch.group(1))
+            moveServo(servo, payload)
 
-    elif topic.startswith("exec/") and topic.endswith("/code"):
-        id = topic[5:len(topic) - 5]
+        elif topic.startswith("exec/") and topic.endswith("/code"):
+            id = topic[5:len(topic) - 5]
 
-        thread = threading.Thread(target=execute, args=(id, payload))
-        thread.daemon = True
-        thread.start()
+            thread = threading.Thread(target=execute, args=(id, payload))
+            thread.daemon = True
+            thread.start()
 
 
 def moveServo(servoid, angle):
@@ -94,6 +107,10 @@ client.on_connect = onConnect
 client.on_message = onMessage
 
 client.connect("localhost", 1883, 60)
+
+wheelhandler.init(moveServo)
+
+print("Started RoverController.")
 
 
 while True:
