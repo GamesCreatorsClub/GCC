@@ -62,7 +62,7 @@ def moveServo(servoNumber, amount):
     _moveServoMethod(servoNumber, amount)
 
 
-def handleWheel(topic, payload):
+def handleWheel(client, topic, payload):
     global wheelsMap
 
     # wheel/<name>/command/...
@@ -87,24 +87,36 @@ def handleWheel(topic, payload):
             handleSpeed(wheel, float(payload))
         if command == "cal":
             # wheel/<name>/cal/<command>/position
-            command = topicsplit[3]
-            position = topicsplit[4]
-
+            topiclen = len(topicsplit)
             wheelCal = wheel["cal"]
 
-            if DEBUG:
-                print("  Setting wheel " + wheelName + " calibration for " + command + "/" + position + " to " + str(int(payload)))
+            if topiclen < 4: # only cal
+                m = "deg,90," + str(wheelCal["deg"]["90"]) + "\n"
+                m = m + "deg,0," + str(wheelCal["deg"]["0"]) + "\n"
+                m = m + "deg,-90," + str(wheelCal["deg"]["-90"]) + "\n"
+                m = m + "speed,0," + str(wheelCal["speed"]["0"]) + "\n"
+                m = m + "speed,300," + str(wheelCal["speed"]["300"]) + "\n"
+                m = m + "speed,-300," + str(wheelCal["speed"]["-300"]) + "\n"
+                client.publish("wheel/" + wheelName + "/cal/values", m)
 
-            if command == "deg" or  command == "speed" or command == "servo":
-                wheelCal[command][position] = int(payload)
-            else:
-                wheelCal[command][position] = payload
+            elif topiclen == 5: # calibration for position
+                command = topicsplit[3]
+                position = topicsplit[4]
 
-            file = open("rover-calibration.config", 'wb')
 
-            pickle.dump(wheelsMap, file, 0)
+                if DEBUG:
+                    print("  Setting wheel " + wheelName + " calibration for " + command + "/" + position + " to " + str(int(payload)))
 
-            file.close()
+                if command == "deg" or  command == "speed" or command == "servo":
+                    wheelCal[command][position] = int(payload)
+                else:
+                    wheelCal[command][position] = payload
+
+                file = open("rover-calibration.config", 'wb')
+
+                pickle.dump(wheelsMap, file, 0)
+
+                file.close()
     else:
         print("ERROR: no wheel with name " +  wheelName + " fonund.")
 

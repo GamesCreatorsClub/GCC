@@ -75,10 +75,14 @@ def handleSystemMessages(topic, payload):
 
 def onConnect(client, data, rc):
     if rc == 0:
-        client.subscribe("system/#", 0)
-        client.subscribe("exec/#", 0)
-        client.subscribe("servo/#", 0)
-        client.subscribe("wheel/#", 0)
+        client.subscribe("system/+", 0)
+        client.subscribe("exec/+/code", 0)
+        client.subscribe("servo/+", 0)
+        client.subscribe("wheel/+/deg", 0)
+        client.subscribe("wheel/+/speed", 0)
+        client.subscribe("wheel/+/cal", 0)
+        client.subscribe("wheel/+/cal/deg/+", 0)
+        client.subscribe("wheel/+/cal/speed/+", 0)
     else:
         print("ERROR: Connection returned error result: " + str(rc))
         os._exit(rc)
@@ -91,7 +95,7 @@ def onMessage(client, data, msg):
 
 
     if  topic.startswith("wheel/"):
-        wheelhandler.handleWheel(topic, payload)
+        wheelhandler.handleWheel(client, topic, payload)
     else:
         servoMatch = SERVO_REGEX.match(msg.topic)
         if servoMatch:

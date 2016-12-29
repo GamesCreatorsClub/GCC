@@ -91,6 +91,10 @@ while True:
         client.publish("drive", "align")
         pygame.draw.rect(screen, (255, 255, 255), rects["UP"])
         pygame.draw.rect(screen, (255, 255, 255), rects["DOWN"])
+    elif keys[pygame.K_c]:
+        client.publish("drive", "align")
+        pygame.draw.rect(screen, (255, 255, 255), rects["UP"])
+        pygame.draw.rect(screen, (255, 255, 255), rects["DOWN"])
     elif keys[pygame.K_v]:
         client.publish("drive", "slant")
         pygame.draw.rect(screen, (255, 255, 255), rects["LEFT"])
