@@ -31,10 +31,10 @@ def straightenWheels():
 def slantWheels():
     global wheelPosition, DELAY, SLANT
 
-    wheelDeg("fl", 45.0)
-    wheelDeg("fr", -45.0)
-    wheelDeg("bl", -45.0)
-    wheelDeg("br", 45.0)
+    wheelDeg("fl", 60.0)
+    wheelDeg("fr", -60.0)
+    wheelDeg("bl", -60.0)
+    wheelDeg("br", 60.0)
     if wheelPosition != SLANT:
         time.sleep(DELAY)
         wheelPosition = SLANT
@@ -85,17 +85,17 @@ def crabAlong(amount):
 def wheelDeg(wheelName, angle):
     topic = "wheel/" + wheelName + "/deg"
     client.publish(topic, str(angle))
-    print("Published topic=" +  topic + "; msg=" + str(angle))
+    # print("Published topic=" +  topic + "; msg=" + str(angle))
 
 def wheelSpeed(wheelName, speed):
     topic = "wheel/" + wheelName + "/speed"
     client.publish(topic, str(speed))
-    print("Published topic=" +  topic + "; msg=" + str(speed))
+    # print("Published topic=" +  topic + "; msg=" + str(speed))
 
 
 def onConnect(client, data, rc):
     client.subscribe("drive/#")
-    print("Driver: Connected")
+    print("DriverAgent: Connected to rover")
     straightenWheels()
 
 
@@ -138,10 +138,10 @@ def onMessage(client, data, msg):
 client.on_connect = onConnect
 client.on_message = onMessage
 
-print("Driver: Starting...")
+print("DriverAgent: Starting...")
 
 client.connect("localhost", 1883, 60)
 
 while True:
-    client.loop()
+    client.loop(0.02)
 

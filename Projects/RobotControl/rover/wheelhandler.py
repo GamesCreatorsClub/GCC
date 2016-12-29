@@ -53,7 +53,6 @@ def init(moveServoMethod):
 
         print("Started wheelhandler. Wheels map is " +  str(wheelsMap))
 
-
 def moveServo(servoNumber, amount):
     global _moveServoMethod
     if _moveServoMethod == None:
@@ -149,10 +148,27 @@ def handleSpeed(wheel, speed):
     wheel["speedServoPos"] = servoPosition
     servoNumber = cal["servo"]
 
-    moveServo(servoNumber, servoPosition)
+    if str(speed) == "0":
+        moveServo(servoNumber, servoPosition)
 
 
 def interpolate(value, zero, max):
     return (max - zero) * value + zero
 
+def driveWheel(wheelName):
+    wheel = wheelsMap[wheelName]
+    speed = wheel["speed"]
+    if "speedServoPos" in wheel:
+        servoPosition = wheel["speedServoPos"]
 
+        cal = wheel["cal"]["speed"]
+        servoNumber = cal["servo"]
+
+        if str(speed) != "0":
+            moveServo(servoNumber, servoPosition)
+
+def driveWheels():
+    driveWheel("fl")
+    driveWheel("fr")
+    driveWheel("bl")
+    driveWheel("br")

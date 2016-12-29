@@ -12,8 +12,8 @@ print("Starting RoverController...")
 
 client = mqtt.Client("Rover")
 
-SERVO_REGEX = re.compile("servo/(\d)")
-DEBUG = False
+SERVO_REGEX = re.compile("servo/(\d+)")
+DEBUG = True
 
 wheelhandler.DEBUG = DEBUG
 
@@ -100,6 +100,7 @@ def onMessage(client, data, msg):
         servoMatch = SERVO_REGEX.match(msg.topic)
         if servoMatch:
             servo = int(servoMatch.group(1))
+            # print("servo matched: " + topic + ", servo " + str(servo))
             moveServo(servo, payload)
 
         elif topic.startswith("exec/") and topic.endswith("/code"):
@@ -128,3 +129,4 @@ print("Started RoverController.")
 
 while True:
     client.loop(0.02)
+    wheelhandler.driveWheels()

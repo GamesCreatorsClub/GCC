@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt
-import pygame, sys, os
+import pygame, sys, threading, os, random
 import agent
 
 pygame.init()
@@ -7,15 +7,23 @@ bigFont = pygame.font.SysFont("apple casual", 48)
 frameclock = pygame.time.Clock()
 screen = pygame.display.set_mode((600,600))
 
-client = mqtt.Client("DriveController")
+client = mqtt.Client("DriveController#" + str(random.randint(1000, 9999)))
 
+roverAddress = ["172.24.1.184", "172.24.1.185", "172.24.1.186"]
+selectedRover = 1
+
+speeds = [50, 75, 100, 150, 200, 250, 300]
+selectedSpeed = 1
+connected = False
 
 def onConnect(client, data, rc):
+    global connected
     if rc == 0:
-        print("Connected")
+        print("DriveController: Connected to rover " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover] + ".");
         agent.init(client, "DriveAgent.py")
+        connected = True
     else:
-        print("Connection returned error result: " + str(rc))
+        print("DriveController: Connection returned error result: " + str(rc))
         os._exit(rc)
 
 def onMessage(client, data, msg):
@@ -25,15 +33,32 @@ def onMessage(client, data, msg):
         if agent.returncode("DriveAgent") != None:
             exit = True
     else:
-        print("Wrong topic '" + msg.topic + "'")
+        print("DriveController: Wrong topic '" + msg.topic + "'")
+
+def _reconnect():
+    client.reconnect()
+
+def connect():
+    global connected
+    connected = False
+    client.disconnect()
+    print("DriveController: Connecting to rover " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover] + "...");
+
+    # client.connect(roverAddress[selectedRover], 1883, 60)
+    client.connect_async(roverAddress[selectedRover], 1883, 60)
+    thread = threading.Thread(target=_reconnect)
+    thread.daemon = True
+    thread.start()
+
+def onDisconnect(client, data, rc):
+    connect()
 
 
+client.on_disconnect = onDisconnect
 client.on_connect = onConnect
 client.on_message = onMessage
 
-print("DriveController: Starting...")
-client.connect("172.24.1.185", 1883, 60)
-
+connect()
 
 rects = {
     "UP": pygame.Rect(200, 0, 200, 200),
@@ -46,47 +71,47 @@ rects = {
 
 
 straight = True
+stopped = True
 
 danceTimer = 0
 speed = 50
-
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 5:
-                speed = speed - 1
-            if event.button == 4:
-                speed = speed + 1
-            speed = speed % 100
-            print("New speed: " + str(speed))
+            print("Set speed to: " + str(speed))
 
     keys = pygame.key.get_pressed()
 
-    client.loop()
+    client.loop(1/40)
     screen.fill((0, 0, 0))
 
     if keys[pygame.K_w]:
         client.publish("drive", "forward>" + str(speed))
         pygame.draw.rect(screen, (255, 255, 255), rects["UP"])
+        stopped = False
     elif keys[pygame.K_s]:
         client.publish("drive", "back>" + str(speed))
         pygame.draw.rect(screen, (255, 255, 255), rects["DOWN"])
+        stopped = False
     elif keys[pygame.K_a]:
         client.publish("drive", "crabLeft>" + str(speed))
         pygame.draw.rect(screen, (255, 255, 255), rects["LEFT"])
+        stopped = False
     elif keys[pygame.K_d]:
         client.publish("drive", "crabRight>" + str(speed))
         pygame.draw.rect(screen, (255, 255, 255), rects["RIGHT"])
+        stopped = False
     elif keys[pygame.K_q]:
         client.publish("drive", "pivotLeft>" + str(speed))
         pygame.draw.rect(screen, (255, 255, 255), rects["LEFT"])
+        stopped = False
     elif keys[pygame.K_e]:
         client.publish("drive", "pivotRight>" + str(speed))
         pygame.draw.rect(screen, (255, 255, 255), rects["RIGHT"])
+        stopped = False
     elif keys[pygame.K_x]:
         client.publish("drive", "align")
         pygame.draw.rect(screen, (255, 255, 255), rects["UP"])
@@ -110,32 +135,31 @@ while True:
             client.publish("drive", "align")
     elif keys[pygame.K_UP]:
         client.publish("drive", "motors>" + str(speed))
+        stopped = False
     elif keys[pygame.K_DOWN]:
         client.publish("drive", "motors>" + str(-speed))
-    elif keys[pygame.K_1]:
-        speed = 50
-        print("New speed: " + str(speed))
+        stopped = False
+    elif keys[pygame.K_LEFTBRACKET]:
+        if selectedSpeed > 0:
+            selectedSpeed = selectedSpeed - 1
+        speed = speeds[selectedSpeed]
+    elif keys[pygame.K_RIGHTBRACKET]:
+        if selectedSpeed < len(speeds) - 1:
+            selectedSpeed = selectedSpeed + 1
+        speed = speeds[selectedSpeed]
     elif keys[pygame.K_2]:
-        speed = 75
-        print("New speed: " + str(speed))
+        selectedRover = 0
+        connect()
     elif keys[pygame.K_3]:
-        speed = 100
-        print("New speed: " + str(speed))
+        selectedRover = 1
+        connect()
     elif keys[pygame.K_4]:
-        speed = 150
-        print("New speed: " + str(speed))
-    elif keys[pygame.K_5]:
-        speed = 200
-        print("New speed: " + str(speed))
-    elif keys[pygame.K_5]:
-        speed = 300
-        print("New speed: " + str(speed))
+        selectedRover = 2
+        connect()
     else:
-        client.publish("drive", "stop")
-
-
-    danceTimer += 1
-    danceTimer = danceTimer % 20
+        if not stopped:
+            client.publish("drive", "stop")
+            stopped = True
 
     value = speed + 155
     if (value > 255):
@@ -143,11 +167,19 @@ while True:
     elif value < 1:
         value = 0
 
-
     pygame.draw.rect(screen, (value, value, value), rects["SPEED"])
 
-    text = bigFont.render("Speed: " + str(speed), 1, (255, 255, 255))
+    if connected:
+        text = bigFont.render("Connected to rover: " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover], 1, (128, 255, 128))
+    else:
+        text = bigFont.render("Connecting to rover: " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover], 1, (255, 128, 128))
     screen.blit(text, pygame.Rect(0, 0, 0, 0))
+
+    text = bigFont.render("Speed: " + str(speed), 1, (255, 255, 255))
+    screen.blit(text, pygame.Rect(0, 40, 0, 0))
+
+    text = bigFont.render("Stopped: " + str(stopped), 1, (255, 255, 255))
+    screen.blit(text, pygame.Rect(0, 80, 0, 0))
 
     pygame.display.flip()
     frameclock.tick(30)
