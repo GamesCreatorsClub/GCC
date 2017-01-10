@@ -1,13 +1,13 @@
 import pickle
 import os.path
 
-wheelsMap = {}
+storageMap = {}
 _moveServoMethod = None
 DEBUG = False
 
 def initWheel(wheelName, motorServo, steerServo):
-    global wheelsMap
-    wheelsMap[wheelName] = {
+    global storageMap
+    storageMap[wheelName] = {
         "deg": 0,
         "speed": 0,
         "cal": {
@@ -29,7 +29,7 @@ def initWheel(wheelName, motorServo, steerServo):
 
 def init(moveServoMethod):
     global _moveServoMethod
-    global wheelsMap
+    global storageMap
 
     _moveServoMethod = moveServoMethod
 
@@ -49,9 +49,9 @@ def init(moveServoMethod):
         for wheelName in loaded:
             for wk in loaded[wheelName]:
                 if wk == "cal":
-                    wheelsMap[wheelName]["cal"] = loaded[wheelName][wk]
+                    storageMap[wheelName]["cal"] = loaded[wheelName][wk]
 
-        print("Started wheelhandler. Wheels map is " +  str(wheelsMap))
+        print("Started wheelhandler. Wheels map is " + str(storageMap))
 
 def moveServo(servoNumber, amount):
     global _moveServoMethod
@@ -62,19 +62,19 @@ def moveServo(servoNumber, amount):
 
 
 def handleWheel(client, topic, payload):
-    global wheelsMap
+    global storageMap
 
-    # wheel/<name>/command/...
+    # storage/write/<object>/<command>
 
     topicsplit = topic.split("/")
     wheelName = topicsplit[1]
     command = topicsplit[2]
 
-    if wheelName in wheelsMap:
-        wheel = wheelsMap[wheelName]
+    if wheelName in storageMap:
+        wheel = storageMap[wheelName]
 
         if DEBUG:
-            print("Handing wheel action: " +  str(topicsplit) + ", " + str(payload))
+            print("Handing action: " +  str(topicsplit) + ", " + str(payload))
 
         if command == "deg":
             if DEBUG:
@@ -113,7 +113,7 @@ def handleWheel(client, topic, payload):
 
                 file = open("rover-calibration.config", 'wb')
 
-                pickle.dump(wheelsMap, file, 0)
+                pickle.dump(storageMap, file, 0)
 
                 file.close()
     else:
@@ -135,7 +135,7 @@ def handleDeg(wheel, degrees):
 
 
 def handleSpeed(wheel, speed):
-    global wheelsMap
+    global storageMap
 
     cal = wheel["cal"]["speed"]
 
@@ -156,7 +156,7 @@ def interpolate(value, zero, max):
     return (max - zero) * value + zero
 
 def driveWheel(wheelName):
-    wheel = wheelsMap[wheelName]
+    wheel = storageMap[wheelName]
     speed = wheel["speed"]
     if "speedServoPos" in wheel:
         servoPosition = wheel["speedServoPos"]
