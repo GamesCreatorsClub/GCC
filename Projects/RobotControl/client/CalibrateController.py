@@ -2,8 +2,6 @@ import paho.mqtt.client as mqtt
 import pygame, sys, os
 
 
-
-
 client = mqtt.Client("CalibrateController")
 
 storageMap = {}
@@ -13,60 +11,59 @@ initialisationDone = False
 def onConnect(client, data, rc):
     if rc == 0:
         print("Connected")
-        client.subscribe("wheel/+/cal/values", 0)
+        client.subscribe("storage/values", 0)
         init()
     else:
         print("Connection returned error result: " + str(rc))
         os._exit(rc)
 
 def onMessage(client, data, msg):
-    global exit
+    global exit, initialisationDone
 
     payload = str(msg.payload, 'utf-8')
     topic = msg.topic
 
-    if topic.startswith("wheel") and topic.endswith("/cal/values"):
-        topicsplit = topic.split("/")
-        wheelName = topicsplit[1]
-
-        storageMap[wheelName] = {}
-        storageMap[wheelName]["deg"] = {}
-        storageMap[wheelName]["speed"] = {}
-        print("    Got calibration data from rover for wheel " + wheelName)
-
+    if topic == "storage/values":
+        print("Received storage map as \n" + payload)
         lines = payload.split("\n")
         for line in lines:
-            processLine(wheelName, line)
+            processLine(line)
+
+        initialisationDone = True
     else:
         print("Wrong topic '" + msg.topic + "'")
 
 
-def processLine(wheelName, line):
-    global storageMap
-    splitline = line.split(",")
-    if not len(splitline) == 3:
-        print("Received an invalid value for " + wheelName)
+def processLine(line):
+    splitline = line.split("=")
+    if not len(splitline) == 2:
+        print("Received an invalid value " + line)
     else:
-        wheelsMap[wheelName][splitline[0]][splitline[1]] = splitline[2]
+        path = splitline[0].split("/")
+        value = splitline[1]
+        map = storageMap
+        for i in range(0, len(path) - 1):
+            if path[i] not in map:
+                map[path[i]] = {}
+            map = map[path[i]]
+        map[path[len(path) - 1]] = value
+
 
 def init():
     global initialisationDone
 
     print("Requesting calibration data from rover... ", end="")
-    client.publish("wheel/fl/cal", "READ")
-    client.publish("wheel/fr/cal", "READ")
-    client.publish("wheel/bl/cal", "READ")
-    client.publish("wheel/br/cal", "READ")
+    client.publish("storage/read", "READ")
     print("Done.")
 
 
 client.on_connect = onConnect
 client.on_message = onMessage
 
-client.connect("172.24.1.185", 1883, 60)
+client.connect("172.24.1.186", 1883, 60)
 
 print("Waiting for calibration data from rover...")
-while not ("fl" in storageMap and "fr" in storageMap and "bl" in storageMap and "br" in storageMap):
+while not initialisationDone:
     client.loop()
 
 print("Received calibration data from rover.")
@@ -86,6 +83,7 @@ lastMouseDown = False
 
 selectedWheel = "fl"
 selectedDeg = "0"
+wheelCal = storageMap["wheels"]["cal"]
 
 texts = {
     "Wheel Calibration" : bigFont.render("Wheel Calibration", True, (0,255,0)),
@@ -265,16 +263,16 @@ def doCalStuff():
         buttonm = buttons["deg " + calDeg + " minus"]
         plusDown = buttonPressed(buttona, mousePos, mouseDown and not lastMouseDown)
         drawButton(screen, buttona, plusDown)
-        drawText(screen, str(storageMap[selectedWheel]["deg"][calDeg]), (172, buttona["rect"].y), bigFont)
+        drawText(screen, str(wheelCal[selectedWheel]["deg"][calDeg]), (172, buttona["rect"].y), bigFont)
         minusDown = buttonPressed(buttonm, mousePos, mouseDown and not lastMouseDown)
         drawButton(screen, buttonm, minusDown)
         if plusDown:
-            storageMap[selectedWheel]["deg"][calDeg] = int(storageMap[selectedWheel]["deg"][calDeg]) + 1
-            client.publish("wheel/" + selectedWheel + "/cal/deg/" + calDeg, str(storageMap[selectedWheel]["deg"][calDeg]))
+            wheelCal[selectedWheel]["deg"][calDeg] = int(wheelCal[selectedWheel]["deg"][calDeg]) + 1
+            client.publish("storage/write/wheels/cal/" + selectedWheel + "/deg/" + calDeg, str(wheelCal[selectedWheel]["deg"][calDeg]))
             client.publish("wheel/" + selectedWheel + "/deg", selectedDeg)
         elif minusDown:
-            storageMap[selectedWheel]["deg"][calDeg] = int(storageMap[selectedWheel]["deg"][calDeg]) - 1
-            client.publish("wheel/" + selectedWheel + "/cal/deg/" + calDeg, str(storageMap[selectedWheel]["deg"][calDeg]))
+            wheelCal[selectedWheel]["deg"][calDeg] = int(wheelCal[selectedWheel]["deg"][calDeg]) - 1
+            client.publish("storage/write/wheels/cal/" + selectedWheel + "/deg/" + calDeg, str(wheelCal[selectedWheel]["deg"][calDeg]))
             client.publish("wheel/" + selectedWheel + "/deg", selectedDeg)
     todo = ["-300", "0", "300"]
 
@@ -283,18 +281,18 @@ def doCalStuff():
         buttonm = buttons["speed " + calSpeed + " minus"]
         plusDown = buttonPressed(buttona, mousePos, mouseDown and not lastMouseDown)
         drawButton(screen, buttona, plusDown)
-        drawText(screen, str(storageMap[selectedWheel]["speed"][calSpeed]), (442, buttona["rect"].y), bigFont)
+        drawText(screen, str(wheelCal[selectedWheel]["speed"][calSpeed]), (442, buttona["rect"].y), bigFont)
         minusDown = buttonPressed(buttonm, mousePos, mouseDown and not lastMouseDown)
         drawButton(screen, buttonm, minusDown)
         if plusDown:
-            storageMap[selectedWheel]["speed"][calSpeed] = int(storageMap[selectedWheel]["speed"][calSpeed]) + 1
-            client.publish("wheel/" + selectedWheel + "/cal/speed/" + calSpeed,
-                           str(storageMap[selectedWheel]["speed"][calSpeed]))
+            wheelCal[selectedWheel]["speed"][calSpeed] = int(wheelCal[selectedWheel]["speed"][calSpeed]) + 1
+            client.publish("storage/write/wheels/cal/" + selectedWheel + "/speed/" + calSpeed,
+                           str(wheelCal[selectedWheel]["speed"][calSpeed]))
             client.publish("wheel/" + selectedWheel + "/speed", selectedSpeed)
         elif minusDown:
-            storageMap[selectedWheel]["speed"][calSpeed] = int(storageMap[selectedWheel]["speed"][calSpeed]) - 1
-            client.publish("wheel/" + selectedWheel + "/cal/speed/" + calSpeed,
-                           str(storageMap[selectedWheel]["speed"][calSpeed]))
+            wheelCal[selectedWheel]["speed"][calSpeed] = int(wheelCal[selectedWheel]["speed"][calSpeed]) - 1
+            client.publish("storage/write/wheels/cal/" + selectedWheel + "/speed/" + calSpeed,
+                           str(wheelCal[selectedWheel]["speed"][calSpeed]))
             client.publish("wheel/" + selectedWheel + "/speed", selectedSpeed)
 
 def doSpeedStettingstuff():

@@ -5,19 +5,41 @@ import re
 import threading
 
 import paho.mqtt.client as mqtt
+import pickle
+import os.path
 
 import wheelhandler
 
-print("Starting RoverController...")
-
-client = mqtt.Client("Rover")
 
 SERVO_REGEX = re.compile("servo/(\d+)")
 DEBUG = True
-
 wheelhandler.DEBUG = DEBUG
 
+storageMap = {}
 subprocesses = {}
+
+def init():
+    if os.path.exists("rover-storage.config"):
+        file = open("rover-storage.config", "rb")
+        loaded = pickle.load(file)
+        file.close()
+
+        if DEBUG:
+            print("  Loaded " +  str(loaded))
+
+        for key in loaded:
+            storageMap[key] = loaded[key]
+
+        print("  Storage map is " + str(storageMap))
+
+
+print("Starting RoverController...")
+
+init()
+
+client = mqtt.Client("Rover")
+
+
 
 def execute(id, payload):
 
@@ -72,6 +94,38 @@ def handleSystemMessages(topic, payload):
         print("Shutting down now!")
         subprocess.call(["/usr/bin/sudo", "/sbin/shutdown", "-h", "now"])
 
+def composeRecursively(map, prefix):
+    res = ""
+    for key in map:
+        if type(map[key]) is dict:
+            newPrefix = prefix + key + "/"
+            res = res + composeRecursively(map[key], newPrefix)
+        else:
+            res = res + prefix + key + "=" + str(map[key]) + "\n"
+
+    return  res
+
+def readoutStorage():
+    client.publish("storage/values", composeRecursively(storageMap, ""))
+
+def writeStorage(topicsplit, value):
+    map = storageMap
+    for i in range(2, len(topicsplit) - 1):
+        key = topicsplit[i]
+        if key not in map:
+            map[key] = {}
+        map = map[key]
+    key = topicsplit[len(topicsplit) - 1]
+    map[key] = value
+
+    if DEBUG:
+        print("Storing to storage " + str(topicsplit) + " = " + value)
+
+    file = open("rover-storage.config", 'wb')
+
+    pickle.dump(storageMap, file, 0)
+
+    file.close()
 
 def onConnect(client, data, rc):
     if rc == 0:
@@ -80,9 +134,8 @@ def onConnect(client, data, rc):
         client.subscribe("servo/+", 0)
         client.subscribe("wheel/+/deg", 0)
         client.subscribe("wheel/+/speed", 0)
-        client.subscribe("wheel/+/cal", 0)
-        client.subscribe("wheel/+/cal/deg/+", 0)
-        client.subscribe("wheel/+/cal/speed/+", 0)
+        client.subscribe("storage/write/#", 0)
+        client.subscribe("storage/read", 0)
     else:
         print("ERROR: Connection returned error result: " + str(rc))
         os._exit(rc)
@@ -111,6 +164,14 @@ def onMessage(client, data, msg):
             thread.start()
         elif topic.startswith("system/"):
             handleSystemMessages(topic[7:], payload)
+        elif topic.startswith("storage/"):
+            topicsplit = topic.split("/")
+            if topicsplit[1] == "read":
+                if DEBUG:
+                    print("Reading out storage")
+                readoutStorage()
+            elif topicsplit[1] == "write":
+                writeStorage(topicsplit, payload)
 
 def moveServo(servoid, angle):
     f = open("/dev/servoblaster", 'w')
@@ -122,7 +183,7 @@ client.on_message = onMessage
 
 client.connect("localhost", 1883, 60)
 
-wheelhandler.init(moveServo)
+wheelhandler.init(moveServo, storageMap)
 
 print("Started RoverController.")
 
