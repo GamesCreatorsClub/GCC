@@ -3,13 +3,14 @@ import pygame, sys, threading, os, random
 import agent
 
 pygame.init()
-bigFont = pygame.font.SysFont("apple casual", 48)
+bigFont = pygame.font.SysFont("apple casual", 32)
 frameclock = pygame.time.Clock()
 screen = pygame.display.set_mode((600,600))
 
 client = mqtt.Client("DriveController#" + str(random.randint(1000, 9999)))
 
-roverAddress = ["172.24.1.184", "172.24.1.185", "172.24.1.186"]
+roverAddress = ["172.24.1.184", "172.24.1.185", "172.24.1.186", "gcc-wifi-ap", "gcc-wifi-ap", "gcc-wifi-ap"]
+roverPort = [1883, 1883, 1883, 1884, 1885, 1886]
 selectedRover = 1
 
 speeds = [50, 75, 100, 150, 200, 250, 300]
@@ -19,7 +20,7 @@ connected = False
 def onConnect(client, data, rc):
     global connected
     if rc == 0:
-        print("DriveController: Connected to rover " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover] + ".");
+        print("DriveController: Connected to rover " + selectedRoverTxt + " @ " + roverAddress[selectedRover] + ".");
         agent.init(client, "DriveAgent.py")
         connected = True
     else:
@@ -45,7 +46,7 @@ def connect():
     print("DriveController: Connecting to rover " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover] + "...");
 
     # client.connect(roverAddress[selectedRover], 1883, 60)
-    client.connect_async(roverAddress[selectedRover], 1883, 60)
+    client.connect_async(roverAddress[selectedRover], roverPort[selectedRover], 60)
     thread = threading.Thread(target=_reconnect)
     thread.daemon = True
     thread.start()
@@ -156,6 +157,15 @@ while True:
     elif keys[pygame.K_4]:
         selectedRover = 2
         connect()
+    elif keys[pygame.K_5]:
+        selectedRover = 3
+        connect()
+    elif keys[pygame.K_6]:
+        selectedRover = 4
+        connect()
+    elif keys[pygame.K_7]:
+        selectedRover = 5
+        connect()
     else:
         if not stopped:
             client.publish("drive", "stop")
@@ -169,10 +179,14 @@ while True:
 
     pygame.draw.rect(screen, (value, value, value), rects["SPEED"])
 
+    selectedRoverTxt = str(selectedRover + 2)
+    if selectedRover > 2:
+        selectedRoverTxt = str(selectedRover - 1) + "-proxy"
+
     if connected:
-        text = bigFont.render("Connected to rover: " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover], 1, (128, 255, 128))
+        text = bigFont.render("Connected to rover: " + selectedRoverTxt + " @ " + roverAddress[selectedRover], 1, (128, 255, 128))
     else:
-        text = bigFont.render("Connecting to rover: " + str(selectedRover + 2) + " @ " + roverAddress[selectedRover], 1, (255, 128, 128))
+        text = bigFont.render("Connecting to rover: " + selectedRoverTxt + " @ " + roverAddress[selectedRover], 1, (255, 128, 128))
     screen.blit(text, pygame.Rect(0, 0, 0, 0))
 
     text = bigFont.render("Speed: " + str(speed), 1, (255, 255, 255))

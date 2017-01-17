@@ -7,16 +7,26 @@ import threading
 import paho.mqtt.client as mqtt
 import pickle
 import os.path
+import RPi.GPIO as GPIO
+import time
 
 import wheelhandler
 
 
 SERVO_REGEX = re.compile("servo/(\d+)")
 DEBUG = True
+SWITCH_GPIO = 20
+CAMERA_LIGHT_GPIO = 16
 wheelhandler.DEBUG = DEBUG
+
+lightsState = False
 
 storageMap = {}
 subprocesses = {}
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(CAMERA_LIGHT_GPIO, GPIO.OUT)
+GPIO.setup(SWITCH_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def init():
     if os.path.exists("rover-storage.config"):
@@ -88,11 +98,37 @@ def execute(id, payload):
     if DEBUG:
         print("exec/" + str(id) + "/status > " + str(popen.returncode))
 
+def setLights(state):
+    global lightsState
+
+    lightsState = state
+    GPIO.output(CAMERA_LIGHT_GPIO, state)
+
+
+def prepareToShutdown():
+    previousLightsState = lightsState
+    seconds = 0.0
+    interval = 0.3
+    state = True
+    while seconds <= 6.0 and GPIO.input(SWITCH_GPIO) == 0:
+        time.sleep(interval)
+        seconds = seconds + interval
+        setLights(state)
+        state = not state
+
+    if GPIO.input(SWITCH_GPIO) == 0:
+        doShutdown()
+    else:
+        setLights(previousLightsState)
+
+def doShutdown():
+    print("Shutting down now!")
+    subprocess.call(["/usr/bin/sudo", "/sbin/shutdown", "-h", "now"])
+
 def handleSystemMessages(topic, payload):
     print("Got system message on " + topic + ": " + payload)
     if topic == "shutdown" and payload == "secret_message":
-        print("Shutting down now!")
-        subprocess.call(["/usr/bin/sudo", "/sbin/shutdown", "-h", "now"])
+        doShutdown()
 
 def composeRecursively(map, prefix):
     res = ""
@@ -136,6 +172,7 @@ def onConnect(client, data, rc):
         client.subscribe("wheel/+/speed", 0)
         client.subscribe("storage/write/#", 0)
         client.subscribe("storage/read", 0)
+        client.subscribe("lights/#", 0)
     else:
         print("ERROR: Connection returned error result: " + str(rc))
         os._exit(rc)
@@ -172,6 +209,13 @@ def onMessage(client, data, msg):
                 readoutStorage()
             elif topicsplit[1] == "write":
                 writeStorage(topicsplit, payload)
+        elif topic.startswith("lights/"):
+            topicsplit = topic.split("/")
+            if topicsplit[1] == "camera":
+                if "on" == payload or "ON" == payload or "1" == payload:
+                    setLights(True)
+                else:
+                    setLights(False)
 
 def moveServo(servoid, angle):
     f = open("/dev/servoblaster", 'w')
@@ -187,7 +231,10 @@ wheelhandler.init(moveServo, storageMap)
 
 print("Started RoverController.")
 
+setLights(lightsState)
 
 while True:
     client.loop(0.02)
     wheelhandler.driveWheels()
+    if GPIO.input(SWITCH_GPIO) == 0:
+        prepareToShutdown()
