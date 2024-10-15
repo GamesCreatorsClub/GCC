@@ -240,9 +240,9 @@ def change_zoom():
     global tile_list
     global xshift, yshift
     last_zoom = zoom
-    if keys[pygame.K_KP_MINUS] and(keys[pygame.K_KP_MINUS] != last_keys[pygame.K_KP_MINUS]) and zoom > 0:
+    if ((keys[pygame.K_KP_MINUS] and(keys[pygame.K_KP_MINUS] != last_keys[pygame.K_KP_MINUS])) or (keys[pygame.K_MINUS] and(keys[pygame.K_MINUS] != last_keys[pygame.K_MINUS]))) and zoom > 0:
         zoom -= 1
-    if keys[pygame.K_KP_PLUS] and(keys[pygame.K_KP_PLUS] != last_keys[pygame.K_KP_PLUS]) and zoom < len(Tile.height)-1:
+    if ((keys[pygame.K_KP_PLUS] and(keys[pygame.K_KP_PLUS] != last_keys[pygame.K_KP_PLUS])) or (keys[pygame.K_RIGHTBRACKET] and(keys[pygame.K_RIGHTBRACKET] != last_keys[pygame.K_RIGHTBRACKET]))) and zoom < len(Tile.height)-1:
         zoom += 1
     if zoom != last_zoom:
         for col in tile_list:
