@@ -12,3 +12,5 @@ t
 **/__pycache__/**
 **/.idea/**
 **/*.pyc
+venv
+.venv
