@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="242">
  <properties>
-  <property name="level_context" value="yumiko_game.YumikoGame"/>
+  <property name="level_context" value=""/>
   <property name="on_show">set_player_input_allowed(False)
 
 set_inventory_visibility(False)
