@@ -1,11 +1,8 @@
 import pygame
-from pygame import Rect
 
 from engine.game import Game
 from engine.level import Level
 
-from engine.debug import (Debug)
-from game.top_down_game_context import TopDownGameContext
 from yumiko_game import YumikoGame
 
 screen_size = (1024, 640)
@@ -27,6 +24,7 @@ levels = Level.load_levels(
 
 game_context = YumikoGame(levels, font, small_font)
 game_context.set_level(levels["start"])
+game_context.screen_size = screen_size
 
 game = Game(
     screen,
