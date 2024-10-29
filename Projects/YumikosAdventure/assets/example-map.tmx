@@ -27,7 +27,7 @@ spawned = True</property>
 spawned = False</property>
    </properties>
   </object>
-  <object id="21" name="pushable_chest" gid="809" x="480" y="176" width="16" height="16">
+  <object id="21" name="pushable_chest" gid="809" x="480" y="176" width="32" height="32">
    <properties>
     <property name="on_enter" value="push_object(this, obj)"/>
    </properties>
@@ -63,7 +63,6 @@ obj.gid = tiles_by_name[&quot;chest-open&quot;]
     <property name="on_leave" value="obj.gid = tiles_by_name[&quot;chest-closed&quot;]"/>
    </properties>
   </object>
-  <object id="34" name="player" gid="1169" x="480" y="272" width="32" height="32"/>
   <object id="39" name="killer-plants1" gid="999" x="160" y="176" width="32" height="32">
    <properties>
     <property name="Animate" value="true"/>
@@ -120,7 +119,7 @@ else:
     <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-up&quot;]"/>
    </properties>
   </object>
-  <object id="48" gid="1027" x="216" y="640" width="32" height="32">
+  <object id="48" name="runaway_object" gid="1027" x="216" y="640" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(this) &lt; 100:
     move_object_away(this, player, 100)
@@ -137,6 +136,7 @@ else:
     <property name="OnCollision" value="AddObjectToInventory(collidedObject); Say(&quot;Got GOLD coin!&quot;)"/>
    </properties>
   </object>
+  <object id="34" name="player" gid="1169" x="480" y="272" width="32" height="32"/>
  </objectgroup>
  <layer id="4" name="foreground" width="50" height="50" visible="0">
   <data encoding="base64" compression="zlib">
