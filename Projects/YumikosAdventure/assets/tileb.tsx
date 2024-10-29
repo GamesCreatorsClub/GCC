@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="tileb" tilewidth="32" tileheight="32">
+<tileset name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
  <image source="maps/tileb.png" width="512" height="512"/>
  <terraintypes>
   <terrain name="mound" tile="-1"/>
@@ -30,6 +30,16 @@
    <object id="0" x="13.0035" y="24.2538" width="5.84428" height="7.52451"/>
   </objectgroup>
  </tile>
+ <tile id="230">
+  <properties>
+   <property name="name" value="plants-killer-1"/>
+  </properties>
+ </tile>
+ <tile id="246">
+  <properties>
+   <property name="name" value="plants-killer-2"/>
+  </properties>
+ </tile>
  <tile id="219" terrain=",,,0"/>
  <tile id="220" terrain=",,0,0"/>
  <tile id="221" terrain=",,0,"/>
@@ -43,4 +53,22 @@
  <tile id="253" terrain="0,,,"/>
  <tile id="254" terrain="0,0,,0"/>
  <tile id="255" terrain="0,0,0,"/>
+<wangsets>
+  <wangset name="Terrains" type="corner" tile="-1">
+   <wangcolor name="mound" color="#ff0000" tile="-1" probability="1"/>
+   <wangtile tileid="219" wangid="0,0,0,1,0,0,0,0"/>
+   <wangtile tileid="220" wangid="0,0,0,1,0,1,0,0"/>
+   <wangtile tileid="221" wangid="0,0,0,0,0,1,0,0"/>
+   <wangtile tileid="235" wangid="0,1,0,1,0,0,0,0"/>
+   <wangtile tileid="236" wangid="0,1,0,1,0,1,0,1"/>
+   <wangtile tileid="237" wangid="0,0,0,0,0,1,0,1"/>
+   <wangtile tileid="238" wangid="0,1,0,1,0,1,0,0"/>
+   <wangtile tileid="239" wangid="0,0,0,1,0,1,0,1"/>
+   <wangtile tileid="251" wangid="0,1,0,0,0,0,0,0"/>
+   <wangtile tileid="252" wangid="0,1,0,0,0,0,0,1"/>
+   <wangtile tileid="253" wangid="0,0,0,0,0,0,0,1"/>
+   <wangtile tileid="254" wangid="0,1,0,1,0,0,0,1"/>
+   <wangtile tileid="255" wangid="0,1,0,0,0,1,0,1"/>
+  </wangset>
+ </wangsets>
 </tileset>
