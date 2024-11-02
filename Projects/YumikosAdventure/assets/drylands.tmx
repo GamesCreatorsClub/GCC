@@ -335,24 +335,23 @@ if dist &lt; 384:
   </object>
   <object id="293" name="backdoor" gid="1035" x="864" y="1872" width="32" height="32">
    <properties>
-    <property name="on_enter" value="obj.gid = engine.tiles_by_name[&quot;door-down&quot;]"/>
+    <property name="on_enter" value="obj.gid = tiles_by_name[&quot;door-down&quot;]"/>
     <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-left&quot;]"/>
    </properties>
   </object>
   <object id="294" name="room1door" gid="1035" x="816" y="1728" width="32" height="32">
    <properties>
-    <property name="on_collision">if not &quot;HouseKey&quot; in inventory:
-    prevent_moving()</property>
-    <property name="on_enter">if &quot;HouseKey&quot; in inventory: 
-    obj.gid = engine.tilesByName[&quot;door-down&quot;]
+    <property name="on_enter">if &quot;HouseKey&quot; in inventory:
+    obj.gid = tiles_by_name[&quot;door-down&quot;]
 else:
-    say_once(&quot;This door is locked. Maybe I can find a key!&quot;)</property>
+    say_once(&quot;This door is locked. Maybe I can find a key!&quot;)
+    prevent_moving()</property>
     <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-left&quot;]"/>
    </properties>
   </object>
   <object id="296" name="HouseKey" gid="1041" x="240" y="1792" width="32" height="32">
    <properties>
-    <property name="on_click">if distance_from_player(obj) &lt; 40:
+    <property name="on_click">if distance_from_player(obj) &lt; 70:
     add_object_to_inventory(obj)
     say_once(&quot;Nice, A key!&quot;)
 </property>
@@ -361,20 +360,19 @@ else:
   </object>
   <object id="297" name="shedDoor" gid="1035" x="1008" y="1872" width="32" height="32">
    <properties>
-    <property name="on_collision">if not &quot;ShedKey&quot; in inventory:
-    prevent_moving()</property>
-    <property name="on_enter">if &quot;ShedKey&quot; in inventory: 
-    collidedObject.gid = tiles_by_name[&quot;door-down&quot;]
+    <property name="on_enter">if &quot;ShedKey&quot; in inventory:
+    obj.gid = tiles_by_name[&quot;door-down&quot;]
 else:
-    say_once(&quot;This door is locked. Is that a key in the other room?&quot;)</property>
-    <property name="on_leave" value="collidedObject.gid = tiles_by_name[&quot;door-left&quot;]"/>
+    say_once(&quot;This door is locked. Is that a key in the other room?&quot;)
+    prevent_moving()</property>
+    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-left&quot;]"/>
    </properties>
   </object>
   <object id="298" name="ShedKey" gid="1041" x="976" y="1728" width="32" height="32">
    <properties>
     <property name="on_click">if distance_from_player(obj) &lt; 40:
     add_object_to_inventory(obj)
-    say_once(&quot;YOu collected the outhouse key!&quot;)
+    say_once(&quot;You collected the outhouse key!&quot;)
 </property>
     <property name="on_enter">say_once(&quot;Hmm... a key. Click to collect it!&quot;)
 prevent_moving()</property>
@@ -385,7 +383,8 @@ prevent_moving()</property>
     <property name="on_enter">if &quot;Trunk&quot; in inventory: 
     say_once(&quot;Thank you. Thank you. Thank you. Thank you. Thank you!&quot;)
 else:
-    say_once(&quot;Hey, err can you find my trunk, it's in the house. I'll let you pass if you bring it 'ere&quot;)</property>
+    say_once(&quot;Hey, err can you find my trunk, it's in the house. I'll let you pass if you bring it 'ere&quot;)
+    prevent_moving()</property>
    </properties>
   </object>
   <object id="302" name="PortalToStart" gid="1027" x="1824" y="1120" width="32" height="32">
@@ -399,7 +398,7 @@ else:
     add_object_to_inventory(obj)
     say_once(&quot;You found the trunk &quot;)
 else:
-    say_once(&quot;I Can't reach that!&quot;)</property>
+    say_once(&quot;I can't reach that!&quot;)</property>
     <property name="on_enter">say_once(&quot;Hey this must be the trunk! Click to collect it!&quot;)
 prevent_moving()</property>
    </properties>
@@ -407,31 +406,35 @@ prevent_moving()</property>
   <object id="304" name="Fake!" gid="1026" x="1616" y="736" width="32" height="32">
    <properties>
     <property name="on_enter">remove_collided_object()
-say_once(&quot;It's A Fake!&quot;)</property>
+say(&quot;It's A Fake!&quot;)</property>
    </properties>
   </object>
   <object id="305" name="Fake!" gid="1026" x="624" y="944" width="32" height="32">
    <properties>
     <property name="on_enter">remove_collided_object()
-say_once(&quot;It's A Fake!&quot;)</property>
+say(&quot;It's A Fake!&quot;)</property>
    </properties>
   </object>
   <object id="306" name="Fake!" gid="1026" x="992" y="432" width="32" height="32">
    <properties>
     <property name="on_enter">remove_collided_object()
-say_once(&quot;It's A Fake!&quot;)</property>
+say(&quot;It's A Fake!&quot;)</property>
    </properties>
   </object>
   <object id="307" name="Fake!" gid="1026" x="1712" y="144" width="32" height="32">
    <properties>
     <property name="on_enter">remove_collided_object()
-say_once(&quot;It's A Fake!&quot;)</property>
+say(&quot;It's A Fake!&quot;)</property>
    </properties>
   </object>
-  <object id="311" name="bench" gid="1009" x="976" y="1792" width="32" height="32"/>
+  <object id="311" name="bench" gid="1009" x="976" y="1792" width="32" height="32">
+   <properties>
+    <property name="solid" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="313" name="bench" gid="977" x="976" y="1760" width="32" height="32">
    <properties>
-    <property name="on_enter" value=""/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </object>
   <object id="316" x="976" y="1728" width="32" height="64" visible="0">
@@ -451,7 +454,7 @@ prevent_moving()</property>
   <object id="327" gid="962" x="816" y="1600" width="32" height="32"/>
   <object id="330" gid="945" x="784" y="1568" width="32" height="32"/>
   <object id="331" gid="946" x="816" y="1568" width="32" height="32"/>
-  <object id="332" x="800" y="1568" width="32" height="32" visible="0">
+  <object id="332" x="800" y="1568" width="32" height="32">
    <properties>
     <property name="on_enter">say_once(&quot;What a deep well!&quot;)
 prevent_moving()</property>
@@ -474,7 +477,7 @@ prevent_moving()
   <object id="344" name="Prisoner" gid="1265" x="1072" y="3504" width="32" height="32">
    <properties>
     <property name="on_enter">say_once(&quot;The Others escaped the theive's hideout but clicking on the statute!&quot;)
-prevent_movin()</property>
+prevent_moving()</property>
    </properties>
   </object>
   <object id="345" name="Den" x="1024" y="3552" width="16" height="16" visible="0"/>
@@ -485,7 +488,7 @@ prevent_movin()</property>
   </object>
   <object id="346" gid="985" x="1136" y="3584" width="32" height="64">
    <properties>
-    <property name="on_click">for obj in layer.objects:
+    <property name="on_click">for obj in level.objects:
     if obj.name == &quot;Thief&quot; or obj.name == &quot;Slow Thief&quot;:
         if &quot;startx&quot; in obj.properties:
             obj.x = obj.properties[&quot;startx&quot;]
@@ -516,7 +519,7 @@ if dist &lt; 384:
   <object id="363" name="Thief" gid="1329" x="48" y="1392" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 3)</property>
+    move_object_towards(obj, player, 3, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
@@ -527,7 +530,7 @@ prevent_moving()
   <object id="364" name="Thief" gid="1329" x="992" y="1152" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 3)</property>
+    move_object_towards(obj, player, 3, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
@@ -537,7 +540,7 @@ prevent_moving()</property>
   <object id="365" name="Thief" gid="1329" x="1536" y="96" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 3)</property>
+    move_object_towards(obj, player, 3, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
@@ -547,7 +550,7 @@ prevent_moving()</property>
   <object id="366" name="Thief" gid="1329" x="304" y="1952" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 3)</property>
+    move_object_towards(obj, player, 3, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
@@ -557,7 +560,7 @@ prevent_moving()</property>
   <object id="367" name="Slow Thief" gid="1329" x="1376" y="480" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 2)</property>
+    move_object_towards(obj, player, 2, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
@@ -567,7 +570,7 @@ prevent_moving()</property>
   <object id="368" name="Slow Thief" gid="1329" x="384" y="1792" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 2)</property>
+    move_object_towards(obj, player, 2, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
@@ -577,7 +580,7 @@ prevent_moving()</property>
   <object id="369" name="Slow Thief" gid="1329" x="576" y="592" width="32" height="32">
    <properties>
     <property name="on_animate">if distance_from_player(obj) &lt; 152:
-    move_object_towards(obj, player, 2)</property>
+    move_object_towards(obj, player, 2, test_collisions=True)</property>
     <property name="on_create" value="record_position(obj)"/>
     <property name="on_enter">teleport_to_object(player, &quot;Den&quot;)
 say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
