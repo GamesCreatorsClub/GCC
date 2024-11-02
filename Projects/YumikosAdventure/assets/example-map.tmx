@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#000000" nextlayerid="5" nextobjectid="51">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#000000" nextlayerid="6" nextobjectid="53">
  <properties>
   <property name="on_show" value="say(&quot;Welcome to Yumiko's Adventure&quot;)"/>
  </properties>
@@ -27,6 +27,11 @@ spawned = True</property>
 spawned = False</property>
    </properties>
   </object>
+  <object id="51" gid="799" x="576" y="160" width="32" height="32">
+   <properties>
+    <property name="solid" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="21" name="pushable_chest" gid="809" x="480" y="176" width="32" height="32">
    <properties>
     <property name="on_enter" value="push_object(this, obj)"/>
@@ -36,6 +41,9 @@ spawned = False</property>
    <properties>
     <property name="OnCollision" value="NextMap()"/>
     <property name="on_click">say_once(&quot;Sign says: 'Come here!'&quot;)
+</property>
+    <property name="on_enter">prevent_moving()
+next_level()
 </property>
    </properties>
   </object>
@@ -136,7 +144,16 @@ else:
     <property name="OnCollision" value="AddObjectToInventory(collidedObject); Say(&quot;Got GOLD coin!&quot;)"/>
    </properties>
   </object>
-  <object id="34" name="player" gid="1169" x="480" y="272" width="32" height="32"/>
+  <object id="34" name="player" gid="1169" x="592" y="352" width="32" height="32">
+   <properties>
+    <property name="player_speed" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="52" gid="831" x="640" y="128" width="32" height="32">
+   <properties>
+    <property name="pushable" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="4" name="foreground" width="50" height="50" visible="0">
   <data encoding="base64" compression="zlib">

@@ -19,7 +19,8 @@ screen_rect = screen.get_rect()
 levels = Level.load_levels(
     screen_rect,
     "assets/start.tmx",
-    "assets/example-map.tmx"
+    "assets/example-map.tmx",
+    "assets/drylands.tmx"
 )
 
 game_context = YumikoGame(levels, font, small_font)

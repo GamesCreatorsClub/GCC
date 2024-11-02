@@ -34,3 +34,8 @@ class YumikoGame(RPGGameContext):
         box_size = self._inventory.image_size
         rect = Rect(screen.get_rect().right - box_size[0] - 2, 50, box_size[0], box_size[1] * 10)
         self._inventory.draw(screen, rect)
+
+    @in_context
+    def record_position(self, obj: TiledObject) -> None:
+        obj.properties["startx"] = obj.x
+        obj.properties["starty"] = obj.y
