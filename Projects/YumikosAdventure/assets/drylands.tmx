@@ -86,7 +86,9 @@
     <property name="Frame1" value="portal-blue"/>
     <property name="Frame2" value="portal-green"/>
     <property name="Frame3" value="portal-red"/>
-    <property name="on_enter" value="next_map()"/>
+    <property name="on_enter">properties[&quot;done&quot;] = True
+select_level(&quot;example-map&quot;)
+</property>
    </properties>
   </object>
   <object id="217" name="start" gid="850" x="158" y="222" width="32" height="32" visible="0"/>

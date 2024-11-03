@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#000000" nextlayerid="6" nextobjectid="53">
  <properties>
-  <property name="on_show" value="say(&quot;Welcome to Yumiko's Adventure&quot;)"/>
+  <property name="on_show">if not  &quot;done&quot; in properties:
+    say(&quot;Welcome to Yumiko's Adventure&quot;)</property>
  </properties>
  <tileset firstgid="1" source="tilea2.tsx"/>
  <tileset firstgid="769" source="tileb.tsx"/>
@@ -14,7 +15,7 @@
  </layer>
  <layer id="2" name="main" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+   eJztzjENAAAIA7Al+NeJDURwcNAqaAIAALDXdT0AAAAAAADguwGQ/QDr
   </data>
  </layer>
  <objectgroup id="3" name="objects">
@@ -39,11 +40,13 @@ spawned = False</property>
   </object>
   <object id="22" name="sign" gid="850" x="640" y="336" width="32" height="32">
    <properties>
-    <property name="OnCollision" value="NextMap()"/>
     <property name="on_click">say_once(&quot;Sign says: 'Come here!'&quot;)
 </property>
-    <property name="on_enter">prevent_moving()
-next_level()
+    <property name="on_create">obj.visible = not &quot;done&quot; in properties
+</property>
+    <property name="on_enter">if &quot;done&quot; not in properties:
+    prevent_moving()
+    next_level()
 </property>
    </properties>
   </object>
