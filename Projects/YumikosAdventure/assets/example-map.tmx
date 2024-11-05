@@ -69,9 +69,9 @@ spawned = False</property>
     say_once(&quot;Got another key!&quot;)
     add_coins(5)
 
-obj.gid = tiles_by_name[&quot;chest-open&quot;]
+obj.tile = tiles_by_name[&quot;chest-open&quot;]
 </property>
-    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;chest-closed&quot;]"/>
+    <property name="on_leave" value="obj.tile = tiles_by_name[&quot;chest-closed&quot;]"/>
    </properties>
   </object>
   <object id="39" name="killer-plants1" gid="999" x="160" y="176" width="32" height="32">
@@ -95,7 +95,7 @@ if random.randint(0, 5) == 2:
   <object id="43" name="door2" gid="1035" x="400" y="488" width="8" height="32">
    <properties>
     <property name="on_enter">if &quot;key1&quot; in inventory: 
-    obj.gid = tiles_by_name[&quot;door-down&quot;]
+    obj.tile = tiles_by_name[&quot;door-down&quot;]
 else:
     prevent_moving()
     say_once(&quot;Door is locked. Hint: Find a key!&quot;)</property>
@@ -110,8 +110,8 @@ say(&quot;Collected a key&quot;)</property>
   </object>
   <object id="45" name="door1" gid="1036" x="575" y="408" width="8" height="32">
    <properties>
-    <property name="on_enter" value="obj.gid = tiles_by_name[&quot;door-down&quot;]"/>
-    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-right&quot;]"/>
+    <property name="on_enter" value="obj.tile = tiles_by_name[&quot;door-down&quot;]"/>
+    <property name="on_leave" value="obj.tile = tiles_by_name[&quot;door-right&quot;]"/>
    </properties>
   </object>
   <object id="46" name="key2" gid="1041" x="592" y="384" width="32" height="32" visible="0">
@@ -123,11 +123,11 @@ say(&quot;Collected a key&quot;)</property>
   <object id="47" name="door3" gid="1033" x="408" y="696" width="32" height="8">
    <properties>
     <property name="on_enter">if &quot;key2&quot; in inventory: 
-    obj.gid = tiles_by_name[&quot;door-left&quot;]
+    obj.tile = tiles_by_name[&quot;door-left&quot;]
 else:
     say_once(&quot;Door is locked&quot;)
     prevent_moving()</property>
-    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-up&quot;]"/>
+    <property name="on_leave" value="obj.tile = tiles_by_name[&quot;door-up&quot;]"/>
    </properties>
   </object>
   <object id="48" name="runaway_object" gid="1027" x="216" y="640" width="32" height="32">
@@ -149,6 +149,7 @@ else:
   </object>
   <object id="34" name="player" gid="1169" x="592" y="352" width="32" height="32">
    <properties>
+    <property name="first_map" value="ok"/>
     <property name="player_speed" type="int" value="4"/>
    </properties>
   </object>

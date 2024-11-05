@@ -337,18 +337,18 @@ if dist &lt; 384:
   </object>
   <object id="293" name="backdoor" gid="1035" x="864" y="1872" width="32" height="32">
    <properties>
-    <property name="on_enter" value="obj.gid = tiles_by_name[&quot;door-down&quot;]"/>
-    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-left&quot;]"/>
+    <property name="on_enter" value="obj.tile = tiles_by_name[&quot;door-down&quot;]"/>
+    <property name="on_leave" value="obj.tile = tiles_by_name[&quot;door-left&quot;]"/>
    </properties>
   </object>
   <object id="294" name="room1door" gid="1035" x="816" y="1728" width="32" height="32">
    <properties>
     <property name="on_enter">if &quot;HouseKey&quot; in inventory:
-    obj.gid = tiles_by_name[&quot;door-down&quot;]
+    obj.tile = tiles_by_name[&quot;door-down&quot;]
 else:
     say_once(&quot;This door is locked. Maybe I can find a key!&quot;)
     prevent_moving()</property>
-    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-left&quot;]"/>
+    <property name="on_leave" value="obj.tile = tiles_by_name[&quot;door-left&quot;]"/>
    </properties>
   </object>
   <object id="296" name="HouseKey" gid="1041" x="240" y="1792" width="32" height="32">
@@ -363,11 +363,11 @@ else:
   <object id="297" name="shedDoor" gid="1035" x="1008" y="1872" width="32" height="32">
    <properties>
     <property name="on_enter">if &quot;ShedKey&quot; in inventory:
-    obj.gid = tiles_by_name[&quot;door-down&quot;]
+    obj.tile = tiles_by_name[&quot;door-down&quot;]
 else:
     say_once(&quot;This door is locked. Is that a key in the other room?&quot;)
     prevent_moving()</property>
-    <property name="on_leave" value="obj.gid = tiles_by_name[&quot;door-left&quot;]"/>
+    <property name="on_leave" value="obj.tile = tiles_by_name[&quot;door-left&quot;]"/>
    </properties>
   </object>
   <object id="298" name="ShedKey" gid="1041" x="976" y="1728" width="32" height="32">
@@ -589,7 +589,11 @@ say_once(&quot;YOU HAVE BEEN CAPTURED BY THE THEIVES!!!!&quot;)
 prevent_moving()</property>
    </properties>
   </object>
-  <object id="27" name="player" gid="1265" x="160" y="224" width="32" height="32" rotation="0.481466"/>
+  <object id="27" name="player" gid="1265" x="160" y="224" width="32" height="32" rotation="0.481466">
+   <properties>
+    <property name="second_map" value="yes"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="4" name="foreground" width="128" height="256" visible="0" opacity="0.46">
   <data encoding="base64" compression="zlib">
