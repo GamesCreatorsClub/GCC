@@ -147,7 +147,7 @@ else:
     <property name="OnCollision" value="AddObjectToInventory(collidedObject); Say(&quot;Got GOLD coin!&quot;)"/>
    </properties>
   </object>
-  <object id="34" name="player" gid="1169" x="592" y="352" width="32" height="32">
+  <object id="34" name="player" gid="2147484817" x="592" y="352" width="32" height="32">
    <properties>
     <property name="first_map" value="ok"/>
     <property name="player_speed" type="int" value="4"/>

@@ -3,7 +3,7 @@ import pygame
 from engine.game import Game
 from engine.level import Level
 
-from yumiko_game import YumikoGame
+from yumiko_game_context import YumikoGameContext
 
 screen_size = (1024, 640)
 
@@ -23,7 +23,7 @@ levels = Level.load_levels(
     "assets/drylands.tmx"
 )
 
-game_context = YumikoGame(levels, font, small_font)
+game_context = YumikoGameContext(levels, font, small_font)
 game_context.set_level(levels["start"])
 game_context.screen_size = screen_size
 

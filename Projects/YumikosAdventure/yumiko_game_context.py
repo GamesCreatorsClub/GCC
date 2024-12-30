@@ -1,18 +1,14 @@
-import math
+from typing import Union
 
-from typing import Union, Optional, ChainMap, Sized, Mapping, Iterator
-
-import time
 from pygame.font import Font
 
 import pygame
 from engine.level import Level
 from engine.tmx import TiledObject
 from game.rpg_game_context import RPGGameContext
-from game.top_down_game_context import TopDownGameContext
-from pygame import Surface, Color, Rect
+from pygame import Surface, Rect
 
-from engine.game_context import in_context, GameContext
+from engine.game_context import in_context
 
 COLOUR_WHITE = pygame.Color("white")
 COLOUR_BLACK = pygame.Color("black")
@@ -25,7 +21,7 @@ def sgn(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
     return -1 if d < 0 else (1 if d > 0 else 0)
 
 
-class YumikoGame(RPGGameContext):
+class YumikoGameContext(RPGGameContext):
     def __init__(self, levels: dict[Union[str, int], Level], font: Font, small_font: Font) -> None:
         super().__init__(levels, font, small_font)
 
